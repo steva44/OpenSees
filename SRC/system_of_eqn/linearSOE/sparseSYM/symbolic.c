@@ -28,7 +28,7 @@
 #include "FeStructs.h"
 /*#include "globalVars.h"*/
 
-
+#ifdef _USINGFORTRAN
 #ifdef _WIN32
 extern int MYGENMMD(int *neq, int *fxadj, int *adjncy, int *winvp,
 			     int *wperm, int *delta, int *fchild, int *parent,
@@ -40,6 +40,20 @@ extern int mygenmmd_(int *neq, int *fxadj, int *adjncy, int *winvp,
 		     int *wperm, int *delta, int *fchild, int *parent,
 		     int *sibling, int *marker, int *maxint, int *nofsub,
 		     int *kdx);
+#endif
+#else
+#ifdef _WIN32
+extern int GENMMD(int *neq, int *fxadj, int *adjncy, int *winvp,
+                 int *wperm, int *delta, int *fchild, int *parent,
+                 int *sibling, int *marker, int *maxint, int *nofsub,
+                 int *kdx);
+
+#else
+extern int genmmd_(int *neq, int *fxadj, int *adjncy, int *winvp,
+             int *wperm, int *delta, int *fchild, int *parent,
+             int *sibling, int *marker, int *maxint, int *nofsub,
+             int *kdx);
+#endif
 #endif
 
 void gennd(int neqns, int **padj, int *mask, int *perm, 
@@ -123,13 +137,23 @@ int symFactorization(int *fxadj, int *adjncy, int neq, int LSPARSE,
     switch(LSPARSE)
     {
        case 1:
+#ifdef _USINGFORTRAN
    /* Now call minimum degree ordering  ( a fortran subroutine) */
 #ifdef WIN32 
-	 MYGENMMD( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
+     MYGENMMD( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
 		   sibling, marker, &maxint, &nofsub, &kdx ) ;
 #else
-	 mygenmmd_( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
+     mygenmmd_( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
 		    sibling, marker, &maxint, &nofsub, &kdx ) ;
+#endif
+#else
+#ifdef WIN32
+     GENMMD( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
+           sibling, marker, &maxint, &nofsub, &kdx ) ;
+#else
+     genmmd_( &neq, fxadj, adjncy, winvp, wperm, &delta, fchild, parent,
+            sibling, marker, &maxint, &nofsub, &kdx ) ;
+#endif
 #endif
          /* reset subscripts for c rather than fortran */
          for (i=0;i<=neq;i++)

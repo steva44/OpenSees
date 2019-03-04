@@ -365,8 +365,10 @@ AxialCurve::checkElementState(double springForce)
 		{
 
 			sprintf(tclAssignment , "set fail_%d  0", eleTag);
-			Tcl_Eval( theTclInterp, tclAssignment);
 
+#ifdef _TCL85
+			Tcl_Eval( theTclInterp, tclAssignment);
+#endif
 
 			if (force >= forceSurface) // on/outside failure surface
 			//if (deform >= deformSurface) // on/outside failure surface SDK
@@ -407,8 +409,10 @@ AxialCurve::checkElementState(double springForce)
 					outputFile.close();
 
 					sprintf(tclAssignment , "set fail_%d  1", eleTag);
+#ifdef _TCL85
 					Tcl_Eval( theTclInterp, tclAssignment);
 
+#endif
 
 				}
 			}

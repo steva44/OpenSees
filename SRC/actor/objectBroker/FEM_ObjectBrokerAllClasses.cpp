@@ -117,10 +117,14 @@
 #include <FedeasSteel2Material.h>
 
 #include <Bilin.h>
+#ifdef _USINGFORTRAN
 #include <DrainBilinearMaterial.h>
 #include <DrainClough1Material.h>
 #include <DrainClough2Material.h>
 #include <DrainPinch1Material.h>
+#include <FeapMaterial03.h>
+#include <stressDensity.h>
+#endif
 #include <HyperbolicGapMaterial.h>
 #include <ImpactMaterial.h>
 
@@ -160,7 +164,6 @@
 //#include <ConcreteS.h>
 #include <PlaneStressUserMaterial.h>
 //end Yuli Huang & Xinzheng Lu
-#include <FeapMaterial03.h>
 #include <CycLiqCP3D.h>
 #include <CycLiqCPPlaneStrain.h>
 #include <CycLiqCPSP3D.h>
@@ -187,7 +190,6 @@
 #include <ManzariDafaliasPlaneStrainRO.h>
 #include <PM4Sand.h>
 #include <InitialStateAnalysisWrapper.h>
-#include <stressDensity.h>
 #include <InitStressNDMaterial.h>
 
 // Fibers
@@ -514,7 +516,9 @@
 #include <DistributedDiagonalSOE.h>
 #endif
 
+#ifdef _TCL85
 #include <TclFeViewer.h>
+#endif
 
 #include <packages.h>
 
@@ -1193,8 +1197,19 @@ FEM_ObjectBrokerAllClasses::getNewUniaxialMaterial(int classTag)
 	case MAT_TAG_FedeasSteel2:
 		return new FedeasSteel2Material();
 
-	case MAT_TAG_DrainBilinear:
-		return new DrainBilinearMaterial();
+#ifdef _USINGFORTRAN
+    case MAT_TAG_DrainBilinear:
+        return new DrainBilinearMaterial();
+
+    case MAT_TAG_DrainClough1:
+        return new DrainClough1Material();
+
+    case MAT_TAG_DrainClough2:
+        return new DrainClough2Material();
+
+    case MAT_TAG_DrainPinch1:
+        return new DrainPinch1Material();
+#endif
 
 	case MAT_TAG_HyperbolicGapMaterial:
 		return new HyperbolicGapMaterial();
@@ -1204,15 +1219,6 @@ FEM_ObjectBrokerAllClasses::getNewUniaxialMaterial(int classTag)
 
 	case MAT_TAG_Bilin:
 		return new Bilin();
-
-	case MAT_TAG_DrainClough1:
-		return new DrainClough1Material();
-
-	case MAT_TAG_DrainClough2:
-		return new DrainClough2Material();
-
-	case MAT_TAG_DrainPinch1:
-		return new DrainPinch1Material();
 
         case MAT_TAG_MinMax:
 	  return new MinMaxMaterial();
@@ -1377,8 +1383,13 @@ FEM_ObjectBrokerAllClasses::getNewNDMaterial(int classTag)
   case ND_TAG_PressureIndependMultiYield:
     return new PressureIndependMultiYield();
 
+#ifdef _USINGFORTRAN
   case ND_TAG_FeapMaterial03:
     return new FeapMaterial03();
+
+  case ND_TAG_stressDensity:
+      return new stressDensity();
+#endif
 
   case ND_TAG_ContactMaterial2D:
     return new ContactMaterial2D();			
@@ -1424,9 +1435,6 @@ FEM_ObjectBrokerAllClasses::getNewNDMaterial(int classTag)
 
   case ND_TAG_InitialStateAnalysisWrapper:
       return new InitialStateAnalysisWrapper(); 
-
-  case ND_TAG_stressDensity:
-      return new stressDensity();
 
   case ND_TAG_CycLiqCP3D:
       return new CycLiqCP3D(); 
@@ -1749,9 +1757,11 @@ FEM_ObjectBrokerAllClasses::getPtrNewRecorder(int classTag)
 	  return 0;
   //           return new TclFeViewer();
 
-		case RECORDER_TAGS_MPCORecorder:
-			return new MPCORecorder();
-	     
+#ifdef _TCL85
+        case RECORDER_TAGS_MPCORecorder:
+            return new MPCORecorder();
+#endif
+
 	default:
 	     opserr << "FEM_ObjectBrokerAllClasses::getNewRecordr - ";
 	     opserr << " - no Recorder type exists for class tag ";

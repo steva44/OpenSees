@@ -81,9 +81,10 @@ extern "C" {
   typedef socklen_t socklen_type;
 #endif
 
-extern int startup_sockets(void);
-extern void cleanup_sockets(void);
+
 extern int httpGet(const char *URL, const char *page, unsigned int port, char **dataPtr);
+extern int startup_sockets(void);
+extern void  cleanup_sockets(void);
 
 #endif 
 

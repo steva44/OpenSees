@@ -1,0 +1,1 @@
+../../libexec/lib/pkgconfig/arpack.pc

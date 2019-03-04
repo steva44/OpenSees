@@ -35,6 +35,7 @@
 
 #define DBL_EPSILON 1e-18
 
+#ifdef __cplusplus
 #ifdef _USRDLL
 #include <windows.h>
 #define OPS_Export _declspec(dllexport)
@@ -43,10 +44,15 @@
 #else
 #define OPS_Export extern "C" 
 #endif
+#endif
 
 static int initFlag = 0;
 
+#ifdef __cplusplus
 OPS_Export void
+#else
+void
+#endif
 elasticPlaneStressC(matObj *thisObj, 
 		    modelState *model, 
 		    double *strain, 

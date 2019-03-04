@@ -36,7 +36,9 @@ void* OPS_ManzariDafaliasMaterial();
 void* OPS_ContactMaterial2DMaterial();
 void* OPS_ContactMaterial3DMaterial();
 void* OPS_InitialStateAnalysisWrapperMaterial();
+#ifdef _USINGFORTRAN
 void* OPS_StressDensityMaterial();
+#endif
 void* OPS_ElasticOrthotropicMaterial();
 void* OPS_PressureDependentElastic3D();
 void* OPS_J2Plasticity();
@@ -113,7 +115,9 @@ namespace {
 	nDMaterialsMap.insert(std::make_pair("ContactMaterial2D", &OPS_ContactMaterial2DMaterial));
 	nDMaterialsMap.insert(std::make_pair("ContactMaterial3D", &OPS_ContactMaterial3DMaterial));
 	nDMaterialsMap.insert(std::make_pair("InitialStateAnalysisWrapper", &OPS_InitialStateAnalysisWrapperMaterial));
+#ifdef _USINGFORTRAN
 	nDMaterialsMap.insert(std::make_pair("StressDensityModel", &OPS_StressDensityMaterial));
+#endif
 	nDMaterialsMap.insert(std::make_pair("ElasticIsotropic", &OPS_ElasticIsotropicMaterial));
 	nDMaterialsMap.insert(std::make_pair("ElasticIsotropic3D", &OPS_ElasticIsotropicMaterial));
 	nDMaterialsMap.insert(std::make_pair("ElasticOrthotropic3D", &OPS_ElasticOrthotropicMaterial));

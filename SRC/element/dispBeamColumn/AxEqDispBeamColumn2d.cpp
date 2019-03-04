@@ -183,7 +183,7 @@ OPS_AxEqDispBeamColumn2d(void)
   }
   
   // get the beam transformation
-  CrdTransf* theTransf = OPS_GetCrdTransf(transfTag);  // get the transformation
+  CrdTransf* theTransf = OPS_getCrdTransf(transfTag);  // get the transformation
   if (theTransf == 0) {                                 // return error if the transformation is not found
     opserr << "coord transfomration not found\n";
     return 0;

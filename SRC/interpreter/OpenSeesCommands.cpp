@@ -76,11 +76,14 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <FullGenEigenSOE.h>
 #include <ArpackSOE.h>
 #include <LoadControl.h>
+#ifdef _PFEM
 #include <CTestPFEM.h>
 #include <PFEMIntegrator.h>
-#include <TransientIntegrator.h>
 #include <PFEMSolver.h>
 #include <PFEMLinSOE.h>
+#include <Mesh.h>
+#endif
+#include <TransientIntegrator.h>
 #include <Accelerator.h>
 #include <KrylovAccelerator.h>
 #include <AcceleratedNewton.h>
@@ -94,13 +97,84 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <RegulaFalsiLineSearch.h>
 #include <NewtonLineSearch.h>
 #include <FileDatastore.h>
-#include <Mesh.h>
 
 #ifdef _PARALLEL_INTERPRETERS
 #include <mpi.h>
 #include <MPI_MachineBroker.h>
 #endif
 
+#include <math.h>
+
+
+//SG add: copy from elementAPI_Dummu class
+modelState theModelState;
+
+
+int OPS_GetStringCopy(char **arrayData)
+{
+  return 0;
+}
+
+//MRL start
+extern "C"
+int OPS_AllocateLimitCurve(limCrvObject *theLimCrv){
+
+    /*fprintf(stderr,"allocateLimitCurve Address %p\n",theLimCrv);*/
+
+    if (theLimCrv->nParam > 0)
+    theLimCrv->theParam = new double[theLimCrv->nParam];
+
+    int nState = theLimCrv->nState;
+
+    if (nState > 0) {
+        theLimCrv->cState = new double[nState];
+        theLimCrv->tState = new double[nState];
+        for (int i=0; i<nState; i++) {
+            theLimCrv->cState[i] = 0;
+            theLimCrv->tState[i] = 0;
+        }
+    } else {
+        theLimCrv->cState = 0;
+        theLimCrv->tState = 0;
+    }
+
+    return 0;
+}
+//MRL end
+
+extern "C"
+int OPS_AllocateMaterial(matObject *theMat){
+
+  /*fprintf(stderr,"allocateMaterial Address %p\n",theMat);*/
+
+  if (theMat->nParam > 0)
+    theMat->theParam = new double[theMat->nParam];
+
+  int nState = theMat->nState;
+
+  if (nState > 0) {
+    theMat->cState = new double[nState];
+    theMat->tState = new double[nState];
+    for (int i=0; i<nState; i++) {
+      theMat->cState[i] = 0;
+      theMat->tState[i] = 0;
+    }
+  } else {
+    theMat->cState = 0;
+    theMat->tState = 0;
+  }
+
+  return 0;
+}
+
+extern "C"
+int OPS_Error(char *errorMessage, int length)
+{
+  opserr << errorMessage;
+  opserr << endln;
+  return 0;
+}
+//SG end
 
 // active object
 static OpenSeesCommands* cmds = 0;
@@ -114,10 +188,15 @@ OpenSeesCommands::OpenSeesCommands(DL_Interpreter* interp)
      theSOE(0), theEigenSOE(0), theNumberer(0), theHandler(0),
      theStaticIntegrator(0), theTransientIntegrator(0),
      theAlgorithm(0), theStaticAnalysis(0), theTransientAnalysis(0),
+     #ifdef _PFEM
      thePFEMAnalysis(0),
+     #endif
+     #ifdef _RELIABILITY
+     reliability(0),
+     #endif
      theAnalysisModel(0), theTest(0), numEigen(0), theDatabase(0),
-     theBroker(), theTimer(), theSimulationInfo(), theMachineBroker(0),
-     reliability(0)
+     theBroker(), theTimer(), theSimulationInfo(), theMachineBroker(0)
+
 {
 #ifdef _PARALLEL_INTERPRETERS
     theMachineBroker = new MPI_MachineBroker(&theBroker, 0, 0);
@@ -127,12 +206,16 @@ OpenSeesCommands::OpenSeesCommands(DL_Interpreter* interp)
 
     theDomain = new Domain;
 
+#ifdef _RELIABILITY
     reliability = new OpenSeesReliabilityCommands(theDomain);
+#endif
 }
 
 OpenSeesCommands::~OpenSeesCommands()
 {
+#ifdef _RELIABILITY
     if (reliability != 0) delete reliability;
+#endif
     if (theDomain != 0) delete theDomain;
     if (theDatabase != 0) delete theDatabase;
     cmds = 0;
@@ -529,6 +612,7 @@ OpenSeesCommands::setStaticAnalysis()
     }
 }
 
+#ifdef _PFEM
 int
 OpenSeesCommands::setPFEMAnalysis()
 {
@@ -610,6 +694,7 @@ OpenSeesCommands::setPFEMAnalysis()
 
     return 0;
 }
+#endif
 
 void
 OpenSeesCommands::setVariableAnalysis()
@@ -782,7 +867,9 @@ OpenSeesCommands::wipeAnalysis()
     theTransientIntegrator = 0;
     theStaticAnalysis = 0;
     theTransientAnalysis = 0;
+#ifdef _PFEM
     thePFEMAnalysis = 0;
+#endif
     theTest = 0;
 
 }
@@ -797,10 +884,10 @@ OpenSeesCommands::wipe()
 	delete theDatabase;
 	theDatabase = 0;
     }
-
+#ifdef _PFEM
     // wipe all meshes
     OPS_clearAllMesh();
-
+#endif
     // wipe domain
     if (theDomain != 0) {
 	theDomain->clearAll();
@@ -1076,6 +1163,7 @@ int OPS_System()
 
 	theSOE = (LinearSOE*)OPS_ProfileSPDLinDirectSolver();
 
+#ifdef _PFEM
     } else if (strcmp(type, "PFEM") == 0) {
 	// PFEM SOE & SOLVER
 
@@ -1134,6 +1222,7 @@ int OPS_System()
 
 	    }
 	}
+#endif
 
 
     } else if ((strcmp(type,"SparseGeneral") == 0) ||
@@ -1268,8 +1357,10 @@ int OPS_CTest()
     } else if (strcmp(type,"NormDispOrUnbalance") == 0) {
 	theTest = (ConvergenceTest*)OPS_NormDispOrUnbalance();
 
+#ifdef _PFEM
     } else if (strcmp(type,"PFEM") == 0) {
 	theTest = (ConvergenceTest*)OPS_CTestPFEM();
+#endif
 
     } else if (strcmp(type,"FixedNumIter") == 0) {
 	theTest = (ConvergenceTest*)OPS_CTestFixedNumIter();
@@ -1356,10 +1447,10 @@ int OPS_Integrator()
 
     } else if (strcmp(type,"BackwardEuler") == 0) {
 	ti = (TransientIntegrator*)OPS_BackwardEuler();
-
+#ifdef _PFEM
     } else if (strcmp(type,"PFEM") == 0) {
 	ti = (TransientIntegrator*)OPS_PFEMIntegrator();
-
+#endif
     } else if (strcmp(type,"NewmarkExplicit") == 0) {
 	ti = (TransientIntegrator*)OPS_NewmarkExplicit();
 
@@ -1557,13 +1648,17 @@ int OPS_Analysis()
 	if (cmds != 0) {
 	    cmds->setTransientAnalysis();
 	}
-    } else if (strcmp(type, "PFEM") == 0) {
-	if (cmds != 0) {
-	    if (cmds->setPFEMAnalysis() < 0) {
-		return -1;
-	    }
-	}
-    } else if (strcmp(type, "VariableTimeStepTransient") == 0 ||
+    }
+#ifdef _PFEM
+    else if (strcmp(type, "PFEM") == 0) {
+        if (cmds != 0) {
+            if (cmds->setPFEMAnalysis() < 0) {
+                return -1;
+            }
+        }
+    }
+#endif
+    else if (strcmp(type, "VariableTimeStepTransient") == 0 ||
 	       (strcmp(type,"TransientWithVariableTimeStep") == 0) ||
 	       (strcmp(type,"VariableTransient") == 0)) {
 	if (cmds != 0) {
@@ -1584,7 +1679,9 @@ int OPS_analyze()
     int result = 0;
     StaticAnalysis* theStaticAnalysis = cmds->getStaticAnalysis();
     TransientAnalysis* theTransientAnalysis = cmds->getTransientAnalysis();
+#ifdef _PFEM
     PFEMAnalysis* thePFEMAnalysis = cmds->getPFEMAnalysis();
+#endif
 
     if (theStaticAnalysis != 0) {
 	if (OPS_GetNumRemainingInputArgs() < 1) {
@@ -1596,11 +1693,16 @@ int OPS_analyze()
 	if (OPS_GetIntInput(&numdata, &numIncr) < 0) return -1;
 	result = theStaticAnalysis->analyze(numIncr);
 
-    } else if (thePFEMAnalysis != 0) {
+    }
+#ifdef _PFEM
+    else if (thePFEMAnalysis != 0) {
 
 	result = thePFEMAnalysis->analyze();
 
-    } else if (theTransientAnalysis != 0) {
+    }
+   #endif
+
+    else if (theTransientAnalysis != 0) {
 	if (OPS_GetNumRemainingInputArgs() < 2) {
 	    opserr << "WARNING insufficient args: analyze numIncr deltaT ...\n";
 	    return -1;

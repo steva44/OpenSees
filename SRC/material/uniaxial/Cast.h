@@ -61,6 +61,7 @@ class Cast : public UniaxialMaterial
     Cast(void);
     virtual ~Cast();
     
+    void * OPS_Cast(void);
 
     const char *getClassType(void) const {return "Cast";};
 

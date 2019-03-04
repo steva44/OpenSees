@@ -47,14 +47,10 @@ using std::ifstream;
 #include <iomanip>
 using std::ios;
 
-//#include <Socket.h>
+extern "C" {
+#include <Socket.h>
+}
 
-#ifdef _WIN32
-int __cdecl
-#else
-int
-#endif
-httpGet(char const *URL, char const *page, unsigned int port, char **dataPtr);
 
 
 #include <elementAPI.h>

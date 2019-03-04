@@ -108,6 +108,7 @@ struct eleObject {
 
 typedef struct eleObject eleObj;
 
+#ifdef __cplusplus
 class AnalysisModel;
 class EquiSolnAlgo;
 class ConstraintHandler;
@@ -120,6 +121,7 @@ class VariableTimeStepDirectIntegrationAnalysis;
 class StaticIntegrator;
 class TransientIntegrator;
 class ConvergenceTest;
+#endif
 
 #define OPS_Error ops_error_
 #define OPS_GetIntInput ops_getintinput_
@@ -262,7 +264,7 @@ eleObj  *OPS_GetElementType(char *, int);
 int     OPS_AllocateElement(eleObj *, int *matTags, int *maType);
 int     OPS_AllocateMaterial(matObj *);
 
-limCrv	*OPS_GetLimitCurveType(char *type, int sizeType);//**MRL
+limCrvObj	*OPS_GetLimitCurveType(char *type, int sizeType);//**MRL
 int     OPS_AllocateLimitCurve(limCrvObj *);//**MRL
 
 int    OPS_InvokeMaterial(struct eleObj *, int *,modelState *, double *, double *, double *, int *);
@@ -276,20 +278,20 @@ int    OPS_GetNodeAcc(int *nodeTag, int *sizeData, double *data);
 int    OPS_GetNodeIncrDisp(int *nodeTag, int *sizeData, double *data);
 int    OPS_GetNodeIncrDeltaDisp(int *nodeTag, int *sizeData, double *data);
 
-AnalysisModel		**OPS_GetAnalysisModel(void);
-EquiSolnAlgo		**OPS_GetAlgorithm(void);
-ConstraintHandler **OPS_GetHandler(void);
-DOF_Numberer		**OPS_GetNumberer(void);
-LinearSOE				**OPS_GetSOE(void);
-EigenSOE				**OPS_GetEigenSOE(void);
-StaticAnalysis	**OPS_GetStaticAnalysis(void);
-DirectIntegrationAnalysis	**OPS_GetTransientAnalysis(void);
-VariableTimeStepDirectIntegrationAnalysis **OPS_GetVariableTimeStepTransientAnalysis(void);
-int							*OPS_GetNumEigen(void);
-StaticIntegrator	**OPS_GetStaticIntegrator(void);
-TransientIntegrator	**OPS_GetTransientIntegrator(void);
-ConvergenceTest		**OPS_GetTest(void);
-bool						*OPS_builtModel(void);
+//AnalysisModel		**OPS_GetAnalysisModel(void);
+//EquiSolnAlgo		**OPS_GetAlgorithm(void);
+//ConstraintHandler **OPS_GetHandler(void);
+//DOF_Numberer		**OPS_GetNumberer(void);
+//LinearSOE				**OPS_GetSOE(void);
+//EigenSOE				**OPS_GetEigenSOE(void);
+//StaticAnalysis	**OPS_GetStaticAnalysis(void);
+//DirectIntegrationAnalysis	**OPS_GetTransientAnalysis(void);
+//VariableTimeStepDirectIntegrationAnalysis **OPS_GetVariableTimeStepTransientAnalysis(void);
+//int							*OPS_GetNumEigen(void);
+//StaticIntegrator	**OPS_GetStaticIntegrator(void);
+//TransientIntegrator	**OPS_GetTransientIntegrator(void);
+//ConvergenceTest		**OPS_GetTest(void);
+//bool						*OPS_builtModel(void);
 
 #endif
 

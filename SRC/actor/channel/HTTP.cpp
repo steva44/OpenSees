@@ -27,10 +27,13 @@
 //
 // Purpose: This file contains all the includes needed by files for http & https connections
 
+extern "C" {
 #include <Socket.h>
+}
 
 #include <stdio.h>
 #include <sys/stat.h>
+
 
 #ifdef _HTTPS
 #include <openssl/crypto.h>
@@ -129,137 +132,6 @@ establishHTTPConnection(const char* URL, unsigned int port) {
   getsockname(sockfd, &my_Addr.addr, &addrLength);
 
   return sockfd;
-}
-
-
-#ifdef _WIN32
-int __cdecl
-#else
-int
-#endif
-httpGet(char const *URL, char const *page, unsigned int port, char **dataPtr) {
-
-  int i, j, nleft, nwrite, sizeData, ok;
-  char *gMsg, *data, *nextData;
-  socket_type sockfd;
-
-  // in case we fail, set return pointer to 0
-  *dataPtr = 0;
-
-  startup_sockets();
-
-  sockfd = establishHTTPConnection(URL, port);
-  if (sockfd < 0) {
-    fprintf(stderr, "httpGet: failed to establis connection\n");
-    return -1;
-  }
-
-  // add the header information to outBuf
-  sprintf(outBuf, "GET %s HTTP/1.1\nHost:%s\n",page,URL);
-  strcat(outBuf,"Accept:text/xml,text/html\n");
-  strcat(outBuf,"Accept-Language:en-us,en\n");
-  strcat(outBuf,"Accept-Charset:ISO-8859-1,utf-8\n");
-  strcat(outBuf,"Keep-Alive:300\n");
-  strcat(outBuf, "Connection:keep-alive\n\n");
-
-  nleft = strlen(outBuf);
-
-  //send the data
-  // if o.k. get a ponter to the data in the message and 
-  // place the incoming data there
-  nwrite = 0;    
-  gMsg = outBuf;
-
-
-  while (nleft > 0) {
-    nwrite = send(sockfd, gMsg, nleft, 0);
-    nleft -= nwrite;
-    gMsg +=  nwrite;
-  }
-
-
-  ok = 1;
-  nleft = 4095;
-
-  sizeData = 0;
-  nextData = 0;
-  data = 0;
-
-  while (ok > 0) {
-
-    gMsg = inBuf;
-    ok = recv(sockfd, gMsg, nleft, 0);
-
-    inBuf[ok+1]='\0';
-         
-    if (ok > 0) {
-      nextData = data;
-      data = (char *)malloc((sizeData+ok+1)*sizeof(char));
-      if (data != 0) {
-	if (nextData != 0) {
-	  for (i=0; i<sizeData; i++)
-	    data[i]=nextData[i];
-	  free(nextData);
-	}
-	for (i=0, j=sizeData; i<ok; i++, j++)
- 	  data[j]=inBuf[i];
-	sizeData += ok;
-	strcpy(&data[sizeData],"");
-      }
-    }
-
-    if (strstr(inBuf,"</html>") != NULL)
-      ok = 0;
-
-  }
-
-  if (sizeData == 0) {
-    if (lastURL != 0)
-      free(lastURL);
-    lastURL = 0;
-
-#ifdef _WIN32
-  closesocket(sockfd);
-#else
-  close(sockfd);
-#endif
-
-    return -1;
-  }
-
-  // now we need to strip off the response header 
-  gMsg = data;
-
-  nextData = strstr(data,"Content-Type");
-
-  if (nextData != NULL) {
-    nextData = strchr(nextData,'\n');
-    nextData += 3;
-
-    nwrite = sizeData+1-(nextData-data);
-
-    data = (char *)malloc((sizeData+1)*sizeof(char));
-
-    for (i=0; i<nwrite; i++)
-      data[i]=nextData[i];
-  }
-
-  *dataPtr = data;
-  free(gMsg);
-
-#ifdef _WIN32
-  closesocket(sockfd);
-#else
-  close(sockfd);
-#endif
- 
-  
-  
-  sockfd = 0;
-
-  cleanup_sockets();
-
-  return 0;
 }
 
 

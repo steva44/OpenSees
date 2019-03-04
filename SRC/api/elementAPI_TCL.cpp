@@ -527,8 +527,8 @@ limCrvObj *OPS_GetLimitCurveType(char *type, int sizeType) {
 }
 // MRL end
 
-//MRL start
-extern "C" 
+//MRL start - SG also in elementAPI_Dummy
+extern "C"
 int OPS_AllocateLimitCurve(limCrvObject *theLimCrv){
 
   /*fprintf(stderr,"allocateLimitCurve Address %p\n",theLimCrv);*/
@@ -551,8 +551,8 @@ int OPS_AllocateLimitCurve(limCrvObject *theLimCrv){
   }
 
   return 0;
-}  
-//MRL end
+}
+////MRL end
 
 extern "C" 
 int OPS_AllocateMaterial(matObject *theMat){

@@ -163,6 +163,7 @@ Matrix * ConstraintFunction::getLinearAdditionPtr(){
 	return linearAddition;
 	};
 
+#ifdef _TCL85
 int ConstraintFunction::update(){
 	/*  1, check and run userinput tcl file 
 		2, to get value Vector
@@ -218,3 +219,4 @@ int ConstraintFunction::update(){
 	numOfComputation++;
 	 return 0;
 	};
+#endif

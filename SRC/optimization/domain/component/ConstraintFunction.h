@@ -69,8 +69,9 @@ public:
 	Matrix * getLinearAdditionPtr();
 
 //	int computeValueAndGradient();
-	int update();
-	
+#ifdef _TCL85
+    int update();
+#endif
 	bool isGradientProvided(){return isGradProvided;};
 	void Print(OPS_Stream &s, int flag){};
 

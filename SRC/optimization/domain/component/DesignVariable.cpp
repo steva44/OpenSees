@@ -186,8 +186,8 @@ int DesignVariable::update(double newX){
 	  sprintf(theValueString," %20.14e", newX);
 	  strcat (tclAssignment, theValueString);
 
-   
-	  if (Tcl_GetVar(theTclInterp, name, TCL_GLOBAL_ONLY) ==NULL)
+#ifdef _TCL85
+      if (Tcl_GetVar(theTclInterp, name, TCL_GLOBAL_ONLY) ==NULL)
 	   {
 			opserr<<"Fatal::the variable with name: "<<name <<" is missed!"<<endln;   
 			exit(-1);
@@ -198,6 +198,7 @@ int DesignVariable::update(double newX){
 			opserr<<"command is:"<<tclAssignment<<endln;
 			exit(-1);
 	   }
+#endif
 
 // 2.--- change value in this class
        this->setValue(newX);

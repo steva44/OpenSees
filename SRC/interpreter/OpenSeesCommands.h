@@ -56,13 +56,20 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <EquiSolnAlgo.h>
 #include <FE_Datastore.h>
 #include <FEM_ObjectBrokerAllClasses.h>
+
+#ifdef _PFEM
 #include <PFEMAnalysis.h>
+#endif
+
 #include <VariableTimeStepDirectIntegrationAnalysis.h>
 #include <Timer.h>
 #include <SimulationInformation.h>
 #include <elementAPI.h>
 #include <MachineBroker.h>
+
+#ifdef _RELIABILITY
 #include "OpenSeesReliabilityCommands.h"
+#endif
 
 class OpenSeesCommands
 {
@@ -104,8 +111,10 @@ public:
     void setStaticAnalysis();
     StaticAnalysis* getStaticAnalysis() {return theStaticAnalysis;}
 
+#ifdef _PFEM
     int setPFEMAnalysis();
     PFEMAnalysis* getPFEMAnalysis() {return thePFEMAnalysis;}
+#endif
 
     void setVariableAnalysis();
     VariableTimeStepDirectIntegrationAnalysis*
@@ -144,7 +153,9 @@ private:
     EquiSolnAlgo *theAlgorithm;
     StaticAnalysis* theStaticAnalysis;
     DirectIntegrationAnalysis* theTransientAnalysis;
+#ifdef _PFEM
     PFEMAnalysis* thePFEMAnalysis;
+#endif
     VariableTimeStepDirectIntegrationAnalysis* theVariableTimeStepTransientAnalysis;
     AnalysisModel* theAnalysisModel;
     ConvergenceTest *theTest;
@@ -157,7 +168,9 @@ private:
 
     MachineBroker* theMachineBroker;
 
+#ifdef _RELIABILITY
     OpenSeesReliabilityCommands* reliability;
+#endif
 
 };
 
@@ -369,12 +382,14 @@ void* OPS_ProfileSPDLinDirectSolver();
 void* OPS_UmfpackGenLinSolver();
 void* OPS_DiagonalDirectSolver();
 void* OPS_SProfileSPDLinSolver();
+#ifdef _PFEM
 void* OPS_PFEMSolver();
 void* OPS_PFEMCompressibleSolver();
 void* OPS_PFEMQuasiSolver();
 void* OPS_PFEMSolver_Umfpack();
 void* OPS_PFEMSolver_Laplace();
 void* OPS_PFEMSolver_LumpM();
+#endif
 void* OPS_SymSparseLinSolver();
 void* OPS_FullGenLinLapackSolver();
 
@@ -390,7 +405,9 @@ void* OPS_CTestNormDispIncr();
 void* OPS_CTestEnergyIncr();
 void* OPS_NormDispAndUnbalance();
 void* OPS_NormDispOrUnbalance();
+#ifdef _PFEM
 void* OPS_CTestPFEM();
+#endif
 void* OPS_CTestFixedNumIter();
 void* OPS_CTestRelativeNormUnbalance();
 void* OPS_CTestRelativeNormDispIncr();
@@ -408,7 +425,9 @@ void* OPS_TRBDF2();
 void* OPS_TRBDF3();
 void* OPS_Houbolt();
 void* OPS_BackwardEuler();
+#ifdef _PFEM
 void* OPS_PFEMIntegrator();
+#endif
 void* OPS_NewmarkExplicit();
 void* OPS_NewmarkHSIncrReduct();
 void* OPS_NewmarkHSIncrLimit();
@@ -449,6 +468,15 @@ void* OPS_NewtonRaphsonAlgorithm();
 void* OPS_ModifiedNewton();
 void* OPS_Broyden();
 void* OPS_BFGS();
+
+//SG add
+extern "C" int        OPS_GetStringCopy(char **cArray); // returns a new copy
+extern "C" int        OPS_AllocateLimitCurve(limCrvObj *);//**MRL
+
+#define OPS_AllocateMaterial ops_allocatematerial_
+extern "C" int        OPS_AllocateMaterial(matObj *);
+extern "C" int        OPS_Error(char *, int length);
+
 
 //////////////////////////////////////////////////////
 

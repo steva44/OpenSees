@@ -51,7 +51,7 @@
 static int numCastMaterials = 0;
 
 void *
-OPS_Cast(void)
+Cast::OPS_Cast(void)
 {
 	if (numCastMaterials == 0) {
 		numCastMaterials++;

@@ -1,0 +1,1 @@
+RANLIB=echo OPTF=-O CDEFS=-DAdd_ ORDERINGSF=-Dpord CC=mpicc -fPIC FC=mpif90 -fPIC FL=mpif90 -fPIC SCALAP=-L/usr/local/opt/scalapack/lib -lscalapack INCPAR= LIBPAR=$(SCALAP) LIBBLAS=-L/usr/local/opt/openblas/lib -lopenblas

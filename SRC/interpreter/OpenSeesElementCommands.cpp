@@ -131,7 +131,9 @@ void* OPS_PFEMElement3DBubble(const ID& info);
 //void* OPS_TaylorHood2D();
 void* OPS_PFEMElement2DCompressible(const ID& info);
 void* OPS_PFEMElement2Dmini(const ID& info);
+#ifdef _USINGFORTRAN
 void* OPS_fElmt02();
+#endif
 void* OPS_ElasticBeam2d(const ID& info);
 void* OPS_ElasticBeam3d();
 void* OPS_DispBeamColumn2dInt();
@@ -448,7 +450,9 @@ namespace {
 	functionMap.insert(std::make_pair("forceBeamColumnWarping", &OPS_ForceBeamColumnWarping2d));
 	functionMap.insert(std::make_pair("elasticForceBeamColumnWarping", &OPS_ElasticForceBeamColumnWarping2d));
 	functionMap.insert(std::make_pair("dispBeamColumnInt", &OPS_DispBeamColumn2dInt));
+#ifdef _USINGFORTRAN
 	functionMap.insert(std::make_pair("fTruss", &OPS_fElmt02));
+#endif
 	functionMap.insert(std::make_pair("PFEMElementCompressible", &OPS_PFEMElementCompressible));
 	functionMap.insert(std::make_pair("PFEMElementBubble", &OPS_PFEMElementBubble));
 	functionMap.insert(std::make_pair("MINI", &OPS_PFEMElementmini));

@@ -41,7 +41,7 @@
 
 
 
-superlu_options_t options;
+superlu_dist_options_t options;
 SuperLUStat_t stat;
 SuperMatrix A;
 ScalePermstruct_t ScalePermstruct;

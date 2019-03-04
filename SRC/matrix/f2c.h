@@ -289,6 +289,7 @@ extern integer e_wsue(void);
 extern int ef1asc_(ftnint *, ftnlen *, ftnint *, ftnlen *);
 extern integer ef1cmc_(ftnint *, ftnlen *, ftnint *, ftnlen *);
 
+#ifndef _MACOSX
 #ifndef _KAI
 #ifndef _LINUX
 extern double erf(double) throw();
@@ -298,6 +299,7 @@ extern double erf_(float *);
 #ifndef _KAI
 #ifndef _LINUX
 extern double erfc(double) throw();
+#endif
 #endif
 #endif
 

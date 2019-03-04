@@ -1,0 +1,7 @@
+CC="clang"
+CFLAGS="-fPIC "
+FORTRAN=""
+FFLAGS=""
+NOOPTS="-fPIC"
+BLASLIB="-L/usr/local/opt/openblas/lib -lopenblas"
+LOADOPTS=""

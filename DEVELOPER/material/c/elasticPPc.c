@@ -35,6 +35,7 @@
 
 #define DBL_EPSILON 1e-18
 
+#ifdef __cplusplus
 #ifdef _USRDLL
 #include <windows.h>
 #define OPS_Export _declspec(dllexport)
@@ -43,9 +44,15 @@
 #else
 #define OPS_Export extern "C" 
 #endif
+#endif
 
+
+#ifdef __cplusplus
 OPS_Export void
-elasticPPc (matObj *thisObj, 
+#else
+void
+#endif
+elasticPPc (matObj *thisObj,
 	    modelState *model, 
 	    double *strain, 
 	    double *tang, 
@@ -172,7 +179,11 @@ elasticPPc (matObj *thisObj,
 }
 
 
+#ifdef __cplusplus
 OPS_Export void
+#else
+void
+#endif
 localInit() 
 {
   OPS_Error("elasticPPC uniaxial material - Written by fmk UC Berkeley Copyright 2008 - Use at your Own Peril\n", 1);

@@ -35,8 +35,13 @@
 #define UDP_Socket_h
 
 #include <bool.h>
-#include <Socket.h>
 #include <Channel.h>
+extern "C" {
+#include <Socket.h>
+}
+
+extern int startup_sockets(void);
+extern void  cleanup_sockets(void);
 
 class UDP_Socket : public Channel
 {

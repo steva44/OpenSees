@@ -65,7 +65,10 @@ public:
 	Vector * getGradientPtr();
 	Vector * getLinearAdditionPtr();
 
+#ifdef _TCL85
 	int update();
+#endif
+
 	bool isGradientProvided(){return isGradProvided;};
 	int getNumberOfEvaluations() {return numOfComputation;};
 

@@ -125,6 +125,7 @@ Vector * ObjectiveFunction::getLinearAdditionPtr(){
 	};
 
 
+#ifdef _TCL85
 int ObjectiveFunction::update(){
 	/* check and 
 	    1. run userinput tcl file 
@@ -166,4 +167,5 @@ int ObjectiveFunction::update(){
 	numOfComputation++;
 	 return 0;
 	};
+#endif
 
