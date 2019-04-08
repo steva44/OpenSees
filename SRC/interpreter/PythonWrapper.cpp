@@ -1343,6 +1343,15 @@ static PyObject *Py_ops_updateParameter(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+static PyObject *Py_ops_setParameter(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_setParameter() < 0) return NULL;
+
+    return wrapper->getResults();
+}
+
 static PyObject *Py_ops_getPID(PyObject *self, PyObject *args)
 {
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
@@ -1478,6 +1487,15 @@ static PyObject *Py_ops_randomVariable(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+static PyObject *Py_ops_probabilityTransformation(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_probabilityTransformation() < 0) return NULL;
+
+    return wrapper->getResults();
+}
+
 static PyObject *Py_ops_updateMaterialStage(PyObject *self, PyObject *args)
 {
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
@@ -1492,6 +1510,24 @@ static PyObject *Py_ops_sdfResponse(PyObject *self, PyObject *args)
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
 
     if (OPS_sdfResponse() < 0) return NULL;
+
+    return wrapper->getResults();
+}
+
+static PyObject *Py_ops_getNumThreads(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_getNumThreads() < 0) return NULL;
+
+    return wrapper->getResults();
+}
+
+static PyObject *Py_ops_setNumThreads(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_setNumThreads() < 0) return NULL;
 
     return wrapper->getResults();
 }
@@ -1636,6 +1672,7 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("parameter", &Py_ops_parameter);
     addCommand("addToParameter", &Py_ops_addToParameter);
     addCommand("updateParameter", &Py_ops_updateParameter);
+    addCommand("setParameter", &Py_ops_setParameter);
     addCommand("getPID", &Py_ops_getPID);
     addCommand("getNP", &Py_ops_getNP);
     addCommand("barrier", &Py_ops_barrier);
@@ -1653,6 +1690,9 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("randomVariable", &Py_ops_randomVariable);
     addCommand("updateMaterialStage", &Py_ops_updateMaterialStage);
     addCommand("sdfResponse", &Py_ops_sdfResponse);
+    addCommand("probabilityTransformation", &Py_ops_probabilityTransformation);
+    addCommand("getNumThreads", &Py_ops_getNumThreads);
+    addCommand("setNumThreads", &Py_ops_setNumThreads);
 
     PyMethodDef method = {NULL,NULL,0,NULL};
     methodsOpenSees.push_back(method);

@@ -1859,7 +1859,8 @@ int OPS_printA()
     FileStream outputFile;
     OPS_Stream *output = &opserr;
 
-    if (OPS_GetNumRemainingInputArgs() > 1) {
+    bool ret = false;
+    if (OPS_GetNumRemainingInputArgs() > 0) {
 	const char* flag = OPS_GetString();
 
 	if ((strcmp(flag,"file") == 0) || (strcmp(flag,"-file") == 0)) {
@@ -1870,6 +1871,8 @@ int OPS_printA()
 		return -1;
 	    }
 	    output = &outputFile;
+	} else if((strcmp(flag,"ret") == 0) || (strcmp(flag,"-ret") == 0)) {
+	    ret = true;
 	}
     }
 
@@ -1884,9 +1887,20 @@ int OPS_printA()
 	    theTransientIntegrator->formTangent(0);
 	}
 
-	const Matrix *A = theSOE->getA();
+	Matrix *A = const_cast<Matrix*>(theSOE->getA());
 	if (A != 0) {
-	    *output << *A;
+	    if (ret) {
+		int size = A->noRows() * A->noCols();
+		if (size >0) {
+		    double& ptr = (*A)(0,0);
+		    if (OPS_SetDoubleOutput(&size, &ptr) < 0) {
+			opserr << "WARNING: printA - failed to set output\n";
+			return -1;
+		    }
+		}
+	    } else {
+		*output << *A;
+	    }
 	}
     }
 
@@ -1906,7 +1920,8 @@ int OPS_printB()
     StaticIntegrator* theStaticIntegrator = cmds->getStaticIntegrator();
     TransientIntegrator* theTransientIntegrator = cmds->getTransientIntegrator();
 
-    if (OPS_GetNumRemainingInputArgs() > 1) {
+    bool ret = false;
+    if (OPS_GetNumRemainingInputArgs() > 0) {
 	const char* flag = OPS_GetString();
 
 	if ((strcmp(flag,"file") == 0) || (strcmp(flag,"-file") == 0)) {
@@ -1917,6 +1932,8 @@ int OPS_printB()
 		return -1;
 	    }
 	    output = &outputFile;
+	} else if((strcmp(flag,"ret") == 0) || (strcmp(flag,"-ret") == 0)) {
+	    ret = true;
 	}
     }
     if (theSOE != 0) {
@@ -1926,8 +1943,19 @@ int OPS_printB()
 	    theTransientIntegrator->formTangent(0);
 	}
 
-	const Vector &b = theSOE->getB();
-	*output << b;
+	Vector &b = const_cast<Vector&>(theSOE->getB());
+	if (ret) {
+	    int size = b.Size();
+	    if (size > 0) {
+		double &ptr = b(0);
+		if (OPS_SetDoubleOutput(&size, &ptr) < 0) {
+		    opserr << "WARNING: printb - failed to set output\n";
+		    return -1;
+		}
+	    }
+	} else {
+	    *output << b;
+	}
     }
 
     // close the output file
