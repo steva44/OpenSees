@@ -285,21 +285,13 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/eigenSOE/SymBandEigenSolver.cpp \
 
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/release/ -lscalapack
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/debug/ -lscalapack
+else:unix: LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/ -lscalapack
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../scalapack/2.0.2_13/lib/release/ -lscalapack
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../scalapack/2.0.2_13/lib/debug/ -lscalapack
-#else:unix: LIBS += -L$$PWD/../scalapack/2.0.2_13/lib/ -lscalapack
+INCLUDEPATH += $$PWD/OpenSeesLibs/scalapack/2.0.2_13
+DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/2.0.2_13
 
-#INCLUDEPATH += $$PWD/../scalapack/2.0.2_13
-#DEPENDPATH += $$PWD/../scalapack/2.0.2_13
-
-
-win32:CONFIG(release, debug|release): LIBS += -L$$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/release/ -lLAPACK
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/debug/ -lLAPACK
-else:unix: LIBS += -L$$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/ -lLAPACK
-
-INCLUDEPATH += $$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
-DEPENDPATH += $$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
 
 }
@@ -308,19 +300,12 @@ DEPENDPATH += $$/System/Library/Frameworks/Accelerate.framework/Versions/A/Frame
 # Using OS X built in library for BLAS
 contains (DEFINES, _CBLAS){
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../openblas/0.3.5/lib/release/ -lopenblasp-r0.3.5
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../openblas/0.3.5/lib/debug/ -lopenblasp-r0.3.5
-#else:unix: LIBS += -L$$PWD/../openblas/0.3.5/lib/ -lopenblasp-r0.3.5
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/release/ -lopenblasp-r0.3.5
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/debug/ -lopenblasp-r0.3.5
+else:unix: LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/ -lopenblasp-r0.3.5
 
-#INCLUDEPATH += $$PWD/../openblas/0.3.5/include
-#DEPENDPATH += $$PWD/../openblas/0.3.5/include
-
-win32:CONFIG(release, debug|release): LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/release/ -lBLAS
-else:win32:CONFIG(debug, debug|release): LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/debug/ -lBLAS
-else:unix: LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/ -lBLAS
-
-INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
-DEPENDPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
+INCLUDEPATH += $$PWD/OpenSeesLibs/openblas/0.3.5/include
+DEPENDPATH += $$PWD/OpenSeesLibs/openblas/0.3.5/include
 
 }
 
