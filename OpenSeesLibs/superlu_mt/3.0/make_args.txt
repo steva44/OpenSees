@@ -1,5 +1,0 @@
-CC="clang"
-CFLAGS=""
-FORTRAN=""
-LOADER="clang"
-BLASLIB="-L/usr/local/opt/openblas/lib -lopenblas"

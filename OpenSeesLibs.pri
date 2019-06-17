@@ -20,12 +20,23 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSolver.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/5.3.0/lib/release/ -lumfpack.5.7.7
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/5.3.0/lib/debug/ -lumfpack.5.7.7
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/5.3.0/lib/ -lumfpack.5.7.7 -lcxsparse.3.2.0
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/5.3.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/5.3.0/include
+LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/lib/ -lumfpack.5.7.7 -lcxsparse.3.2.0
+INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
+
+}
+
 
 }
 
@@ -59,18 +70,27 @@ SOURCES += \
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/release/ -lsuperlu
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/ -lsuperlu
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/ -lsuperlu
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/5.2.1/include \
-               $$PWD/OpenSeesLibs/superlu/5.2.1/include/superlu \
+LIBS += -L$$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/lib/ -lsuperlu
 
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu/5.2.1/include
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/5.2.1/lib/release/libsuperlu.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/libsuperlu.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/5.2.1/lib/release/superlu.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/superlu.lib
-else:unix: PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/5.2.1/lib/libsuperlu.a
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/include/superlu
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/include/superlu
+
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/lib/libsuperlu.a
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/superlu/Unix/5.2.1/lib/ -lsuperlu
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/include/superlu
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/include/superlu
+
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/lib/libsuperlu.a
+
+}
 
 }
 
@@ -80,20 +100,28 @@ HEADERS += \
    $$PWD/SRC/system_of_eqn/linearSOE/sparseGEN/SuperLU_MT_util.h \
    $$PWD/SRC/system_of_eqn/linearSOE/sparseGEN/ThreadedSuperLU.h \
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/3.0/lib/release/ -lsuperlu_mt_PTHREAD
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/3.0/lib/debug/ -lsuperlu_mt_PTHREAD
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/3.0/lib/ -lsuperlu_mt_PTHREAD
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx:{
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_mt/3.0/include \
-               $$PWD/OpenSeesLibs/superlu_mt/3.0/include/superlu_mt \
+LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/lib/ -lsuperlu_mt_PTHREAD
 
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu_mt/3.0/include
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/include
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/include
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/3.0/lib/release/libsuperlu_mt_PTHREAD.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/3.0/lib/debug/libsuperlu_mt_PTHREAD.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/3.0/lib/release/superlu_mt_PTHREAD.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/3.0/lib/debug/superlu_mt_PTHREAD.lib
-else:unix: PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/3.0/lib/libsuperlu_mt_PTHREAD.a
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/lib/libsuperlu_mt_PTHREAD.a
+
+}
+else:unix:{
+
+LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/Unix/3.0/lib/ -lsuperlu_mt_PTHREAD
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_mt/Unix/3.0/include/superlu_mt
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu_mt/Unix/3.0/include/superlu_mt
+
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/Unix/3.0/lib/libsuperlu_mt_PTHREAD.a
+
+}
 
 }
 
@@ -112,12 +140,25 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenRowLinSolver.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/5.1.0/lib/release/ -lsuperlu_dist.5.1.0
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/5.1.0/lib/debug/ -lsuperlu_dist.5.1.0
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/5.1.0/lib/ -lsuperlu_dist.5.1.0
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/5.1.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/5.1.0/include
+LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/lib/ -lsuperlu_dist.5.1.0
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
+
+}
+else:unix:{
+
+LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/lib/ -lsuperlu_dist
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/include
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/include
+
+}
+
 
 }
 
@@ -139,12 +180,19 @@ SOURCES += \
    #$$PWD/SRC/graph/numberer/MetisNumberer.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/metis/5.1.0/lib/release/ -lmetis
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/metis/5.1.0/lib/debug/ -lmetis
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/metis/5.1.0/lib/ -lmetis
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
+LIBS += -L$$PWD/OpenSeesLibs/metis/Mac/5.1.0/lib/ -lmetis
+INCLUDEPATH += $$PWD/OpenSeesLibs/Mac/metis/5.1.0/include
+DEPENDPATH += $$PWD/OpenSeesLibs/Mac/metis/5.1.0/include
+}
+else:unix: {
+LIBS += -L$$PWD/OpenSeesLibs/metis/Unix/5.1.0/lib/ -lmetis
+INCLUDEPATH += $$PWD/OpenSeesLibs/Unix/metis/5.1.0/include
+DEPENDPATH += $$PWD/OpenSeesLibs/Unix/metis/5.1.0/include
+}
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/metis/5.1.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/metis/5.1.0/include
 
 }
 
@@ -184,12 +232,21 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/eigenSOE/SymArpackSolver.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/arpack/3.6.3/libexec/lib/release/ -larpack.2
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/arpack/3.6.3/libexec/lib/debug/ -larpack.2
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/arpack/3.6.3/libexec/lib/ -larpack.2
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
+LIBS += -L$$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/lib/ -lparpack.2 -larpack
+INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
+DEPENDPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
+}
+else:unix: {
+LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/lib/ -larpack
+INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/include
+DEPENDPATH  += $$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/include
+}
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/3.6.3/libexec/include
-DEPENDPATH += $$PWD/OpenSeesLibs/arpack/3.6.3/libexec/include
+
+
 
 }
 
@@ -284,15 +341,21 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/eigenSOE/FullGenEigenSolver.cpp \
    $$PWD/SRC/system_of_eqn/eigenSOE/SymBandEigenSolver.cpp \
 
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/release/ -lscalapack
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/debug/ -lscalapack
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/scalapack/2.0.2_13/lib/ -lscalapack
+LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/ -lLAPACK
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/scalapack/2.0.2_13
-DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/2.0.2_13
+INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
+DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
-
+}
+else:unix: {
+LIBS += -L$$PWD/OpenSeesLibs/scalapack/Unix/2.0.2_15/lib/ -lscalapack
+INCLUDEPATH += $$PWD/OpenSeesLibs/scalapack/Unix/2.0.2_15
+DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/Unix/2.0.2_15
+}
 
 }
 
@@ -300,12 +363,29 @@ DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/2.0.2_13
 # Using OS X built in library for BLAS
 contains (DEFINES, _CBLAS){
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/release/ -lopenblasp-r0.3.5
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/debug/ -lopenblasp-r0.3.5
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/openblas/0.3.5/lib/ -lopenblasp-r0.3.5
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/openblas/0.3.5/include
-DEPENDPATH += $$PWD/OpenSeesLibs/openblas/0.3.5/include
+LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/ -lBLAS
+
+INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
+DEPENDPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
+
+
+LIBS += -L$$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15/lib/ -lscalapack
+
+INCLUDEPATH += $$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15
+DEPENDPATH += $$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15
+
+
+}
+else:unix: {
+LIBS += -L$$PWD/OpenSeesLibs/openblas/Unix/0.3.6_1/lib/ -lopenblas
+INCLUDEPATH += $$PWD/OpenSeesLibs/openblas/Unix/0.3.6_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/openblas/Unix/0.3.6_1/include
+}
+
 
 }
 
@@ -332,12 +412,23 @@ SOURCES += \
    #$$PWD/SRC/system_of_eqn/linearSOE/mumps/example.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/mumps/5.1.2_2/lib/release/ -ldmumps -lmumps_common -lpord
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/mumps/5.1.2_2/lib/debug/ -ldmumps -lmumps_common -lpord
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/mumps/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/mumps/5.1.2_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/mumps/5.1.2_2/include
+LIBS += -L$$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
+INCLUDEPATH += $$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/include
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
+INCLUDEPATH += $$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/include
+
+}
+
 }
 
 # Portable, Extensible Toolkit for Scientific Computation
@@ -367,12 +458,23 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/linearSOE/petsc/TclPetsc.cpp \
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/petsc/3.9.3_1/lib/release/ -lpetsc.3.9.3
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/petsc/3.9.3_1/lib/debug/ -lpetsc.3.9.3
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/petsc/3.9.3_1/lib/ -lpetsc.3.9.3
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/petsc/3.9.3_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/petsc/3.9.3_1/include
+LIBS += -L$$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/lib/ -lpetsc.3.9.3
+INCLUDEPATH += $$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/include
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/lib/ -lpetsc.3.9.3
+INCLUDEPATH += $$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/include
+
+}
+
 
 }
 
@@ -447,12 +549,22 @@ SOURCES += \
 #https://www.open-mpi.org/
 contains (DEFINES, _OPENMPI){
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/open-mpi/4.0.0/lib/release/ -lmpi.40
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/open-mpi/4.0.0/lib/debug/ -lmpi.40
-else:unix: LIBS += -L$$PWD/OpenSeesLibs/open-mpi/4.0.0/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/4.0.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/4.0.0/include
+LIBS += -L$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40
+INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/include
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/open-mpi/Unix/4.0.1_1/lib/ -lmpi -lmca_common_sm -lmca_common_monitoring -lmca_common_ompio -lmpi_mpifh -lopen-pal -lompitrace -lopen-rte -lmpi_usempif08
+INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/Unix/4.0.1_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Unix/4.0.1_1/include
+
+}
 
 }
 
@@ -463,14 +575,15 @@ QMAKE_CXXFLAGS=-I/usr/local/opt/tcl-tk/include
 
 win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/release/ -ltcl8.6
 else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/debug/ -ltcl8.6
-else:unix: LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/ -ltcl8.6
+else:macx: LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/ -ltcl8.6
+#else:unix: LIBS += -L
 
 INCLUDEPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 DEPENDPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 
 win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/release/ -ltk8.6
 else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/debug/ -ltk8.6
-else:unix: LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/ -ltk8.6
+else:macx: LIBS += -L/usr/local/Cellar/tcl-tk/8.6.9/lib/ -ltk8.6
 
 INCLUDEPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 DEPENDPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
@@ -481,7 +594,7 @@ DEPENDPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/release/ -lgfortran.5
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/debug/ -lgfortran.5
-#else:unix: LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/ -lgfortran.5
+#else:macx: LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/ -lgfortran.5
 
 #INCLUDEPATH += $$PWD/../gcc/8.2.0/lib/gcc/8
 #DEPENDPATH += $$PWD/../gcc/8.2.0/lib/gcc/8

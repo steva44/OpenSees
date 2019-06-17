@@ -13,6 +13,7 @@ DESTDIR = ./Bin
 include(./qmake.conf)
 
 #use plugin so that only one library file gets built and turn off Qt
+#CONFIG += staticlib
 CONFIG += plugin
 CONFIG -= app_bundle
 CONFIG -= qt
@@ -57,6 +58,5 @@ INCLUDEPATH += /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Vers
 DEPENDPATH += /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/include
 
 }
-
 
 

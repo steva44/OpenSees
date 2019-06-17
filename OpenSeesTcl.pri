@@ -24,6 +24,9 @@ HEADERS += \
    $$PWD/SRC/interpreter/DL_Interpreter.h \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/WrapperLimitCurve.h \
    $$PWD/SRC/recorder/GmshRecorder.h \ #throws errors if not compiled with tcl
+   $$PWD/SRC/material/uniaxial/limitState/limitCurve/AxialCurve.h \
+   $$PWD/SRC/optimization/domain/component/ConstraintFunction.h \
+   $$PWD/SRC/optimization/domain/component/ObjectiveFunction.h \
    #$$PWD/SRC/modelbuilder/tcl/TclPlaneStressMaterialTester.h \
    #$$PWD/SRC/modelbuilder/tcl/TclSectionTester.h \
    #$$PWD/SRC/modelbuilder/tcl/TclUniaxialMaterialTester.h \
@@ -118,6 +121,9 @@ SOURCES += \
    $$PWD/SRC/api/elementAPI_TCL.cpp \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/WrapperLimitCurve.cpp \
    $$PWD/SRC/recorder/GmshRecorder.cpp \ #throws errors if not compiled with tcl
+   $$PWD/SRC/material/uniaxial/limitState/limitCurve/AxialCurve.cpp \
+   $$PWD/SRC/optimization/domain/component/ConstraintFunction.cpp \
+   $$PWD/SRC/optimization/domain/component/ObjectiveFunction.cpp \
    #$$PWD/SRC/optimization/tcl/TclOptimizationBuilder.cpp \
    #$$PWD/SRC/tcl/tclMain85.cpp \
    #$$PWD/SRC/tcl/tkAppInit.cpp \

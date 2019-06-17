@@ -141,6 +141,11 @@ HEADERS += \
    $$PWD/SRC/reliability/domain/components/PrincipalPlane.h \
    $$PWD/SRC/reliability/domain/components/RandomVariable.h \
    $$PWD/SRC/domain/component/RVParameter.h \
+   $$PWD/SRC/domain/component/DVParameter.h \
+   $$PWD/SRC/optimization/domain/component/DesignVariable.h \
+   $$PWD/SRC/optimization/domain/component/DesignVariableIter.h \
+   $$PWD/SRC/optimization/domain/component/DesignVariablePositioner.h \
+   $$PWD/SRC/optimization/domain/component/DesignVariablePositionerIter.h \
    $$PWD/SRC/reliability/domain/components/RandomVariableIter.h \
    $$PWD/SRC/reliability/domain/components/RandomVariablePositioner.h \
    $$PWD/SRC/reliability/domain/components/RandomVariablePositionerIter.h \
@@ -315,6 +320,11 @@ SOURCES += \
    $$PWD/SRC/reliability/domain/components/PrincipalPlane.cpp \
    $$PWD/SRC/reliability/domain/components/RandomVariable.cpp \
    $$PWD/SRC/domain/component/RVParameter.cpp \
+   $$PWD/SRC/domain/component/DVParameter.cpp \
+   $$PWD/SRC/optimization/domain/component/DesignVariable.cpp \
+   $$PWD/SRC/optimization/domain/component/DesignVariableIter.cpp \
+   $$PWD/SRC/optimization/domain/component/DesignVariablePositioner.cpp \
+   $$PWD/SRC/optimization/domain/component/DesignVariablePositionerIter.cpp \
    $$PWD/SRC/reliability/domain/components/RandomVariableIter.cpp \
    $$PWD/SRC/reliability/domain/components/RandomVariablePositioner.cpp \
    $$PWD/SRC/reliability/domain/components/RandomVariablePositionerIter.cpp \

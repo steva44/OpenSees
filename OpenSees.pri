@@ -754,7 +754,6 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/fedeas/FedeasSteel1Material.h \
    $$PWD/SRC/material/uniaxial/fedeas/FedeasSteel2Material.h \
    $$PWD/SRC/material/uniaxial/fedeas/PlasticDamageMaterial.h \
-   $$PWD/SRC/material/uniaxial/limitState/limitCurve/AxialCurve.h \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/LimitCurve.h \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/RotationShearCurve.h \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/ShearCurve.h \
@@ -994,17 +993,10 @@ HEADERS += \
    $$PWD/SRC/OPS_Globals.h \
    $$PWD/SRC/modelbuilder/tcl/Block2D.h \
    $$PWD/SRC/modelbuilder/tcl/Block3D.h \
-   $$PWD/SRC/optimization/domain/component/ConstraintFunction.h \
-   $$PWD/SRC/optimization/domain/component/DesignVariable.h \
-   $$PWD/SRC/optimization/domain/component/DesignVariableIter.h \
-   $$PWD/SRC/optimization/domain/component/DesignVariablePositioner.h \
-   $$PWD/SRC/optimization/domain/component/DesignVariablePositionerIter.h \
-   $$PWD/SRC/optimization/domain/component/ObjectiveFunction.h \
    $$PWD/SRC/optimization/domain/Optimization.h \
    $$PWD/SRC/optimization/domain/OptimizationDomain.h \
    $$PWD/SRC/optimization/domain/OptimizationDomainComponent.h \
    $$PWD/SRC/domain/component/DomainComponent.h \
-   $$PWD/SRC/domain/component/DVParameter.h \
    $$PWD/SRC/domain/component/ElementParameter.h \
    $$PWD/SRC/domain/component/ElementStateParameter.h \
    $$PWD/SRC/domain/component/InitialStateParameter.h \
@@ -1658,7 +1650,6 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/fedeas/FedeasSteel2Material.cpp \
    $$PWD/SRC/material/uniaxial/fedeas/PD1.c \
    $$PWD/SRC/material/uniaxial/fedeas/PlasticDamageMaterial.cpp \
-   $$PWD/SRC/material/uniaxial/limitState/limitCurve/AxialCurve.cpp \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/LimitCurve.cpp \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/RotationShearCurve.cpp \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/ShearCurve.cpp \
@@ -1901,17 +1892,10 @@ SOURCES += \
    $$PWD/SRC/utility/Timer.cpp \
    $$PWD/SRC/modelbuilder/tcl/Block2D.cpp \
    $$PWD/SRC/modelbuilder/tcl/Block3D.cpp \
-   $$PWD/SRC/optimization/domain/component/ConstraintFunction.cpp \
-   $$PWD/SRC/optimization/domain/component/DesignVariable.cpp \
-   $$PWD/SRC/optimization/domain/component/DesignVariableIter.cpp \
-   $$PWD/SRC/optimization/domain/component/DesignVariablePositioner.cpp \
-   $$PWD/SRC/optimization/domain/component/DesignVariablePositionerIter.cpp \
-   $$PWD/SRC/optimization/domain/component/ObjectiveFunction.cpp \
    $$PWD/SRC/optimization/domain/Optimization.cpp \
    $$PWD/SRC/optimization/domain/OptimizationDomain.cpp \
    $$PWD/SRC/optimization/domain/OptimizationDomainComponent.cpp \
    $$PWD/SRC/domain/component/DomainComponent.cpp \
-   $$PWD/SRC/domain/component/DVParameter.cpp \
    $$PWD/SRC/domain/component/ElementParameter.cpp \
    $$PWD/SRC/domain/component/ElementStateParameter.cpp \
    $$PWD/SRC/domain/component/InitialStateParameter.cpp \
