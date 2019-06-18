@@ -272,6 +272,7 @@ int OPS_basicForce();
 int OPS_basicStiffness();
 int OPS_version();
 int OPS_maxOpenFiles();
+int OPS_logFile();
 // Sensitivity:BEGIN /////////////////////////////////////////////
 int OPS_sensNodeDisp();
 int OPS_sensNodeVel();
@@ -317,7 +318,15 @@ int OPS_setNumThreads();
 
 // OpenSeesReliabilityCommands.cpp
 int OPS_randomVariable();
+int OPS_getRVTags();
+int OPS_getRVMean();
+int OPS_getRVStdv();
+int OPS_getRVPDF();
+int OPS_getRVCDF();
+int OPS_getRVInverseCDF();
+int OPS_addCorrelate();
 int OPS_probabilityTransformation();
+int OPS_transformUtoX();
 
 /* OpenSeesCommands.cpp */
 int OPS_wipe();

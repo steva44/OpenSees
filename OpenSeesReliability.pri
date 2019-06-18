@@ -160,6 +160,7 @@ HEADERS += \
    $$PWD/SRC/reliability/domain/distributions/LognormalRV.h \
    $$PWD/SRC/reliability/domain/distributions/NormalRV.h \
    $$PWD/SRC/reliability/domain/distributions/ParetoRV.h \
+   $$PWD/SRC/reliability/domain/distributions/PythonRV.h \
    $$PWD/SRC/reliability/domain/distributions/RayleighRV.h \
    $$PWD/SRC/reliability/domain/distributions/ShiftedExponentialRV.h \
    $$PWD/SRC/reliability/domain/distributions/ShiftedRayleighRV.h \
@@ -339,6 +340,7 @@ SOURCES += \
    $$PWD/SRC/reliability/domain/distributions/LognormalRV.cpp \
    $$PWD/SRC/reliability/domain/distributions/NormalRV.cpp \
    $$PWD/SRC/reliability/domain/distributions/ParetoRV.cpp \
+   $$PWD/SRC/reliability/domain/distributions/PythonRV.cpp \
    $$PWD/SRC/reliability/domain/distributions/RayleighRV.cpp \
    $$PWD/SRC/reliability/domain/distributions/ShiftedExponentialRV.cpp \
    $$PWD/SRC/reliability/domain/distributions/ShiftedRayleighRV.cpp \

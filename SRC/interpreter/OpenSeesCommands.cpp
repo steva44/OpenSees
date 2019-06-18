@@ -43,7 +43,6 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include "OpenSeesCommands.h"
 #include <OPS_Globals.h>
 #include <elementAPI.h>
-#include <StandardStream.h>
 #include <UniaxialMaterial.h>
 #include <NDMaterial.h>
 #include <SectionForceDeformation.h>
@@ -178,10 +177,6 @@ int OPS_Error(char *errorMessage, int length)
 
 // active object
 static OpenSeesCommands* cmds = 0;
-
-// define opserr
-static StandardStream sserr;
-OPS_Stream *opserrPtr = &sserr;
 
 OpenSeesCommands::OpenSeesCommands(DL_Interpreter* interp)
     :interpreter(interp), theDomain(0), ndf(0), ndm(0),
@@ -931,6 +926,12 @@ OpenSeesCommands::wipe()
     // wipe CyclicModel
     OPS_clearAllCyclicModel();
 
+    if (reliability != 0) {
+      ReliabilityDomain* theReliabilityDomain = reliability->getDomain();
+      if (theReliabilityDomain != 0) {
+	//theReliabilityDomain->clearAll();
+      }
+    }
 }
 
 void
@@ -1827,6 +1828,7 @@ int OPS_resetModel()
     if (theTransientIntegrator != 0) {
 	theTransientIntegrator->revertToStart();
     }
+
     return 0;
 }
 
@@ -2755,7 +2757,7 @@ int OPS_neesUpload()
 	}
     }
 
-    simulationInfo->neesUpload(userName, userPasswd, projID, expID);
+    //simulationInfo->neesUpload(userName, userPasswd, projID, expID);
 
     return 0;
 }

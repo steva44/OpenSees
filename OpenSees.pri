@@ -618,6 +618,7 @@ HEADERS += \
    $$PWD/SRC/material/nD/AcousticMedium.h \
    $$PWD/SRC/material/nD/BeamFiberMaterial.h \
    $$PWD/SRC/material/nD/BeamFiberMaterial2d.h \
+   $$PWD/SRC/material/nD/BeamFiberMaterial2dPS.h \
    $$PWD/SRC/material/nD/CapPlasticity.h \
    $$PWD/SRC/material/nD/ConcreteMcftNonLinear5.h \
    $$PWD/SRC/material/nD/ConcreteMcftNonLinear7.h \
@@ -686,6 +687,7 @@ HEADERS += \
    $$PWD/SRC/material/section/integration/SectionIntegration.h \
    $$PWD/SRC/material/section/integration/TubeSectionIntegration.h \
    $$PWD/SRC/material/section/integration/WideFlangeSectionIntegration.h \
+   $$PWD/SRC/material/section/integration/RCTunnelSectionIntegration.h \
    $$PWD/SRC/material/section/repres/cell/Cell.h \
    $$PWD/SRC/material/section/repres/cell/CircSectionCell.h \
    $$PWD/SRC/material/section/repres/cell/QuadCell.h \
@@ -861,6 +863,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/ShearPanelMaterial.h \
    $$PWD/SRC/material/uniaxial/SimpleFractureMaterial.h \
    $$PWD/SRC/material/uniaxial/SmoothPSConcrete.h \
+   $$PWD/SRC/material/uniaxial/SPSW02.h \
    $$PWD/SRC/material/uniaxial/StainlessECThermal.h \
    $$PWD/SRC/material/uniaxial/Steel01.h \
    $$PWD/SRC/material/uniaxial/Steel01Thermal.h \
@@ -1513,6 +1516,7 @@ SOURCES += \
    $$PWD/SRC/material/nD/AcousticMedium.cpp \
    $$PWD/SRC/material/nD/BeamFiberMaterial.cpp \
    $$PWD/SRC/material/nD/BeamFiberMaterial2d.cpp \
+   $$PWD/SRC/material/nD/BeamFiberMaterial2dPS.cpp \
    $$PWD/SRC/material/nD/CapPlasticity.cpp \
    $$PWD/SRC/material/nD/ConcreteMcftNonLinear5.cpp \
    $$PWD/SRC/material/nD/ConcreteMcftNonLinear7.cpp \
@@ -1581,6 +1585,7 @@ SOURCES += \
    $$PWD/SRC/material/section/integration/SectionIntegration.cpp \
    $$PWD/SRC/material/section/integration/TubeSectionIntegration.cpp \
    $$PWD/SRC/material/section/integration/WideFlangeSectionIntegration.cpp \
+   $$PWD/SRC/material/section/integration/RCTunnelSectionIntegration.cpp \
    $$PWD/SRC/material/section/repres/cell/Cell.cpp \
    $$PWD/SRC/material/section/repres/cell/CircSectionCell.cpp \
    $$PWD/SRC/material/section/repres/cell/QuadCell.cpp \
@@ -1757,6 +1762,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/ShearPanelMaterial.cpp \
    $$PWD/SRC/material/uniaxial/SimpleFractureMaterial.cpp \
    $$PWD/SRC/material/uniaxial/SmoothPSConcrete.cpp \
+   $$PWD/SRC/material/uniaxial/SPSW02.cpp \
    $$PWD/SRC/material/uniaxial/StainlessECThermal.cpp \
    $$PWD/SRC/material/uniaxial/Steel01.cpp \
    $$PWD/SRC/material/uniaxial/Steel01Thermal.cpp \
@@ -1885,7 +1891,6 @@ SOURCES += \
    $$PWD/SRC/tagged/TaggedObject.cpp \
    $$PWD/SRC/utility/File.cpp \
    $$PWD/SRC/utility/FileIter.cpp \
-   $$PWD/SRC/utility/NeesCentral.cpp \
    $$PWD/SRC/utility/PeerNGA.cpp \
    $$PWD/SRC/utility/SimulationInformation.cpp \
    $$PWD/SRC/utility/StringContainer.cpp \

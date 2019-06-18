@@ -350,6 +350,12 @@ LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/
 INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
+#Need to include the library below so that we do not get a blacs_gridexit error in PyCharm. It looks like this function is not included in the accelerate framework
+LIBS += -L$$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15/lib/ -lscalapack
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15
+DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15
+
 }
 else:unix: {
 LIBS += -L$$PWD/OpenSeesLibs/scalapack/Unix/2.0.2_15/lib/ -lscalapack
@@ -371,13 +377,6 @@ LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/
 
 INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 DEPENDPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
-
-
-LIBS += -L$$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15/lib/ -lscalapack
-
-INCLUDEPATH += $$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15
-DEPENDPATH += $$PWD/../../RtsGIT/Rts/Libraries/OpenSees/OpenSees/OpenSeesLibs/scalapack/Mac/2.0.2_15
-
 
 }
 else:unix: {
