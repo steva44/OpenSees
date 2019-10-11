@@ -1,45 +1,3 @@
-
-
-
-#UMFPACK is a set of routines for solving unsymmetric sparse linear systems of the form Ax=b, using the Unsymmetric MultiFrontal method (Matrix A is not required to be symmetric).
-#Written in ANSI/ISO C
-contains (DEFINES, _UMFPACK){
-
-#Need to define this so we dont get a strange compilation error due to the sparse-suite cs.h include
-DEFINES += NCOMPLEX
-
-INCLUDEPATH += \
-    $$PWD/SRC/system_of_eqn/linearSOE/umfGEN \
-
-HEADERS += \
-   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSOE.h \
-   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSolver.h \
-
-SOURCES += \
-   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSOE.cpp \
-   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSolver.cpp \
-
-
-win32:CONFIG(release, debug|release): LIBS += -L
-else:win32:CONFIG(debug, debug|release): LIBS += -L
-else:macx: {
-
-LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/lib/ -lumfpack.5.7.7 -lcxsparse.3.2.0
-INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
-
-}
-else:unix: {
-
-LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/lib/ -lumfpack -lcxsparse
-INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
-
-}
-
-
-}
-
 #ITPACK, developed at the Center for Numerical Analysis, the University of Texas at Austin, is a collection of
 #subroutines for solving large sparse linear systems by adaptive accelerated iterative algorithms.
 #currently not using ITPACK in OTHER folder due to fortran useage.No brew formula.
@@ -125,6 +83,7 @@ PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/Unix/3.0/lib/libsuperlu_mt_PTHRE
 
 }
 
+
 contains (DEFINES, _SUPERLUDIST){
 
 HEADERS += \
@@ -139,6 +98,12 @@ SOURCES += \
    $$PWD/SRC/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenRowLinSOE.cpp \
    $$PWD/SRC/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenRowLinSolver.cpp \
 
+#SuperLU depends on parmetis
+if(!contains (DEFINES, _PARMETIS)){
+
+DEFINES += _PARMETIS
+
+}
 
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
@@ -149,16 +114,35 @@ LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/lib/ -lsuperlu_dist.5.1.0
 INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
 DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
 
+
 }
 else:unix:{
-
-LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/lib/ -lsuperlu_dist
 
 INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/include
 DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/include
 
+LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Unix/5.1.0/lib/ -lsuperlu_dist
+
 }
 
+}
+
+#PARMETIS is an MPI-based parallel library that implements a variety of algorithms for partitioning and repartitioning unstructured graphs and for computing fill-reducing orderings of sparse matrices.
+contains (DEFINES, _PARMETIS){
+
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
+
+LIBS += -L$$$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/lib/ -lparmetis
+
+INCLUDEPATH += $$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/include
+DEPENDPATH += $$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/include
+
+}
+else:unix:{
+
+}
 
 }
 
@@ -235,7 +219,7 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L$$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/lib/ -lparpack.2 -larpack
+LIBS += -L$$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/lib/ -larpack.2 -larpack
 INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
 DEPENDPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
 }
@@ -548,14 +532,22 @@ SOURCES += \
 #https://www.open-mpi.org/
 contains (DEFINES, _OPENMPI){
 
+#Set the environment variable for OpenMPI since the installation is moved from its original location
+#%{Env:OPAL_PREFIX} = $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/
+#%{OPAL_PREFIX:-$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/}
+
+
+
+
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40
-INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_1/include
+LIBS += -L$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/include
 
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/lib/libmpi_usempi_ignore_tkr.a
 }
 else:unix: {
 
@@ -568,6 +560,7 @@ DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Unix/4.0.1_1/include
 }
 
 
+#Tcl Interpreter -- need to change the paths below to match the version/location on your system
 contains (DEFINES, _TCL85){
 
 QMAKE_CXXFLAGS=-I/usr/local/opt/tcl-tk/include
@@ -589,6 +582,56 @@ DEPENDPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 
 }
 
+
+#UMFPACK is a set of routines for solving unsymmetric sparse linear systems of the form Ax=b, using the Unsymmetric MultiFrontal method (Matrix A is not required to be symmetric).
+#Written in ANSI/ISO C
+contains (DEFINES, _UMFPACK){
+
+#Need to define this so we dont get a strange compilation error due to the sparse-suite cs.h include
+DEFINES += NCOMPLEX
+
+INCLUDEPATH += \
+    $$PWD/SRC/system_of_eqn/linearSOE/umfGEN \
+
+HEADERS += \
+   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSOE.h \
+   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSolver.h \
+
+SOURCES += \
+   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSOE.cpp \
+   $$PWD/SRC/system_of_eqn/linearSOE/umfGEN/UmfpackGenLinSolver.cpp \
+
+
+win32:CONFIG(release, debug|release): LIBS += -L
+else:win32:CONFIG(debug, debug|release): LIBS += -L
+else:macx: {
+
+LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/lib/ -lumfpack.5.7.7 -lcxsparse.3.2.0
+INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
+
+#Add umfpack dependency openblas
+LIBS += -L$$PWD/OpenSeesLibs/openblas/Mac/0.3.6_1/lib/ -lopenblasp-r0.3.6
+INCLUDEPATH += $$PWD/OpenSeesLibs/openblas/Mac/0.3.6_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/OpenSeesLibs/openblas/Mac/0.3.6_1/include
+
+#Add umfpack dependency gfortran
+QMAKE_RPATHDIR += $$PWD/OpenSeesLibs/OpenSeesLibs/misc/MAC/
+LIBS += -L$$PWD/OpenSeesLibs/misc/MAC/ -lgfortran
+DEPENDPATH += $$PWD/OpenSeesLibs/misc/MAC
+
+
+}
+else:unix: {
+
+LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
+DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
+
+}
+
+}
+
 #contains (DEFINES, _USINGFORTRAN){
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/release/ -lgfortran.5
@@ -597,6 +640,14 @@ DEPENDPATH += /usr/local/Cellar/tcl-tk/8.6.9/include
 
 #INCLUDEPATH += $$PWD/../gcc/8.2.0/lib/gcc/8
 #DEPENDPATH += $$PWD/../gcc/8.2.0/lib/gcc/8
+
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/misc/MAC/release/libgfortran.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/misc/MAC/debug/libgfortran.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/misc/MAC/release/gfortran.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/OpenSeesLibs/misc/MAC/debug/gfortran.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/OpenSeesLibs/misc/MAC/libgfortran.a
+
 
 #}
 

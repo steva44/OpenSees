@@ -367,7 +367,6 @@ int OPS_stopTimer();
 int OPS_modalDamping();
 int OPS_modalDampingQ();
 int OPS_neesMetaData();
-int OPS_neesUpload();
 int OPS_defaultUnits();
 int OPS_totalCPU();
 int OPS_solveCPU();
@@ -522,7 +521,6 @@ extern "C" int        OPS_Error(char *, int length);
 //              UCFiber, TclModelBuilderYS_SectionCommand, yieldSurface_BC,
 //              ysEvolutionModel, plasticMaterial, cyclicModel, damageModel,
 //              FirePattern, PySimple1Gen, TzSimple1Gen, Hfiber,
-//              stiffnessDegradation, unloadingRule, strengthDegradation,
 //              hystereticBackbone, updateMaterialStage, updateMaterials,
 //              loadPackage
 #endif
