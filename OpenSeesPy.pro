@@ -50,12 +50,12 @@ include(./OpenSeesPy.pri)
 #Change these variables to match the location of your Python installation
 macx: {
 
-LIBS += -L/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/ -lpython3.7
+LIBS += -L/usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/lib/ -lpython3.7
 
-INCLUDEPATH += /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m \
-               /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m/internal
+INCLUDEPATH += /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m \
+               /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m/internal
 
-DEPENDPATH += /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/include
+DEPENDPATH += /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include
 
 }
 

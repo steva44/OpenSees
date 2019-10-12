@@ -102,6 +102,9 @@ INCLUDEPATH += \
     $$PWD/SRC/material/uniaxial/fedeas \
     $$PWD/SRC/material/uniaxial/limitState \
     $$PWD/SRC/material/uniaxial/limitState/limitCurve \
+    $$PWD/SRC/material/uniaxial/stiffness \
+    $$PWD/SRC/material/uniaxial/strength \
+    $$PWD/SRC/material/uniaxial/unloading \
     $$PWD/SRC/material/uniaxial/PY \
     $$PWD/SRC/material/uniaxial/snap \
     $$PWD/SRC/material/yieldSurface/evolution \
@@ -496,6 +499,8 @@ HEADERS += \
    $$PWD/SRC/element/truss/Truss2.h \
    $$PWD/SRC/element/truss/TrussSection.h \
    $$PWD/SRC/element/twoNodeLink/TwoNodeLink.h \
+   $$PWD/SRC/element/twoNodeLink/Inerter.h \
+   $$PWD/SRC/element/twoNodeLink/LinearElasticSpring.h \
    $$PWD/SRC/element/UP-ucsd/BBarBrickUP.h \
    $$PWD/SRC/element/UP-ucsd/BBarFourNodeQuadUP.h \
    $$PWD/SRC/element/UP-ucsd/BrickUP.h \
@@ -740,6 +745,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/backbone/ArctangentBackbone.h \
    $$PWD/SRC/material/uniaxial/backbone/HystereticBackbone.h \
    $$PWD/SRC/material/uniaxial/backbone/ManderBackbone.h \
+   $$PWD/SRC/material/uniaxial/backbone/MultilinearBackbone.h \
    $$PWD/SRC/material/uniaxial/backbone/RaynorBackbone.h \
    $$PWD/SRC/material/uniaxial/backbone/ReeseSandBackbone.h \
    $$PWD/SRC/material/uniaxial/backbone/ReeseSoftClayBackbone.h \
@@ -762,6 +768,23 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/ThreePointCurve.h \
    $$PWD/SRC/material/uniaxial/limitState/LimitStateMaterial.h \
    $$PWD/SRC/material/uniaxial/limitState/PinchingLimitStateMaterial.h \
+   $$PWD/SRC/material/uniaxial/stiffness/StiffnessDegradation.h \
+   $$PWD/SRC/material/uniaxial/stiffness/ConstantStiffnessDegradation.h \
+   $$PWD/SRC/material/uniaxial/stiffness/DuctilityStiffnessDegradation.h \
+   $$PWD/SRC/material/uniaxial/stiffness/EnergyStiffnessDegradation.h \
+   $$PWD/SRC/material/uniaxial/stiffness/PincheiraStiffnessDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/StrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/ACIStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/ConstantStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/DuctilityStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/EnergyStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/PetrangeliStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/strength/SectionStrengthDegradation.h \
+   $$PWD/SRC/material/uniaxial/unloading/UnloadingRule.h \
+   $$PWD/SRC/material/uniaxial/unloading/ConstantUnloadingRule.h \
+   $$PWD/SRC/material/uniaxial/unloading/EnergyUnloadingRule.h \
+   $$PWD/SRC/material/uniaxial/unloading/KarsanUnloadingRule.h \
+   $$PWD/SRC/material/uniaxial/unloading/TakedaUnloadingRule.h \
    $$PWD/SRC/material/uniaxial/PY/PyLiq1.h \
    $$PWD/SRC/material/uniaxial/PY/PySimple1.h \
    $$PWD/SRC/material/uniaxial/PY/PySimple1Gen.h \
@@ -820,6 +843,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/ElasticMaterial.h \
    $$PWD/SRC/material/uniaxial/ElasticMaterialThermal.h \
    $$PWD/SRC/material/uniaxial/ElasticMultiLinear.h \
+   $$PWD/SRC/material/uniaxial/ElasticPowerFunc.h \
    $$PWD/SRC/material/uniaxial/ElasticPPMaterial.h \
    $$PWD/SRC/material/uniaxial/ENTMaterial.h \
    $$PWD/SRC/material/uniaxial/EPPGapMaterial.h \
@@ -837,6 +861,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/InitStressMaterial.h \
    $$PWD/SRC/material/uniaxial/KikuchiAikenHDR.h \
    $$PWD/SRC/material/uniaxial/KikuchiAikenLRB.h \
+   $$PWD/SRC/material/uniaxial/MaterialState.h \
    $$PWD/SRC/material/uniaxial/Maxwell.h \
    $$PWD/SRC/material/uniaxial/MinMaxMaterial.h \
    $$PWD/SRC/material/uniaxial/ModIMKPeakOriented.h \
@@ -846,6 +871,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/MultiLinear.h \
    $$PWD/SRC/material/uniaxial/Neoprene.h \
    $$PWD/SRC/material/uniaxial/NewUniaxialMaterial.h \
+   $$PWD/SRC/material/uniaxial/OOHystereticMaterial.h \
    $$PWD/SRC/material/uniaxial/OriginCentered.h \
    $$PWD/SRC/material/uniaxial/ParallelMaterial.h \
    $$PWD/SRC/material/uniaxial/PathIndependentMaterial.h \
@@ -1395,6 +1421,8 @@ SOURCES += \
    $$PWD/SRC/element/truss/Truss2.cpp \
    $$PWD/SRC/element/truss/TrussSection.cpp \
    $$PWD/SRC/element/twoNodeLink/TwoNodeLink.cpp \
+   $$PWD/SRC/element/twoNodeLink/Inerter.cpp \
+   $$PWD/SRC/element/twoNodeLink/LinearElasticSpring.cpp \
    $$PWD/SRC/element/UP-ucsd/BBarBrickUP.cpp \
    $$PWD/SRC/element/UP-ucsd/BBarFourNodeQuadUP.cpp \
    $$PWD/SRC/element/UP-ucsd/BrickUP.cpp \
@@ -1638,6 +1666,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/backbone/ArctangentBackbone.cpp \
    $$PWD/SRC/material/uniaxial/backbone/HystereticBackbone.cpp \
    $$PWD/SRC/material/uniaxial/backbone/ManderBackbone.cpp \
+   $$PWD/SRC/material/uniaxial/backbone/MultilinearBackbone.cpp \
    $$PWD/SRC/material/uniaxial/backbone/RaynorBackbone.cpp \
    $$PWD/SRC/material/uniaxial/backbone/ReeseSandBackbone.cpp \
    $$PWD/SRC/material/uniaxial/backbone/ReeseSoftClayBackbone.cpp \
@@ -1661,6 +1690,23 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/limitState/limitCurve/ThreePointCurve.cpp \
    $$PWD/SRC/material/uniaxial/limitState/LimitStateMaterial.cpp \
    $$PWD/SRC/material/uniaxial/limitState/PinchingLimitStateMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/stiffness/StiffnessDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/stiffness/ConstantStiffnessDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/stiffness/DuctilityStiffnessDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/stiffness/EnergyStiffnessDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/stiffness/PincheiraStiffnessDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/StrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/ACIStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/ConstantStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/DuctilityStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/EnergyStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/PetrangeliStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/strength/SectionStrengthDegradation.cpp \
+   $$PWD/SRC/material/uniaxial/unloading/UnloadingRule.cpp \
+   $$PWD/SRC/material/uniaxial/unloading/ConstantUnloadingRule.cpp \
+   $$PWD/SRC/material/uniaxial/unloading/EnergyUnloadingRule.cpp \
+   $$PWD/SRC/material/uniaxial/unloading/KarsanUnloadingRule.cpp \
+   $$PWD/SRC/material/uniaxial/unloading/TakedaUnloadingRule.cpp \
    $$PWD/SRC/material/uniaxial/PY/PyLiq1.cpp \
    $$PWD/SRC/material/uniaxial/PY/PySimple1.cpp \
    $$PWD/SRC/material/uniaxial/PY/PySimple1Gen.cpp \
@@ -1719,6 +1765,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/ElasticMaterial.cpp \
    $$PWD/SRC/material/uniaxial/ElasticMaterialThermal.cpp \
    $$PWD/SRC/material/uniaxial/ElasticMultiLinear.cpp \
+   $$PWD/SRC/material/uniaxial/ElasticPowerFunc.cpp \
    $$PWD/SRC/material/uniaxial/ElasticPPMaterial.cpp \
    $$PWD/SRC/material/uniaxial/ENTMaterial.cpp \
    $$PWD/SRC/material/uniaxial/EPPGapMaterial.cpp \
@@ -1736,6 +1783,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/InitStressMaterial.cpp \
    $$PWD/SRC/material/uniaxial/KikuchiAikenHDR.cpp \
    $$PWD/SRC/material/uniaxial/KikuchiAikenLRB.cpp \
+   $$PWD/SRC/material/uniaxial/MaterialState.cpp \
    $$PWD/SRC/material/uniaxial/Maxwell.cpp \
    $$PWD/SRC/material/uniaxial/MinMaxMaterial.cpp \
    $$PWD/SRC/material/uniaxial/ModIMKPeakOriented.cpp \
@@ -1745,6 +1793,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/MultiLinear.cpp \
    $$PWD/SRC/material/uniaxial/Neoprene.cpp \
    $$PWD/SRC/material/uniaxial/NewUniaxialMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/OOHystereticMaterial.cpp \
    $$PWD/SRC/material/uniaxial/OriginCentered.cpp \
    $$PWD/SRC/material/uniaxial/ParallelMaterial.cpp \
    $$PWD/SRC/material/uniaxial/PathIndependentMaterial.cpp \

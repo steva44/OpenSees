@@ -198,7 +198,7 @@ OpenSeesCommands::OpenSeesCommands(DL_Interpreter* interp)
      #endif
      theAnalysisModel(0), theTest(0), numEigen(0), theDatabase(0),
      theBroker(), theTimer(), theSimulationInfo(), theMachineBroker(0),
-     theChannels(0), numChannels(0), reliability(0)
+     theChannels(0), numChannels(0)
 {
 #ifdef _PARALLEL_INTERPRETERS
     theMachineBroker = new MPI_MachineBroker(&theBroker, 0, 0);
