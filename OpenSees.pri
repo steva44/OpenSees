@@ -2028,29 +2028,32 @@ HEADERS += \
    $$PWD/SRC/actor/actor/Actor.h \
    $$PWD/SRC/actor/actor/MovableObject.h \
    $$PWD/SRC/actor/address/ChannelAddress.h \
+   $$PWD/SRC/actor/address/SocketAddress.h \
+   $$PWD/SRC/actor/channel/Channel.h \
+   $$PWD/SRC/actor/channel/Socket.h \
+   $$PWD/SRC/actor/channel/TCP_Socket.h \
+   $$PWD/SRC/actor/channel/UDP_Socket.h \
    $$PWD/SRC/actor/message/Message.h \
    $$PWD/SRC/actor/objectBroker/FEM_ObjectBroker.h \
    $$PWD/SRC/actor/objectBroker/FEM_ObjectBrokerAllClasses.h \
    $$PWD/SRC/actor/objectBroker/ObjectBroker.h \
-   $$PWD/SRC/actor/channel/TCP_Socket.h \
-   $$PWD/SRC/actor/channel/Channel.h \
-   $$PWD/SRC/actor/channel/Socket.h \
-   $$PWD/SRC/actor/channel/UDP_Socket.h \
+
 
 SOURCES += \
    $$PWD/SRC/actor/actor/Actor.cpp \
    $$PWD/SRC/actor/actor/MovableObject.cpp \
    $$PWD/SRC/actor/address/ChannelAddress.cpp \
    $$PWD/SRC/actor/address/SocketAddress.cpp \
+   $$PWD/SRC/actor/channel/Channel.cpp \
+   $$PWD/SRC/actor/channel/HTTP.cpp \
+   $$PWD/SRC/actor/channel/mySocket.c \
+   $$PWD/SRC/actor/channel/socket.c \
+   $$PWD/SRC/actor/channel/TCP_Socket.cpp \
+   $$PWD/SRC/actor/channel/UDP_Socket.cpp \
    $$PWD/SRC/actor/message/Message.cpp \
    $$PWD/SRC/actor/objectBroker/FEM_ObjectBroker.cpp \
    $$PWD/SRC/actor/objectBroker/FEM_ObjectBrokerAllClasses.cpp \
    $$PWD/SRC/actor/objectBroker/ObjectBroker.cpp \
-   $$PWD/SRC/actor/channel/TCP_Socket.cpp \
-   $$PWD/SRC/actor/channel/Channel.cpp \
-   $$PWD/SRC/actor/channel/Socket.cpp \
-   $$PWD/SRC/actor/channel/HTTP.cpp \
-   $$PWD/SRC/actor/channel/UDP_Socket.cpp \
 }
 
 

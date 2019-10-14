@@ -30,13 +30,13 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/ -lsuperlu
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/lib/ -lsuperlu
+LIBS += -L/usr/local/Cellar/superlu/5.2.1/lib/ -lsuperlu
 
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/include/superlu
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/include/superlu
+INCLUDEPATH += /usr/local/Cellar/superlu/5.2.1/include/superlu
+DEPENDPATH += /usr/local/Cellar/superlu/5.2.1/include/superlu
 
-PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/Mac/5.2.1_4/lib/libsuperlu.a
+PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.1/lib/libsuperlu.a
 
 }
 else:unix: {
@@ -62,12 +62,12 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx:{
 
-LIBS += -L$$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/lib/ -lsuperlu_mt_PTHREAD
+LIBS += -L/usr/local/Cellar/superlu_mt/3.0/lib/ -lsuperlu_mt_PTHREAD
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/include
+INCLUDEPATH += /usr/local/Cellar/superlu_mt/3.0/include
+DEPENDPATH += /usr/local/Cellar/superlu_mt/3.0/include
 
-PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu_mt/Mac/3.0/lib/libsuperlu_mt_PTHREAD.a
+PRE_TARGETDEPS += /usr/local/Cellar/superlu_mt/3.0/lib/libsuperlu_mt_PTHREAD.a
 
 }
 else:unix:{
@@ -109,10 +109,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/lib/ -lsuperlu_dist.5.1.0
+LIBS += -L/usr/local/Cellar/superlu_dist/5.1.0/lib/ -lsuperlu_dist.5.1.0
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu_dist/Mac/5.1.0/include
+INCLUDEPATH += /usr/local/Cellar/superlu_dist/5.1.0/include
+DEPENDPATH += /usr/local/Cellar/superlu_dist/5.1.0/include
 
 
 }
@@ -134,10 +134,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/lib/ -lparmetis
+LIBS += -L/usr/local/Cellar/parmetis/4.0.3/lib/ -lparmetis
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/include
-DEPENDPATH += $$PWD/OpenSeesLibs/parmetis/MAC/4.0.3/include
+INCLUDEPATH += /usr/local/Cellar/parmetis/4.0.3/include
+DEPENDPATH += /usr/local/Cellar/parmetis/4.0.3/include
 
 }
 else:unix:{
@@ -167,9 +167,9 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L$$PWD/OpenSeesLibs/metis/Mac/5.1.0/lib/ -lmetis
-INCLUDEPATH += $$PWD/OpenSeesLibs/Mac/metis/5.1.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/Mac/metis/5.1.0/include
+LIBS += -L/usr/local/Cellar/metis/5.1.0/lib/ -lmetis
+INCLUDEPATH += /usr/local/Cellar/metis/5.1.0/include
+DEPENDPATH += /usr/local/Cellar/metis/5.1.0/include
 }
 else:unix: {
 LIBS += -L$$PWD/OpenSeesLibs/metis/Unix/5.1.0/lib/ -lmetis
@@ -219,9 +219,9 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L$$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/lib/ -larpack.2 -larpack
-INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
-DEPENDPATH += $$PWD/OpenSeesLibs/arpack/Mac/3.7.0_2/libexec/include
+LIBS += -L/usr/local/Cellar/arpack/3.5.0/libexec/lib/ -larpack.2 -larpack
+INCLUDEPATH += /usr/local/Cellar/arpack/3.5.0/libexec/include
+DEPENDPATH += /usr/local/Cellar/arpack/3.5.0/libexec/include
 }
 else:unix: {
 LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/lib/ -larpack
@@ -335,10 +335,10 @@ INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Framew
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
 #Need to include the library below so that we do not get a blacs_gridexit error in PyCharm. It looks like this function is not included in the accelerate framework
-LIBS += -L$$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15/lib/ -lscalapack
+LIBS += -L/usr/local/Cellar/scalapack/2.0.2/lib/ -lscalapack
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15
-DEPENDPATH += $$PWD/OpenSeesLibs/scalapack/Mac/2.0.2_15
+INCLUDEPATH += /usr/local/Cellar/scalapack/2.0.2/
+DEPENDPATH += /usr/local/Cellar/scalapack/2.0.2/
 
 }
 else:unix: {
@@ -399,9 +399,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
-INCLUDEPATH += $$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/mumps/Mac/5.1.2_2/include
+LIBS += -L/usr/local/Cellar/mumps/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
+INCLUDEPATH += /usr/local/Cellar/mumps/5.1.2_2/include
+DEPENDPATH += /usr/local/Cellar/mumps/5.1.2_2/include
 
 }
 else:unix: {
@@ -445,9 +445,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/lib/ -lpetsc.3.9.3
-INCLUDEPATH += $$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/petsc/Mac/3.10.3_2/include
+LIBS += -L/usr/libs/Cellar/petsc/Mac/3.11.3_2/lib/ -lpetsc.3.9.3
+INCLUDEPATH += /usr/libs/Cellar/petsc/Mac/3.11.3_2/include
+DEPENDPATH += /usr/libs/Cellar/petsc/Mac/3.11.3_2/include
 
 }
 else:unix: {
@@ -543,9 +543,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
-INCLUDEPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/include
+LIBS += -L/usr/local/Cellar/open-mpi/4.0.1_2/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.1_2/include
+DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.1_2/include
 
 PRE_TARGETDEPS += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/lib/libmpi_usempi_ignore_tkr.a
 }
@@ -606,19 +606,18 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L$$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/lib/ -lumfpack.5.7.7 -lcxsparse.3.2.0
-INCLUDEPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Mac/5.3.0_1/include
+LIBS += -L/usr/local/Cellar/suite-sparse/5.4.0_1/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.4.0_1/include
+DEPENDPATH += /usr/local/Cellar/suite-sparse/5.4.0_1/include
 
 #Add umfpack dependency openblas
-LIBS += -L$$PWD/OpenSeesLibs/openblas/Mac/0.3.6_1/lib/ -lopenblasp-r0.3.6
-INCLUDEPATH += $$PWD/OpenSeesLibs/openblas/Mac/0.3.6_1/include
-DEPENDPATH += $$PWD/OpenSeesLibs/OpenSeesLibs/openblas/Mac/0.3.6_1/include
+#LIBS += -L/usr/local/Cellar/openblas/0.3.7/lib/ -lopenblas
+#INCLUDEPATH += /usr/local/Cellar/openblas/0.3.7/include
+#DEPENDPATH += /usr/local/Cellar/openblas/0.3.7/include
 
 #Add umfpack dependency gfortran
-QMAKE_RPATHDIR += $$PWD/OpenSeesLibs/OpenSeesLibs/misc/MAC/
-LIBS += -L$$PWD/OpenSeesLibs/misc/MAC/ -lgfortran
-DEPENDPATH += $$PWD/OpenSeesLibs/misc/MAC
+#LIBS += -L/usr/local/Cellar/gcc/9.2.0_1/lib/gcc/9/ -lgfortran
+#DEPENDPATH += /usr/local/Cellar/gcc/9.2.0_1/lib/gcc/9/
 
 
 }

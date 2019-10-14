@@ -12,38 +12,76 @@ Qt is an open source, cross-platform development environment that is free for ma
 
 The purpose of this project is to create a package that will allow aspiring developers to get started on writing code without having to worry about the compilation environment. A program as large as OpenSees relies on many third-party libraries, often referred to as dependencies. It can be a daunting task assembling, compiling, and linking these libraries. Many times, these libraries depend on other libraries, and so on. The current list of dependencies includes:
 
-MUMPS (5.1.2)
-Scalapack (2.0.2.13)
-UMFPACK (5.7.7) contained in Suite-Sparse (5.3.0)
-SUPERLU (5.2.1)
-SUPERLUMT (3.0)
-SUPERLUDIST (5.1.0)
-Openblas (0.3.5)
-Parmetis (4.0.3)
-ARPACK (3.6.3)
-Libevent (2.1.8)
-GCC(8.2.0)
-TCL (8.6.9)** Tcl only
-Python(3.7.2)** OpenSeesPy only
+MUMPS 
+UMFPACK contained in Suite-Sparse 
+SUPERLU 
+SUPERLUMT 
+SUPERLUDIST 
+Scalapack 
+ARPACK 
+Parmetis
+GCC
+
+
+Python ** When compiling OpenSeesPy
+TCL ** When compiling with Tcl
 
 Please ensure that your project complies with each library's licensing requirements. 
 
 Another feature of this build platform is modularity. Developers can select from a list of build options that can be turned on and off as required. The basic configuration builds the structural analysis core. Other build options include parallel processing, reliability, and the particle finite element method (PFEM) modules. Python and Tcl interpreters are additional build options. These options are located in single configuration file called qmake.conf. By default, the environment is configured to build the core along with the parallel processing module. Other options can be turned on by deleting the '#'symbol that precedes the option; this includes the option into the build environment. 
 
-Note: This build environment comes with pre-compiled dependencies. Although this makes getting started easier, the caveat is that your build environment (compiler version) must match that of the environment used to compile the dependencies. The supported environments are listed below. There are no guarantees that it will work with other build environments. In other words, make sure your compiler type and version (i.e., clang-1000.11.45.5) matches the version below listed under the heading 'Supported Build Environments'. Otherwise, bad things might happen. Also, this project is still a work in progress. Currently, only building in OS X is supported. Windows support will be added shortly. Moreover, not all build options are supported. For example, compiling with fortran is not supported. 
-
-This project uses qmake and Qt Creator. qmake is a build tool for compiling and linking applications. Qt Creator is a free IDE (interactive development environment) that bundles code writing/editing and application building within one program. Qt Creator uses project (.pro) files. The project files contain all information required by qmake to build an application. 
+Note: This project uses qmake and Qt Creator. qmake is a build tool for compiling and linking applications. Qt Creator is a free IDE (interactive development environment) that bundles code writing/editing and application building within one program. Qt Creator uses project (.pro) files. The project files contain the information required by qmake to build an application. 
 
 ***************
 
 Getting started:
 1) Download and install Qt open source from https://www.qt.io/download The version of the Qt library is not important in this case since the library is not used in the OpenSees project (although I use Qt in other projects and recommend it)
 2) Download the OpenSeesQt source code into a folder of your choice (https://github.com/steva44/OpenSees/archive/master.zip)
-3) In the directory containing the code, double click on the 'OpenSees.pro' file. If compiling OpenSeesPy, open the 'OpenSeesPy.pro' file. The .pro files are project files that will automatically open the project in Qt Creator.  
-4) Select a build configuration, for example 'Desktop Qt 5.12.1 clang 64bit'. The project will automatically configure itself. You only have to do this once.
-5) The left-hand pane should now display the project directory structure. In the left-hand pane, under the heading qmake, open the 'qmake.conf' file. Review and select additional build options, if any. Note that this is still a work in progress and not all build options are supported. 
-6) Click on the 'start' button in the bottom lefthand corner of Qt Creator to compile. Clicking on the small computer symbol above the start button allows for switching between the debug and release deploy configurations. The release deployment results in faster program execution but it does not allow for debugging or stepping through the code. The start button with the bug symbol opens the debugger. 
-7) Go and have a coffee, it will take a few minutes to finish compiling! 
+
+3) Installing the dependencies.
+
+/////MacOS/////
+
+The compiling and installing of third-party libraries is handled through a system package manager. In this case we are using the package-manager Homebrew. It is very likely that the libraries OpenSees depends on have their own dependencies, and so forth. The system package manager conveniently knows what dependencies are required and automatically installs them. Homebrew is installed by running:
+
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+in the macOS terminal prompt. From herein, the the word 'run' will be used to represent copying and pasting a command into the macOS terminal prompt.  Homebrew maintains its own folder within '/usr/local/' directory aptly named the 'Cellar'
+
+	/usr/local/Cellar/
+
+Each dependency installed through Homebrew will have its own subfolder within the Cellar directory. Each subfolder contains that dependencies 'include' and 'lib' folders. Now that Homebew is installed, to install the required OpenSees dependencies run the following command:
+
+	brew install petsc superlu_mt superlu_dist openblas GCC superlu parmetis mumps arpack 
+
+If compiling OpenSeesPy, Python is needed as well: 
+
+	brew install python
+
+Similarly for tcl:
+
+	brew install tcl
+
+You can now run: 
+
+	brew list 
+
+to get a list of all packages installed by Homebrew on your system. 
+
+\!/ IMPORTANT: This project depends on many libraries. Homebrew will automatically install the newest libraries. Also, if you run the upgrade command in Homebrew, it will upgrade every library to its newest version. The library versions may have changed since the time of writing. If the library version has changed in the meantime, this will cause build library linking issues. The solution is to update the file paths in the 'OpenSeesLibs.pri' file. The compiler needs to know where to find the library header files and the location of the libraries for linking. For example, if the library version is changed from Library_XX to Library_YY, then the paths should be updated to match:
+
+	usr/local/Cellar/Library_XX/include/
+
+should be changed to:
+
+	usr/local/Cellar/Library_YY/include/
+
+4) In the directory containing the code, double click on the 'OpenSees.pro' file. If compiling OpenSeesPy, open the 'OpenSeesPy.pro' file. The .pro files are project files that will automatically open the project in Qt Creator.  
+
+5) Select a build configuration, for example 'Desktop Qt 5.12.1 clang 64bit'. The project will automatically configure itself. You only have to do this once.
+6) The left-hand pane should now display the project directory structure. In the left-hand pane, under the heading qmake, open the 'qmake.conf' file. Review and select additional build options, if any. Note that this is still a work in progress and not all build options are supported. 
+7) Click on the 'start' button in the bottom lefthand corner of Qt Creator to compile. Clicking on the small computer symbol above the start button allows for switching between the debug and release deploy configurations. The release deployment results in faster program execution but it does not allow for debugging or stepping through the code. The start button with the bug symbol opens the debugger. 
+8) Go and have a coffee, it will take a few minutes to finish compiling! 
 
 Building OpenSeesPy:
 
@@ -73,13 +111,13 @@ Supported Build Environments:
 
 Build Environment:
 OSX 10.14.4 (Mojave) 
-Qt 5.12.2 
+Qt 5.13.3 
 Qt Creator 4.8.1
 
 Compiler:
-
-Apple LLVM version 10.0.1 (clang-1001.0.46.3)
-Target: x86_64-apple-darwin18.5.0
+OSX SDK:10.14
+Apple clang version 11.0.0 (clang-1100.0.33.8)
+Target: x86_64-apple-darwin18.7.0
 Thread model: posix
 64-BIT architecture
 
@@ -89,16 +127,9 @@ To find the version of clang on your computer, type the following in terminal:
 
 ***************
 
-Note: This project comes with pre-built libraries for everything except Python. Therefore, you do not have to go through the trouble of building any libraries unless you are using a special build system or you want to experiment. The precompiled library files are located in the 'OpenSeesLibs' folder. In the event that you are feeling adventurous and you want to compile the libraries on your own, instructions are given below for each library, for each operating system. After successful compilation, note the installation directory. This directory contains the locations of the 'include' and 'lib' folders for that library. If replacing or adding new libraries, the file paths should be updated in the 'OpenSeesLibs.pri' file. This is required so that the compiler knows where to find the header files and to link the libraries to your project. 
 
 
-*****OSX******
 
-On OSX, the dependencies are built/installed with Homebrew. Homebrew is a free and open-source software package management system that simplifies the installation of software on Apple's macOS operating system and Linux. Homebrew maintains its own folder within '/usr/local/' directory aptly named the 'Cellar'
-
-	/usr/local/Cellar/
-
-Each dependency installed through Homebrew will have its own subfolder within the Cellar directory. Each subfolder contains that dependencies 'include' and 'lib' folders. 
 
 
 *MUMPS*
