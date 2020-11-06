@@ -44,8 +44,8 @@
 superlu_dist_options_t options;
 SuperLUStat_t stat;
 SuperMatrix A;
-ScalePermstruct_t ScalePermstruct;
-LUstruct_t LUstruct;
+dScalePermstruct_t ScalePermstruct;
+dLUstruct_t LUstruct;
 gridinfo_t grid;
 MPI_Comm comm_SuperLU;
 
@@ -71,8 +71,8 @@ DistributedSuperLU::DistributedSuperLU()
 DistributedSuperLU::~DistributedSuperLU()
 {
   //Destroy_LU(theSOE->size, &grid, &LUstruct); 
-  ScalePermstructFree(&ScalePermstruct);
-  LUstructFree(&LUstruct); 
+  dScalePermstructFree(&ScalePermstruct);
+  dLUstructFree(&LUstruct);
 
   //superlu_gridexit(&grid);
 
@@ -204,9 +204,9 @@ DistributedSuperLU::setSize()
 
   // free old structures if resize already called
   } else {
-    Destroy_LU(theSOE->size, &grid, &LUstruct); 
-    ScalePermstructFree(&ScalePermstruct);
-    LUstructFree(&LUstruct); 
+    dDestroy_LU(theSOE->size, &grid, &LUstruct);
+    dScalePermstructFree(&ScalePermstruct);
+    dLUstructFree(&LUstruct);
   }
   
   //
@@ -233,8 +233,8 @@ DistributedSuperLU::setSize()
     //
     // Initialize ScalePermstruct and LUstruct.
     //
-    ScalePermstructInit(n, n, &ScalePermstruct);
-    LUstructInit(n, &LUstruct);
+    dScalePermstructInit(n, n, &ScalePermstruct);
+    dLUstructInit(n, &LUstruct);
   }  
 			      
 			      

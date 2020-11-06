@@ -797,8 +797,6 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/PY/TzSimple1.h \
    $$PWD/SRC/material/uniaxial/PY/TzSimple1Gen.h \
    $$PWD/SRC/material/uniaxial/PY/TzSimple2.h \
-   $$PWD/SRC/material/uniaxial/snap/Bilin.h \
-   $$PWD/SRC/material/uniaxial/snap/Bilin02.h \
    $$PWD/SRC/material/uniaxial/snap/Bilinear.h \
    $$PWD/SRC/material/uniaxial/snap/Clough.h \
    $$PWD/SRC/material/uniaxial/snap/CloughDamage.h \
@@ -809,6 +807,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/AxialSpHD.h \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.h \
    $$PWD/SRC/material/uniaxial/BarSlipMaterial.h \
+   $$PWD/SRC/material/uniaxial/Bilin.h \
    $$PWD/SRC/material/uniaxial/BilinearOilDamper.h \
    $$PWD/SRC/material/uniaxial/Bond_SP01.h \
    $$PWD/SRC/material/uniaxial/BoucWenMaterial.h \
@@ -1719,8 +1718,6 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/PY/TzSimple1.cpp \
    $$PWD/SRC/material/uniaxial/PY/TzSimple1Gen.cpp \
    $$PWD/SRC/material/uniaxial/PY/TzSimple2.cpp \
-   $$PWD/SRC/material/uniaxial/snap/Bilin.cpp \
-   $$PWD/SRC/material/uniaxial/snap/Bilin02.cpp \
    $$PWD/SRC/material/uniaxial/snap/Bilinear.cpp \
    $$PWD/SRC/material/uniaxial/snap/Clough.cpp \
    $$PWD/SRC/material/uniaxial/snap/CloughDamage.cpp \
@@ -1731,6 +1728,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/AxialSpHD.cpp \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.cpp \
    $$PWD/SRC/material/uniaxial/BarSlipMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/Bilin.cpp \
    $$PWD/SRC/material/uniaxial/BilinearOilDamper.cpp \
    $$PWD/SRC/material/uniaxial/Bond_SP01.cpp \
    $$PWD/SRC/material/uniaxial/BoucWenMaterial.cpp \

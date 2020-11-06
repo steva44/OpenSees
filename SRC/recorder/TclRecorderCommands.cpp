@@ -60,12 +60,15 @@ extern void* OPS_PVDRecorder();
 extern void* OPS_GmshRecorder();
 extern void* OPS_MPCORecorder();
 extern void* OPS_VTK_Recorder();
+extern void* OPS_ElementRecorderRMS();
+extern void* OPS_NodeRecorderRMS();
 
 
  #include <NodeIter.h>
  #include <ElementIter.h>
  #include <Node.h>
  #include <Element.h>
+#include <Parameter.h>
  #include <DamageModel.h>
  #include <DamageRecorder.h>
  #include <MeshRegion.h>
@@ -92,13 +95,6 @@ extern void* OPS_VTK_Recorder();
  extern const char * getInterpPWD(Tcl_Interp *interp);  // commands.cpp
 
  //extern TclModelBuilder *theDamageTclModelBuilder;
-
- extern int OPS_ResetInputNoBuilder(ClientData clientData, 
-				    Tcl_Interp *interp,  
-				    int cArg, 
-				    int mArg, 
-				    TCL_Char **argv, 
-				    Domain *domain);
 
  typedef struct externalRecorderCommand {
    char *funcName;
@@ -653,15 +649,15 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        const char *fileNameinf = 0;
 
        //  end of new
-       int numSlaveEle = 0;
+       int numSecondaryEle = 0;
 
        // create an ID to hold ele tags
        //ID eleIDs(numEle, numEle+1); 
        ID eleIDs;
        eleIDs = ID(1);
-       ID slaveEleIDs = ID(1);
-       slaveEleIDs[0] = 0;
-       bool slaveFlag = false;
+       ID secondaryEleIDs = ID(1);
+       secondaryEleIDs[0] = 0;
+       bool secondaryFlag = false;
        ID secIDs = 0;
        //	secIDs = 0;
 
@@ -730,8 +726,8 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 
 	 //    end of new
 
-	 else if ((strcmp(argv[loc],"-slave") == 0)) {
-	   slaveFlag = true;
+	 else if ((strcmp(argv[loc],"-slave") == 0) || (strcmp(argv[loc],"-secondary") == 0)) {
+	   secondaryFlag = true;
 	   loc++;
 	 }
 
@@ -751,11 +747,11 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   loc++;
 	   int eleTag;
 	   while (loc < argc && Tcl_GetInt(interp, argv[loc], &eleTag) == TCL_OK) {
-	     if (slaveFlag == false)
+	     if (secondaryFlag == false)
 	       eleIDs[numEle++] = eleTag;
 	     else
-	       slaveEleIDs[numSlaveEle++] = eleTag;
-	     slaveFlag = false;
+	       secondaryEleIDs[numSecondaryEle++] = eleTag;
+	     secondaryFlag = false;
 	     loc++;
 	   }
 
@@ -804,12 +800,12 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   }
 
 	   for (int i=start; i<=end; i++)
-	     if (slaveFlag == false)
+	     if (secondaryFlag == false)
 	       eleIDs[numEle++] = i;
 	     else
-	       slaveEleIDs[numSlaveEle++] = i;
+	       secondaryEleIDs[numSecondaryEle++] = i;
 
-	   slaveFlag = false;    
+	   secondaryFlag = false;    
 	   loc += 3;
 	 } 
 
@@ -832,12 +828,12 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   }      
 	   const ID &eleRegion = theRegion->getElements();
 	   for (int i=0; i<eleRegion.Size(); i++)
-	     if (slaveFlag == false)
+	     if (secondaryFlag == false)
 	       eleIDs[numEle++] = eleRegion(i);
 	     else
-	       slaveEleIDs[numSlaveEle++] = eleRegion(i);
+	       secondaryEleIDs[numSecondaryEle++] = eleRegion(i);
 
-	   slaveFlag = false;
+	   secondaryFlag = false;
 	   loc += 2;
 	 } 
 
@@ -1023,7 +1019,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        (*theRecorder) = new RemoveRecorder( nodeTag, 
 					    eleIDs, 
 					    secIDs, 
-					    slaveEleIDs, 
+					    secondaryEleIDs, 
 					    remCriteria, 
 					    theDomain,
 					    *theOutputStream,
@@ -1055,7 +1051,9 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        }    
 
        // AddingSensitivity:BEGIN ///////////////////////////////////
-       int sensitivity = 0;
+       //int sensitivity = 0;
+       int paramTag = 0;
+       int gradIndex = -1;
        // AddingSensitivity:END /////////////////////////////////////
 
        TCL_Char *responseID = 0;
@@ -1321,11 +1319,19 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
  // AddingSensitivity:BEGIN //////////////////////////////////////
 	 else if (strcmp(argv[pos],"-sensitivity") == 0) {
 		 pos++;
-		 if (Tcl_GetInt(interp, argv[pos], &sensitivity) != TCL_OK) {
-			 opserr << "ERROR: Invalid gradient number to node recorder." << endln;
+		 if (Tcl_GetInt(interp, argv[pos], &paramTag) != TCL_OK) {
+			 opserr << "ERROR: Invalid parameter tag to node recorder." << endln;
 			 return TCL_ERROR;
 		 }
 		 pos++;
+
+		 // Now get gradIndex from parameter tag
+		 Parameter *theParameter = theDomain.getParameter(paramTag);
+		 if (theParameter == 0) {
+		   opserr << "NodeRecorder: parameter " << paramTag << " not found" << endln;
+		   return TCL_ERROR;
+		 }
+		 gradIndex = theParameter->getGradIndex();
 	 }
  // AddingSensitivity:END ////////////////////////////////////////
 	 else	 
@@ -1377,7 +1383,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 
 	 (*theRecorder) = new NodeRecorder(theDofs, 
 					   theNodes, 
-					   sensitivity,
+					   gradIndex,
 					   responseID, 
 					   theDomain, 
 					   *theOutputStream, 
@@ -1829,6 +1835,18 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
      else if (strcmp(argv[1],"pvd") == 0 || strcmp(argv[1],"PVD") == 0) {
        OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
        (*theRecorder) = (Recorder*) OPS_PVDRecorder();
+     }
+     else if (strcmp(argv[1],"vtk") == 0 || strcmp(argv[1],"VTK") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_VTK_Recorder();
+     }
+     else if (strcmp(argv[1],"ElementRMS") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_ElementRecorderRMS();
+     }
+     else if (strcmp(argv[1],"NodeRMS") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_NodeRecorderRMS();
      }
      else if (strcmp(argv[1],"vtk") == 0 || strcmp(argv[1],"VTK") == 0) {
        OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);

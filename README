@@ -1,39 +1,19 @@
+**OpenSeesQt for Mac**
 
-***************
 
-OpenSeesQt
-
-***************
-
-Stevan Gavrilovic
-PhD Candidate
-University of British Columbia 
+Stevan Gavrilovic, PhD
+NHERI SimCenter
+University of California, Berkeley 
 
 A Qt build environment for OpenSees -- Open System For Earthquake Engineering Simulation Pacific Earthquake Engineering Research Center(http://opensees.berkeley.edu). 
 
 Qt is an open source, cross-platform development environment that is free for many uses. Please see the license here: https://www.qt.io/licensing/
 
-The purpose of this project is to create a package that will allow aspiring developers to get started on writing code without having to worry about the compilation environment. A program as large as OpenSees relies on many third-party libraries, often referred to as dependencies. It can be a daunting task assembling, compiling, and linking these libraries. Many times, these libraries depend on other libraries, and so on. The current list of OpenSees dependencies includes:
+Currently only supports building on a Mac. 
 
-MUMPS 
-UMFPACK contained in Suite-Sparse 
-SUPERLU 
-SUPERLUMT 
-SUPERLUDIST 
-Scalapack 
-ARPACK 
-Parmetis
-GCC
-PetSc
+A feature of this build platform is modularity. Developers can select from a list of build options that can be turned on and off as required. The basic configuration builds the structural analysis core. Other build options include parallel processing, reliability, and the particle finite element method (PFEM) modules. Python and Tcl interpreters are additional build options. These options are located in single configuration file called `qmake.conf`. By default, the environment is configured to build the core along with the parallel processing module. Other options can be turned ON by deleting the '#'symbol that precedes the option; this will include the option into the build environment. 
 
-Python ** When compiling OpenSeesPy
-Tcl ** When compiling with Tcl interpreter
-
-Please ensure that your project complies with each library's licensing requirements. 
-
-Another feature of this build platform is modularity. Developers can select from a list of build options that can be turned on and off as required. The basic configuration builds the structural analysis core. Other build options include parallel processing, reliability, and the particle finite element method (PFEM) modules. Python and Tcl interpreters are additional build options. These options are located in single configuration file called qmake.conf. By default, the environment is configured to build the core along with the parallel processing module. Other options can be turned on by deleting the '#'symbol that precedes the option; this includes the option into the build environment. 
-
-Note: This project uses qmake and Qt Creator. qmake is a build tool for compiling and linking applications. Qt Creator is a free IDE (interactive development environment) that bundles code writing/editing and application building within one program. Qt Creator uses project (.pro) files. The project files contain the information required by qmake to build an application. 
+Note: This project uses qmake and Qt Creator. qmake is a build tool for compiling and linking applications. Qt Creator is a free IDE (interactive development environment) that bundles code writing/editing and application building within one program. Qt Creator uses project (.pro) files. These project files contain the information required by qmake to build an application. 
 
 ***************
 
@@ -41,29 +21,37 @@ Getting Started
 
 ***************
 
-1) Download and install Qt open source from https://www.qt.io/download The version of the Qt library is not important in this case since the library is not used in the OpenSees project (although I use Qt in other projects and recommend it)
+1) Download and install Qt open source from https://www.qt.io/download. The version of the Qt library is not important in this case since the library is not used in the OpenSees project (although I use Qt in other projects and recommend it).
 
 2) Download the OpenSeesQt source code into a folder of your choice (https://github.com/steva44/OpenSees/archive/master.zip)
 
 3) Installing the dependencies.
 
-/////MacOS/////
+**MacOS**
 
 The compiling and installing of third-party libraries is handled through a system package manager. In this case we are using the package-manager Homebrew. It is very likely that the libraries OpenSees depends on have their own dependencies, and so forth. The system package manager conveniently knows what dependencies are required and automatically installs them. Homebrew is installed by running:
 
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 in the macOS terminal prompt. From herein, the the word 'run' will be used to represent copying and pasting a command into the macOS terminal prompt.  Homebrew maintains its own folder within '/usr/local/' directory aptly named the 'Cellar'
 
-	/usr/local/Cellar/
+	`/usr/local/Cellar/`
 
-Each dependency installed through Homebrew will have its own subfolder within the Cellar directory. Each subfolder contains that dependencies 'include' and 'lib' folders. Now that Homebew is installed, to install the required OpenSees dependencies run the following commands:
+Each dependency installed through Homebrew will have its own subfolder within the Cellar directory. Each subfolder contains that dependencies 'include' and 'lib' folders. 
 
-	brew install petsc superlu_mt superlu_dist openblas dpo/openblas/superlu  parmetis 
+If you just installed Brew, you may need to add 'taps' to the Brew directory. A 'tap' is an online location where Brew can find some of the libraries that are needed here. Install the following taps by running these commands in terminal:
 
-	brew install brewsci/num/brewsci-arpack
+```
+	brew tap brewsci/science
+	brew tap brewsci/num 
+```
 
-	brew install brewsci/num/mumps
+Now that Homebew and the taps are installed,the required OpenSees dependencies are installed by running the following commands:
+
+	brew install petsc openblas arpack superlu 
+
+
+	brew install brewsci-mumps
 
 If compiling OpenSeesPy, Python is needed as well: 
 
@@ -105,6 +93,7 @@ should be changed to:
 Building OpenSeesPy:
 
 ***************
+
 
 
 OpenSeesPy builds OpenSees as a library object that can be used within Python. 
@@ -159,51 +148,20 @@ Notes on OpenSees Dependencies
 ***************
 
 
-*MUMPS*
-MUltifrontal Massively Parallel sparse direct Solver, or MUMPS, is a sparse direct solver used for parallel solving of a system of equations
+*SUPERLUDIST*
 
-Installing MUMPS via brew:
+Brew install support for SuperLU_Dist, i.e., `brew install superlu_dist` is currently broken as of this writing. 
 
-	brew install mumps
+To compile SuperLU_Dist manually, download the source from the GitHub repo: 
 
-Mumps requires the following dependencies that will automatically be installed:
--Scalapack 
+To the CMAKE list, add the following to the top of the `CMakeLists.txt` file:
 
-*OpenMPI*
-OpenMPI is a high performance message passing library (https://www.open-mpi.org/)
+```
+set(TPL_PARMETIS_INCLUDE_DIRS /usr/local/Cellar/parmetis/4.0.3_5/include /usr/local/Cellar/metis/5.1.0/include)
+set(TPL_PARMETIS_LIBRARIES /usr/local/Cellar/parmetis/4.0.3_5/lib/libparmetis.dylib /usr/local/Cellar/metis/5.1.0/lib/libmetis.dylib)
+```
 
-Installing OpenMPI via brew:
-
-	brew install open-mpi
-
-OpenMPI requires the following dependencies that will automatically be installed:
--GCC (GNU compiler collection)
--libevent (Asynchronous event library: https://libevent.org/) 
-
-
-*UMFPACK*
-UMFPACK is a set of routines for solving unsymmetric sparse linear systems of the form Ax=b, using the Unsymmetric MultiFrontal method (Matrix A is not required to be symmetric).
-UMFPACK is part of suite-sparse library in homebrew/science
-
-Installing UMFPACK via brew:
-	brew install suite-sparse
-
-UMFPACK requires the following dependencies that will automatically be installed:
--Metis ('METIS' is a type of GraphPartitioner and numberer - An Unstructured Graph Partitioning And Sparse Matrix Ordering System', developed by G. Karypis and V. Kumar at the University of Minnesota.
-
-
-*SUPERLU*
-SUPERLU is a general purpose library for the direct solution of large, sparse, nonsymmetric systems of linear equations. The library is written in C and is callable from either C or Fortran program. It uses MPI, OpenMP and CUDA to support various forms of parallelism.
-
-Installing SUPERLU via brew:
-
-	brew install superlu
-
-Should install by default with option --with-openmp enabled. Open MP is needed for parallel analysis. 
-
-SUPERLU requires the following dependencies that will automatically be installed:
--GCC (GNU compiler collection)
--openblas (In scientific computing, OpenBLAS is an open source implementation of the BLAS API with many hand-crafted optimizations for specific processor types)
+Then build with CMAKE and compile. 
 
 
 *SUPERLUMT*
@@ -216,18 +174,8 @@ Installing SUPERLUMT via brew:
 SUPERLUMT requires the following dependencies that will automatically be installed:
 -openblas 
 
-*SUPERLUDIST*
-SUPERLU but for for for distributed memory parallel machines. Supports manycore heterogeous node architecture: MPI is used for interprocess communication, OpenMP is used for on-node threading, CUDA is used for computing on GPUs.
 
-Installing SUPERLUDIST via brew:
 
-	brew install superlu_dist
-
-SUPERLUDIST requires the following dependencies that will automatically be installed:
--GCC (GNU compiler collection)
--openblas (In scientific computing, OpenBLAS is an open source implementation of the BLAS API with many hand-crafted optimizations for specific processor types)
--OpenMPI (a high performance message passing library (https://www.open-mpi.org/))
--Parmetis (MPI library for graph/mesh partitioning and fill-reducing orderings)
 
 
 *LAPACK (SCALAPACK)*

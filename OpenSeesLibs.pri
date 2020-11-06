@@ -30,13 +30,13 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/ -lsuperlu
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/superlu/5.2.1/lib/ -lsuperlu
+LIBS += -L/usr/local/Cellar/superlu/5.2.1_4/lib/ -lsuperlu
 
 
-INCLUDEPATH += /usr/local/Cellar/superlu/5.2.1/include/superlu
-DEPENDPATH += /usr/local/Cellar/superlu/5.2.1/include/superlu
+INCLUDEPATH += /usr/local/Cellar/superlu/5.2.1_4/include/superlu
+DEPENDPATH += /usr/local/Cellar/superlu/5.2.1_4/include/superlu
 
-PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.1/lib/libsuperlu.a
+PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.1_4/lib/libsuperlu.a
 
 }
 else:unix: {
@@ -109,10 +109,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/superlu_dist/5.1.0/lib/ -lsuperlu_dist.5.1.0
+LIBS += -L/Users/steve/Desktop/C++Libraries/SuperLUDist/Install/lib/ -lsuperlu_dist
 
-INCLUDEPATH += /usr/local/Cellar/superlu_dist/5.1.0/include
-DEPENDPATH += /usr/local/Cellar/superlu_dist/5.1.0/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuperLUDist/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuperLUDist/Install/include
 
 
 }
@@ -134,10 +134,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/parmetis/4.0.3/lib/ -lparmetis
+LIBS += -L/usr/local/Cellar/parmetis/4.0.3_5/lib/ -lparmetis
 
-INCLUDEPATH += /usr/local/Cellar/parmetis/4.0.3/include
-DEPENDPATH += /usr/local/Cellar/parmetis/4.0.3/include
+INCLUDEPATH += /usr/local/Cellar/parmetis/4.0.3_5/include
+DEPENDPATH += /usr/local/Cellar/parmetis/4.0.3_5/include
 
 }
 else:unix:{
@@ -219,9 +219,9 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L/usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/lib/ -larpack.2 -larpack
-INCLUDEPATH += /usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/include
-DEPENDPATH += /usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/include
+LIBS += -L/usr/local/Cellar/arpack/3.7.0_5/lib/ -larpack.2 -larpack
+INCLUDEPATH += /usr/local/Cellar/arpack/3.7.0_5/libexec/include
+DEPENDPATH += /usr/local/Cellar/arpack/3.7.0_5/libexec/include
 }
 else:unix: {
 LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/lib/ -larpack
@@ -335,10 +335,10 @@ INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Framew
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
 #Need to include the library below so that we do not get a blacs_gridexit error in PyCharm. It looks like this function is not included in the accelerate framework
-LIBS += -L/usr/local/Cellar/scalapack/2.1.0_1/lib/ -lscalapack
+LIBS += -L/usr/local/Cellar/scalapack/2.1.0_2/lib/ -lscalapack
 
-INCLUDEPATH += /usr/local/Cellar/scalapack/2.1.0_1/
-DEPENDPATH += /usr/local/Cellar/scalapack/2.1.0_1/
+INCLUDEPATH += /usr/local/Cellar/scalapack/2.1.0_2/
+DEPENDPATH += /usr/local/Cellar/scalapack/2.1.0_2/
 
 }
 else:unix: {
@@ -399,9 +399,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/brewsci-mumps/5.2.1/lib/ -ldmumps -lmumps_common -lpord
-INCLUDEPATH += /usr/local/Cellar/brewsci-mumps/5.2.1/include
-DEPENDPATH += /usr/local/Cellar/brewsci-mumps/5.2.1/include
+LIBS += -L/Users/steve/Desktop/C++Libraries/Mumps/Install/lib/ -ldmumps -lmumps_common -lpord
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/Mumps/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/Mumps/Install/include
 
 }
 else:unix: {
@@ -539,9 +539,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/open-mpi/4.0.3/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
-INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.3/include
-DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.3/include
+LIBS += -L/usr/local/Cellar/open-mpi/4.0.5/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.5/include
+DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.5/include
 
 #PRE_TARGETDEPS += /usr/local/Cellar/open-mpi/4.0.3/lib/libmpi_usempi_ignore_tkr.a
 }
@@ -602,9 +602,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/suite-sparse/5.7.2/lib/ -lumfpack -lcxsparse
-INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.7.2/include
-DEPENDPATH += /usr/local/Cellar/suite-sparse/5.7.2/include
+LIBS += -L/usr/local/Cellar/suite-sparse/5.8.1/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.8.1/include
+DEPENDPATH += /usr/local/Cellar/suite-sparse/5.8.1/include
 
 #Add umfpack dependency openblas
 #LIBS += -L/usr/local/Cellar/openblas/0.3.7/lib/ -lopenblas

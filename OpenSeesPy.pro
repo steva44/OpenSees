@@ -1,6 +1,6 @@
 # Created by Stevan Gavrilovic
-# University of British Columbia
-# 2.10.2019
+# University of California Berkeley
+# 6.11.2020
 
 message("Building OpenSees with Python")
 
@@ -50,10 +50,10 @@ include(./OpenSeesPy.pri)
 #Change these variables to match the location of your Python installation
 macx: {
 
-#LIBS += -L/usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/lib/ -lpython3.7
+LIBS += -L/usr/local/Cellar/python@3.9/3.9.0_1/Frameworks/Python.framework/Versions/3.9/lib/ -lpython3.9
 
-INCLUDEPATH += /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m \
-               /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include/python3.7m/internal
+INCLUDEPATH += /usr/local/Cellar/python@3.9/3.9.0_1/Frameworks/Python.framework/Versions/3.9/include/python3.9  \
+               /usr/local/Cellar/python@3.9/3.9.0_1/Frameworks/Python.framework/Versions/3.9/include/python3.9 /internal
 
 #DEPENDPATH += /usr/local/Cellar/python/3.7.4_1/Frameworks/Python.framework/Versions/3.7/include
 
