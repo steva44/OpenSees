@@ -59,11 +59,11 @@ in the macOS terminal prompt. From herein, the the word 'run' will be used to re
 
 Each dependency installed through Homebrew will have its own subfolder within the Cellar directory. Each subfolder contains that dependencies 'include' and 'lib' folders. Now that Homebew is installed, to install the required OpenSees dependencies run the following commands:
 
-	brew install petsc superlu_mt superlu_dist openblas GCC arpack superlu parmetis 
+	brew install petsc superlu_mt superlu_dist openblas dpo/openblas/superlu  parmetis 
 
-	brew uninstall --ignore-dependencies scalapack
+	brew install brewsci/num/brewsci-arpack
 
-        brew install mumps 
+	brew install brewsci/num/mumps
 
 If compiling OpenSeesPy, Python is needed as well: 
 

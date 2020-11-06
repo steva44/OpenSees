@@ -219,9 +219,9 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L/usr/local/Cellar/arpack/3.5.0/libexec/lib/ -larpack.2 -larpack
-INCLUDEPATH += /usr/local/Cellar/arpack/3.5.0/libexec/include
-DEPENDPATH += /usr/local/Cellar/arpack/3.5.0/libexec/include
+LIBS += -L/usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/lib/ -larpack.2 -larpack
+INCLUDEPATH += /usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/include
+DEPENDPATH += /usr/local/Cellar/brewsci-arpack/3.6.3_1/libexec/include
 }
 else:unix: {
 LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/lib/ -larpack
@@ -335,10 +335,10 @@ INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Framew
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
 #Need to include the library below so that we do not get a blacs_gridexit error in PyCharm. It looks like this function is not included in the accelerate framework
-LIBS += -L/usr/local/Cellar/scalapack/2.0.2/lib/ -lscalapack
+LIBS += -L/usr/local/Cellar/scalapack/2.1.0_1/lib/ -lscalapack
 
-INCLUDEPATH += /usr/local/Cellar/scalapack/2.0.2/
-DEPENDPATH += /usr/local/Cellar/scalapack/2.0.2/
+INCLUDEPATH += /usr/local/Cellar/scalapack/2.1.0_1/
+DEPENDPATH += /usr/local/Cellar/scalapack/2.1.0_1/
 
 }
 else:unix: {
@@ -399,16 +399,16 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/mumps/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
-INCLUDEPATH += /usr/local/Cellar/mumps/5.1.2_2/include
-DEPENDPATH += /usr/local/Cellar/mumps/5.1.2_2/include
+LIBS += -L/usr/local/Cellar/brewsci-mumps/5.2.1/lib/ -ldmumps -lmumps_common -lpord
+INCLUDEPATH += /usr/local/Cellar/brewsci-mumps/5.2.1/include
+DEPENDPATH += /usr/local/Cellar/brewsci-mumps/5.2.1/include
 
 }
 else:unix: {
 
 LIBS += -L$$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/lib/ -ldmumps -lmumps_common -lpord
 INCLUDEPATH += $$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/include
+DEPENDPATH += $$PWD/OpenSeesLibs/mumps/Unix/5.1.2_2/include1
 
 }
 
@@ -532,22 +532,18 @@ SOURCES += \
 #https://www.open-mpi.org/
 contains (DEFINES, _OPENMPI){
 
-#Set the environment variable for OpenMPI since the installation is moved from its original location
-#%{Env:OPAL_PREFIX} = $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/
-#%{OPAL_PREFIX:-$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/}
-
-
-
+#Set the OPAL_PREFIX environment variable in Qt Creator projects for OpenMPI if the MPI installation is moved from its original location
+#%{OPAL_PREFIX:-$$PWD/OpenSeesLibs/open-mpi/Mac/4.0.3/}
 
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/open-mpi/4.0.1_2/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
-INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.1_2/include
-DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.1_2/include
+LIBS += -L/usr/local/Cellar/open-mpi/4.0.3/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.3/include
+DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.3/include
 
-PRE_TARGETDEPS += $$PWD/OpenSeesLibs/open-mpi/Mac/4.0.1_2/lib/libmpi_usempi_ignore_tkr.a
+#PRE_TARGETDEPS += /usr/local/Cellar/open-mpi/4.0.3/lib/libmpi_usempi_ignore_tkr.a
 }
 else:unix: {
 
@@ -606,9 +602,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/suite-sparse/5.4.0_1/lib/ -lumfpack -lcxsparse
-INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.4.0_1/include
-DEPENDPATH += /usr/local/Cellar/suite-sparse/5.4.0_1/include
+LIBS += -L/usr/local/Cellar/suite-sparse/5.7.2/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.7.2/include
+DEPENDPATH += /usr/local/Cellar/suite-sparse/5.7.2/include
 
 #Add umfpack dependency openblas
 #LIBS += -L/usr/local/Cellar/openblas/0.3.7/lib/ -lopenblas
