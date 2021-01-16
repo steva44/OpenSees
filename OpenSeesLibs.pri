@@ -627,6 +627,22 @@ DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
 
 }
 
+
+win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/release/ -lomp
+else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/debug/ -lomp
+else:unix: LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/ -lomp
+
+INCLUDEPATH += /usr/local/Cellar/libomp/11.0.0/include
+DEPENDPATH += /usr/local/Cellar/libomp/11.0.0/include
+
+win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/release/ -lgfortran.5
+else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/debug/ -lgfortran.5
+else:unix: LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/ -lgfortran.5
+
+INCLUDEPATH += /usr/local/Cellar/gcc/10.2.0/lib/gcc/10
+DEPENDPATH += /usr/local/Cellar/gcc/10.2.0/lib/gcc/10
+
+
 #contains (DEFINES, _USINGFORTRAN){
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../gcc/8.2.0/lib/gcc/8/release/ -lgfortran.5

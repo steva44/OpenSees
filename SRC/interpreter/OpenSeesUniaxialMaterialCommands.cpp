@@ -81,6 +81,7 @@ void* OPS_Concrete01();
 void* OPS_Steel4();
 void* OPS_HystereticMaterial();
 void* OPS_ReinforcingSteel();
+void* OPS_Dodd_Restrepo();
 void* OPS_RambergOsgoodSteel();
 void* OPS_SteelMPF();
 void* OPS_Concrete02();
@@ -140,10 +141,7 @@ void* OPS_SteelBRB();
 void* OPS_SimpleFractureMaterial();
 void* OPS_Maxwell();
 #ifdef _USINGFORTRAN
-void* OPS_Dodd_Restrepo();
-#ifndef _NO_NEW_RESTREPO
     void* OPS_DoddRestr();
-#endif
 #endif
 void* OPS_Steel2();
 void* OPS_OriginCentered();
@@ -227,6 +225,11 @@ namespace {
 	uniaxialMaterialsMap.insert(std::make_pair("Steel4", &OPS_Steel4));
 	uniaxialMaterialsMap.insert(std::make_pair("Hysteretic", &OPS_HystereticMaterial));
 	uniaxialMaterialsMap.insert(std::make_pair("ReinforcingSteel", &OPS_ReinforcingSteel));
+#ifdef _USINGFORTRAN
+	uniaxialMaterialsMap.insert(std::make_pair("Dodd_Restrepo", &OPS_Dodd_Restrepo));
+	uniaxialMaterialsMap.insert(std::make_pair("DoddRestrepo", &OPS_Dodd_Restrepo));
+	uniaxialMaterialsMap.insert(std::make_pair("Restrepo", &OPS_Dodd_Restrepo));
+#endif
 	uniaxialMaterialsMap.insert(std::make_pair("RambergOsgoodSteel", &OPS_RambergOsgoodSteel));
 	uniaxialMaterialsMap.insert(std::make_pair("RambergOsgood", &OPS_RambergOsgoodSteel));
 	uniaxialMaterialsMap.insert(std::make_pair("SteelMPF", &OPS_SteelMPF));
@@ -300,12 +303,7 @@ namespace {
 	uniaxialMaterialsMap.insert(std::make_pair("Maxwell", &OPS_Maxwell));
 	uniaxialMaterialsMap.insert(std::make_pair("MaxwellMaterial", &OPS_Maxwell));
 #ifdef _USINGFORTRAN
-    uniaxialMaterialsMap.insert(std::make_pair("Dodd_Restrepo", &OPS_Dodd_Restrepo));
-    uniaxialMaterialsMap.insert(std::make_pair("DoddRestrepo", &OPS_Dodd_Restrepo));
-    uniaxialMaterialsMap.insert(std::make_pair("Restrepo", &OPS_Dodd_Restrepo));
-#ifndef _NO_NEW_RESTREPO
-	uniaxialMaterialsMap.insert(std::make_pair("DoddRestr", &OPS_DoddRestr));
-#endif
+    uniaxialMaterialsMap.insert(std::make_pair("DoddRestr", &OPS_DoddRestr));
 #endif
 	uniaxialMaterialsMap.insert(std::make_pair("Steel2", &OPS_Steel2));
 	uniaxialMaterialsMap.insert(std::make_pair("OriginCentered", &OPS_OriginCentered));

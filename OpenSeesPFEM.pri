@@ -15,6 +15,7 @@ HEADERS += \
    $$PWD/SRC/element/PFEMElement/MINI.h \
    $$PWD/SRC/element/PFEMElement/Particle.h \
    $$PWD/SRC/element/PFEMElement/ParticleGroup.h \
+   $$PWD/SRC/element/PFEMElement/PFEMContact2D.h \
    $$PWD/SRC/element/PFEMElement/PFEMElement2D.h \
    $$PWD/SRC/element/PFEMElement/PFEMElement2DBubble.h \
    $$PWD/SRC/element/PFEMElement/PFEMElement2DCompressible.h \
@@ -66,6 +67,7 @@ SOURCES += \
    $$PWD/SRC/element/PFEMElement/MINI.cpp \
    $$PWD/SRC/element/PFEMElement/Particle.cpp \
    $$PWD/SRC/element/PFEMElement/ParticleGroup.cpp \
+   $$PWD/SRC/element/PFEMElement/PFEMContact2D.cpp \
    $$PWD/SRC/element/PFEMElement/PFEMElement2D.cpp \
    $$PWD/SRC/element/PFEMElement/PFEMElement2DBubble.cpp \
    $$PWD/SRC/element/PFEMElement/PFEMElement2DCompressible.cpp \

@@ -51,8 +51,6 @@ Now that Homebew and the taps are installed,the required OpenSees dependencies a
 	brew install petsc openblas arpack superlu 
 
 
-	brew install brewsci-mumps
-
 If compiling OpenSeesPy, Python is needed as well: 
 
 	brew install python
@@ -164,7 +162,7 @@ set(TPL_PARMETIS_LIBRARIES /usr/local/Cellar/parmetis/4.0.3_5/lib/libparmetis.dy
 Then build with CMAKE and compile. 
 
 
-*SUPERLUMT*
+**SUPERLUMT**
 SUPERLU but for for shared memory parallel machines. Provides Pthreads and OpenMP interfaces.
 
 Installing SUPERLUMT via brew:
@@ -175,8 +173,13 @@ SUPERLUMT requires the following dependencies that will automatically be install
 -openblas 
 
 
+**MUMPS**
 
+Download Mumps from: https://github.com/scivision/mumps.git
 
+In CMAKE GUI, at the configure step, do not select `Use default native compilers`. Instead select `Specify native compilers`and select the GCC compilers because Fortran is required. 
+
+Check the values `metis` and `openmp` in `Ungrouped Entries` pulldown.
 
 *LAPACK (SCALAPACK)*
 The Linear Algebra PACKage, or LAPACK, is written in Fortran 90 and provides routines for solving systems of simultaneous linear equations, least-squares solutions of linear systems of equations, eigenvalue problems, and singular value problems.The associated matrix factorizations (LU, Cholesky, QR, SVD, Schur, generalized Schur) are also provided, as are related computations such as reordering of the Schur factorizations and estimating condition numbers. Dense and banded matrices are handled, but not general sparse matrices. In all areas, similar functionality is provided for real and complex matrices, in both single and double precision.

@@ -58,9 +58,11 @@ INCLUDEPATH += \
     $$PWD/SRC/element/frictionBearing \
     $$PWD/SRC/element/frictionBearing/frictionModel \
     $$PWD/SRC/element/generic \
+    $$PWD/SRC/element/GradientInelasticBeamColumn \
     $$PWD/SRC/element/HUelements \
     $$PWD/SRC/element/joint \
     $$PWD/SRC/element/mvlem \
+    $$PWD/SRC/element/mixedBeamColumn \
     $$PWD/SRC/element/nonlinearBeamColumn/matrixutil \
     $$PWD/SRC/element/pyMacro \
     $$PWD/SRC/element/shell \
@@ -420,6 +422,7 @@ HEADERS += \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumn2dThermal.h \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumn3d.h \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnCBDI2d.h \
+   $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnCBDI3d.h \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnWarping2d.h \
    $$PWD/SRC/element/forceBeamColumn/HingeEndpointBeamIntegration.h \
    $$PWD/SRC/element/forceBeamColumn/HingeMidpointBeamIntegration.h \
@@ -436,10 +439,13 @@ HEADERS += \
    $$PWD/SRC/element/forceBeamColumn/UserDefinedBeamIntegration.h \
    $$PWD/SRC/element/forceBeamColumn/UserDefinedHingeIntegration.h \
    $$PWD/SRC/element/fourNodeQuad/ConstantPressureVolumeQuad.h \
+   $$PWD/SRC/element/fourNodeQuad/EightNodeQuad.h \
    $$PWD/SRC/element/fourNodeQuad/EnhancedQuad.h \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuad.h \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuad3d.h \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuadWithSensitivity.h \
+   $$PWD/SRC/element/fourNodeQuad/SixNodeTri.h \
+   $$PWD/SRC/element/fourNodeQuad/NineNodeQuad.h \
    $$PWD/SRC/element/fourNodeQuad/NineNodeMixedQuad.h \
    $$PWD/SRC/element/frictionBearing/frictionModel/Coulomb.h \
    $$PWD/SRC/element/frictionBearing/frictionModel/FrictionModel.h \
@@ -462,6 +468,8 @@ HEADERS += \
    $$PWD/SRC/element/frictionBearing/TripleFrictionPendulum.h \
    $$PWD/SRC/element/generic/GenericClient.h \
    $$PWD/SRC/element/generic/GenericCopy.h \
+   $$PWD/SRC/element/GradientInelasticBeamColumn/GradientInelasticBeamColumn2d.h \
+   $$PWD/SRC/element/GradientInelasticBeamColumn/GradientInelasticBeamColumn3d.h \
    $$PWD/SRC/element/HUelements/KikuchiBearing.h \
    $$PWD/SRC/element/HUelements/MultipleNormalSpring.h \
    $$PWD/SRC/element/HUelements/MultipleShearSpring.h \
@@ -471,12 +479,16 @@ HEADERS += \
    $$PWD/SRC/element/joint/ElasticTubularJoint.h \
    $$PWD/SRC/element/joint/Joint2D.h \
    $$PWD/SRC/element/joint/Joint3D.h \
+   $$PWD/SRC/element/joint/LehighJoint2d.h \
    $$PWD/SRC/element/joint/MP_Joint2D.h \
    $$PWD/SRC/element/joint/MP_Joint3D.h \
    $$PWD/SRC/element/mvlem/MVLEM.h \
    $$PWD/SRC/element/mvlem/SFI_MVLEM.h \
+   $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn2d.h \
+   $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn3d.h \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.h \
    $$PWD/SRC/element/pyMacro/PY_Macro2D.h \
+   $$PWD/SRC/element/shell/ASDShellQ4.h \
    $$PWD/SRC/element/shell/R3vectors.h \
    $$PWD/SRC/element/shell/ShellANDeS.h \
    $$PWD/SRC/element/shell/ShellDKGQ.h \
@@ -600,6 +612,7 @@ HEADERS += \
    $$PWD/SRC/material/nD/soil/MultiYieldSurfaceClay.h \
    $$PWD/SRC/material/nD/soil/PressureDependMultiYield.h \
    $$PWD/SRC/material/nD/soil/PressureDependMultiYield02.h \
+   $$PWD/SRC/material/nD/soil/PressureDependMultiYield03.h \
    $$PWD/SRC/material/nD/soil/PressureIndependMultiYield.h \
    $$PWD/SRC/material/nD/soil/T2Vector.h \
    $$PWD/SRC/material/nD/UWmaterials/BoundingCamClay.h \
@@ -680,6 +693,8 @@ HEADERS += \
    $$PWD/SRC/material/nD/PlateRebarMaterialThermal.h \
    $$PWD/SRC/material/nD/PressureDependentElastic3D.h \
    $$PWD/SRC/material/nD/SimplifiedJ2.h \
+   $$PWD/SRC/material/nD/UVCmultiaxial.h \
+   $$PWD/SRC/material/nD/UVCplanestress.h \
    $$PWD/SRC/material/nD/WrapperNDMaterial.h \
    $$PWD/SRC/material/section/fiber/Fiber.h \
    $$PWD/SRC/material/section/fiber/NDFiber2d.h \
@@ -808,6 +823,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.h \
    $$PWD/SRC/material/uniaxial/BarSlipMaterial.h \
    $$PWD/SRC/material/uniaxial/Bilin.h \
+   $$PWD/SRC/material/uniaxial/Bilin02.h \
    $$PWD/SRC/material/uniaxial/BilinearOilDamper.h \
    $$PWD/SRC/material/uniaxial/Bond_SP01.h \
    $$PWD/SRC/material/uniaxial/BoucWenMaterial.h \
@@ -855,6 +871,9 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/HookGap.h \
    $$PWD/SRC/material/uniaxial/HyperbolicGapMaterial.h \
    $$PWD/SRC/material/uniaxial/HystereticMaterial.h \
+   $$PWD/SRC/material/uniaxial/IMKBilin.h \
+   $$PWD/SRC/material/uniaxial/IMKPinching.h \
+   $$PWD/SRC/material/uniaxial/IMKPeakOriented.h \
    $$PWD/SRC/material/uniaxial/ImpactMaterial.h \
    $$PWD/SRC/material/uniaxial/InitStrainMaterial.h \
    $$PWD/SRC/material/uniaxial/InitStressMaterial.h \
@@ -887,6 +906,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/SeriesMaterial.h \
    $$PWD/SRC/material/uniaxial/ShearPanelMaterial.h \
    $$PWD/SRC/material/uniaxial/SimpleFractureMaterial.h \
+   $$PWD/SRC/material/uniaxial/SLModel.h \
    $$PWD/SRC/material/uniaxial/SmoothPSConcrete.h \
    $$PWD/SRC/material/uniaxial/SPSW02.h \
    $$PWD/SRC/material/uniaxial/StainlessECThermal.h \
@@ -905,6 +925,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/TriMatrix.h \
    $$PWD/SRC/material/uniaxial/UniaxialJ2Plasticity.h \
    $$PWD/SRC/material/uniaxial/UniaxialMaterial.h \
+   $$PWD/SRC/material/uniaxial/UVCuniaxial.h \
    $$PWD/SRC/material/uniaxial/ViscousDamper.h \
    $$PWD/SRC/material/uniaxial/ViscousMaterial.h \
    $$PWD/SRC/material/uniaxial/WrapperUniaxialMaterial.h \
@@ -1339,6 +1360,7 @@ SOURCES += \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumn2dThermal.cpp \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumn3d.cpp \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnCBDI2d.cpp \
+   $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnCBDI3d.cpp \
    $$PWD/SRC/element/forceBeamColumn/ForceBeamColumnWarping2d.cpp \
    $$PWD/SRC/element/forceBeamColumn/HingeEndpointBeamIntegration.cpp \
    $$PWD/SRC/element/forceBeamColumn/HingeMidpointBeamIntegration.cpp \
@@ -1355,10 +1377,13 @@ SOURCES += \
    $$PWD/SRC/element/forceBeamColumn/UserDefinedBeamIntegration.cpp \
    $$PWD/SRC/element/forceBeamColumn/UserDefinedHingeIntegration.cpp \
    $$PWD/SRC/element/fourNodeQuad/ConstantPressureVolumeQuad.cpp \
+   $$PWD/SRC/element/fourNodeQuad/EightNodeQuad.cpp \
    $$PWD/SRC/element/fourNodeQuad/EnhancedQuad.cpp \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuad.cpp \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuad3d.cpp \
    $$PWD/SRC/element/fourNodeQuad/FourNodeQuadWithSensitivity.cpp \
+   $$PWD/SRC/element/fourNodeQuad/SixNodeTri.cpp \
+   $$PWD/SRC/element/fourNodeQuad/NineNodeQuad.cpp \
    $$PWD/SRC/element/fourNodeQuad/NineNodeMixedQuad.cpp \
    $$PWD/SRC/element/frictionBearing/frictionModel/Coulomb.cpp \
    $$PWD/SRC/element/frictionBearing/frictionModel/FrictionModel.cpp \
@@ -1381,6 +1406,8 @@ SOURCES += \
    $$PWD/SRC/element/frictionBearing/TripleFrictionPendulum.cpp \
    $$PWD/SRC/element/generic/GenericClient.cpp \
    $$PWD/SRC/element/generic/GenericCopy.cpp \
+   $$PWD/SRC/element/GradientInelasticBeamColumn/GradientInelasticBeamColumn2d.cpp \
+   $$PWD/SRC/element/GradientInelasticBeamColumn/GradientInelasticBeamColumn3d.cpp \
    $$PWD/SRC/element/HUelements/KikuchiBearing.cpp \
    $$PWD/SRC/element/HUelements/DBESI0.C \
    $$PWD/SRC/element/HUelements/DBESI1.C \
@@ -1392,12 +1419,16 @@ SOURCES += \
    $$PWD/SRC/element/joint/ElasticTubularJoint.cpp \
    $$PWD/SRC/element/joint/Joint2D.cpp \
    $$PWD/SRC/element/joint/Joint3D.cpp \
+   $$PWD/SRC/element/joint/LehighJoint2d.cpp \
    $$PWD/SRC/element/joint/MP_Joint2D.cpp \
    $$PWD/SRC/element/joint/MP_Joint3D.cpp \
    $$PWD/SRC/element/mvlem/MVLEM.cpp \
+   $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn2d.cpp \
+   $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn3d.cpp \
    $$PWD/SRC/element/mvlem/SFI_MVLEM.cpp \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.cpp \
    $$PWD/SRC/element/pyMacro/PY_Macro2D.cpp \
+   $$PWD/SRC/element/shell/ASDShellQ4.cpp \
    $$PWD/SRC/element/shell/R3vectors.cpp \
    $$PWD/SRC/element/shell/ShellANDeS.cpp \
    $$PWD/SRC/element/shell/ShellDKGQ.cpp \
@@ -1520,6 +1551,7 @@ SOURCES += \
    $$PWD/SRC/material/nD/soil/MultiYieldSurfaceClay.cpp \
    $$PWD/SRC/material/nD/soil/PressureDependMultiYield.cpp \
    $$PWD/SRC/material/nD/soil/PressureDependMultiYield02.cpp \
+   $$PWD/SRC/material/nD/soil/PressureDependMultiYield03.cpp \
    $$PWD/SRC/material/nD/soil/PressureIndependMultiYield.cpp \
    $$PWD/SRC/material/nD/soil/T2Vector.cpp \
    $$PWD/SRC/material/nD/UWmaterials/BoundingCamClay.cpp \
@@ -1600,6 +1632,8 @@ SOURCES += \
    $$PWD/SRC/material/nD/PlateRebarMaterialThermal.cpp \
    $$PWD/SRC/material/nD/PressureDependentElastic3D.cpp \
    $$PWD/SRC/material/nD/SimplifiedJ2.cpp \
+   $$PWD/SRC/material/nD/UVCmultiaxial.cpp \
+   $$PWD/SRC/material/nD/UVCplanestress.cpp \
    $$PWD/SRC/material/nD/WrapperNDMaterial.cpp \
    $$PWD/SRC/material/section/fiber/Fiber.cpp \
    $$PWD/SRC/material/section/fiber/NDFiber2d.cpp \
@@ -1729,6 +1763,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.cpp \
    $$PWD/SRC/material/uniaxial/BarSlipMaterial.cpp \
    $$PWD/SRC/material/uniaxial/Bilin.cpp \
+   $$PWD/SRC/material/uniaxial/Bilin02.cpp \
    $$PWD/SRC/material/uniaxial/BilinearOilDamper.cpp \
    $$PWD/SRC/material/uniaxial/Bond_SP01.cpp \
    $$PWD/SRC/material/uniaxial/BoucWenMaterial.cpp \
@@ -1776,6 +1811,9 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/HookGap.cpp \
    $$PWD/SRC/material/uniaxial/HyperbolicGapMaterial.cpp \
    $$PWD/SRC/material/uniaxial/HystereticMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/IMKBilin.cpp \
+   $$PWD/SRC/material/uniaxial/IMKPinching.cpp \
+   $$PWD/SRC/material/uniaxial/IMKPeakOriented.cpp \
    $$PWD/SRC/material/uniaxial/ImpactMaterial.cpp \
    $$PWD/SRC/material/uniaxial/InitStrainMaterial.cpp \
    $$PWD/SRC/material/uniaxial/InitStressMaterial.cpp \
@@ -1808,6 +1846,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/SeriesMaterial.cpp \
    $$PWD/SRC/material/uniaxial/ShearPanelMaterial.cpp \
    $$PWD/SRC/material/uniaxial/SimpleFractureMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/SLModel.cpp \
    $$PWD/SRC/material/uniaxial/SmoothPSConcrete.cpp \
    $$PWD/SRC/material/uniaxial/SPSW02.cpp \
    $$PWD/SRC/material/uniaxial/StainlessECThermal.cpp \
@@ -1826,6 +1865,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/TriMatrix.cpp \
    $$PWD/SRC/material/uniaxial/UniaxialJ2Plasticity.cpp \
    $$PWD/SRC/material/uniaxial/UniaxialMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/UVCuniaxial.cpp \
    $$PWD/SRC/material/uniaxial/ViscousDamper.cpp \
    $$PWD/SRC/material/uniaxial/ViscousMaterial.cpp \
    $$PWD/SRC/material/uniaxial/WrapperUniaxialMaterial.cpp \

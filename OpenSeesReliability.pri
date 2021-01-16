@@ -70,7 +70,7 @@ HEADERS += \
    $$PWD/SRC/reliability/analysis/direction/PolakHeSearchDirectionAndMeritFunction.h \
    $$PWD/SRC/reliability/analysis/direction/SearchDirection.h \
    $$PWD/SRC/reliability/analysis/direction/SQPsearchDirectionMeritFunctionAndHessian.h \
-   $$PWD/SRC/reliability/analysis/gFunction/GFunEvaluator.h \
+#   $$PWD/SRC/reliability/analysis/gFunction/GFunEvaluator.h \
    $$PWD/SRC/reliability/analysis/gradient/FiniteDifferenceGradient.h \
    $$PWD/SRC/reliability/analysis/gradient/GradientEvaluator.h \
    $$PWD/SRC/reliability/analysis/gradient/ImplicitGradient.h \
@@ -85,50 +85,50 @@ HEADERS += \
    $$PWD/SRC/reliability/analysis/misc/MatrixOperations.h \
    $$PWD/SRC/reliability/analysis/randomNumber/CStdLibRandGenerator.h \
    $$PWD/SRC/reliability/analysis/randomNumber/RandomNumberGenerator.h \
-   $$PWD/SRC/reliability/analysis/rootFinding/ModNewtonRootFinding.h \
+#   $$PWD/SRC/reliability/analysis/rootFinding/ModNewtonRootFinding.h \
    $$PWD/SRC/reliability/analysis/rootFinding/RootFinding.h \
    $$PWD/SRC/reliability/analysis/rootFinding/SafeGuardedZeroFindingAlgorithm.h \
    $$PWD/SRC/reliability/analysis/rootFinding/SecantRootFinding.h \
    $$PWD/SRC/reliability/analysis/rootFinding/ZeroFindingAlgorithm.h \
    #$$PWD/SRC/reliability/analysis/sensitivity/FiniteDifferenceGradGEvaluator.h \
-   $$PWD/SRC/reliability/analysis/sensitivity/GradGEvaluator.h \
+   #$$PWD/SRC/reliability/analysis/sensitivity/GradGEvaluator.h \
    #$$PWD/SRC/reliability/analysis/sensitivity/OpenSeesGradGEvaluator.h \
    $$PWD/SRC/reliability/analysis/stepSize/ArmijoStepSizeRule.h \
    $$PWD/SRC/reliability/analysis/stepSize/FixedStepSizeRule.h \
    $$PWD/SRC/reliability/analysis/stepSize/StepSizeRule.h \
-   $$PWD/SRC/reliability/analysis/telm/Analyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/AnalyzerGradGEvaluator.h \
-   $$PWD/SRC/reliability/analysis/telm/CrossingRateAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/DynamicAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/FirstPassageAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/FOSeriesSimulation.h \
-   $$PWD/SRC/reliability/analysis/telm/GeneralRandGenerator.h \
-   $$PWD/SRC/reliability/analysis/telm/InitialPointBuilder.h \
-   $$PWD/SRC/reliability/analysis/telm/InitialStaticAnalysis.h \
-   $$PWD/SRC/reliability/analysis/telm/localMath.h \
-   $$PWD/SRC/reliability/analysis/telm/NewDiscretizedRandomProcessSeries.h \
-   $$PWD/SRC/reliability/analysis/telm/NewNewmarkSensitivityIntegrator.h \
-   $$PWD/SRC/reliability/analysis/telm/NewSearchWithStepSizeAndStepDirection.h \
-   $$PWD/SRC/reliability/analysis/telm/NewSensitivityAlgorithm.h \
-   $$PWD/SRC/reliability/analysis/telm/NewStandardLinearOscillatorAccelerationFilter.h \
-   $$PWD/SRC/reliability/analysis/telm/NewStaticSensitivityIntegrator.h \
-   $$PWD/SRC/reliability/analysis/telm/NewWhitenoiseFilter.h \
-   $$PWD/SRC/reliability/analysis/telm/NonStatFirstPassageAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/OutCrossingResults.h \
-   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoeff.h \
-   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoefficientIter.h \
-   $$PWD/SRC/reliability/analysis/telm/randomc.h \
-   $$PWD/SRC/reliability/analysis/telm/RandomProcess.h \
-   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulation.h \
-   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulatorResult.h \
-   $$PWD/SRC/reliability/analysis/telm/ReliabilityDirectIntegrationAnalysis.h \
-   $$PWD/SRC/reliability/analysis/telm/ReliabilityStaticAnalysis.h \
-   $$PWD/SRC/reliability/analysis/telm/SelectLoadInitialStaticAnalysis.h \
-   $$PWD/SRC/reliability/analysis/telm/SmoothConcrete02.h \
-   $$PWD/SRC/reliability/analysis/telm/StatFirstPassageAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/StaticAnalyzer.h \
-   $$PWD/SRC/reliability/analysis/telm/ThresholdIncInitialPointBuilder.h \
-   $$PWD/SRC/reliability/analysis/telm/TimePoints.h \
+#   $$PWD/SRC/reliability/analysis/telm/Analyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/AnalyzerGradGEvaluator.h \
+#   $$PWD/SRC/reliability/analysis/telm/CrossingRateAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/DynamicAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/FirstPassageAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/FOSeriesSimulation.h \
+#   $$PWD/SRC/reliability/analysis/telm/GeneralRandGenerator.h \
+#   $$PWD/SRC/reliability/analysis/telm/InitialPointBuilder.h \
+#   $$PWD/SRC/reliability/analysis/telm/InitialStaticAnalysis.h \
+#   $$PWD/SRC/reliability/analysis/telm/localMath.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewDiscretizedRandomProcessSeries.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewNewmarkSensitivityIntegrator.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewSearchWithStepSizeAndStepDirection.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewSensitivityAlgorithm.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewStandardLinearOscillatorAccelerationFilter.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewStaticSensitivityIntegrator.h \
+#   $$PWD/SRC/reliability/analysis/telm/NewWhitenoiseFilter.h \
+#   $$PWD/SRC/reliability/analysis/telm/NonStatFirstPassageAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/OutCrossingResults.h \
+#   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoeff.h \
+#   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoefficientIter.h \
+#   $$PWD/SRC/reliability/analysis/telm/randomc.h \
+#   $$PWD/SRC/reliability/analysis/telm/RandomProcess.h \
+#   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulation.h \
+#   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulatorResult.h \
+#   $$PWD/SRC/reliability/analysis/telm/ReliabilityDirectIntegrationAnalysis.h \
+#   $$PWD/SRC/reliability/analysis/telm/ReliabilityStaticAnalysis.h \
+#   $$PWD/SRC/reliability/analysis/telm/SelectLoadInitialStaticAnalysis.h \
+#   $$PWD/SRC/reliability/analysis/telm/SmoothConcrete02.h \
+#   $$PWD/SRC/reliability/analysis/telm/StatFirstPassageAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/StaticAnalyzer.h \
+#   $$PWD/SRC/reliability/analysis/telm/ThresholdIncInitialPointBuilder.h \
+#   $$PWD/SRC/reliability/analysis/telm/TimePoints.h \
    $$PWD/SRC/reliability/analysis/transformation/AllIndependentTransformation.h \
    $$PWD/SRC/reliability/analysis/transformation/NatafProbabilityTransformation.h \
    $$PWD/SRC/reliability/analysis/transformation/ProbabilityTransformation.h \
@@ -245,7 +245,7 @@ SOURCES += \
    $$PWD/SRC/reliability/analysis/direction/PolakHeSearchDirectionAndMeritFunction.cpp \
    $$PWD/SRC/reliability/analysis/direction/SearchDirection.cpp \
    $$PWD/SRC/reliability/analysis/direction/SQPsearchDirectionMeritFunctionAndHessian.cpp \
-   $$PWD/SRC/reliability/analysis/gFunction/GFunEvaluator.cpp \
+#   $$PWD/SRC/reliability/analysis/gFunction/GFunEvaluator.cpp \
    $$PWD/SRC/reliability/analysis/gradient/FiniteDifferenceGradient.cpp \
    $$PWD/SRC/reliability/analysis/gradient/GradientEvaluator.cpp \
    $$PWD/SRC/reliability/analysis/gradient/ImplicitGradient.cpp \
@@ -260,55 +260,55 @@ SOURCES += \
    $$PWD/SRC/reliability/analysis/misc/MatrixOperations.cpp \
    $$PWD/SRC/reliability/analysis/randomNumber/CStdLibRandGenerator.cpp \
    $$PWD/SRC/reliability/analysis/randomNumber/RandomNumberGenerator.cpp \
-   $$PWD/SRC/reliability/analysis/rootFinding/ModNewtonRootFinding.cpp \
+#   $$PWD/SRC/reliability/analysis/rootFinding/ModNewtonRootFinding.cpp \
    $$PWD/SRC/reliability/analysis/rootFinding/RootFinding.cpp \
    $$PWD/SRC/reliability/analysis/rootFinding/SafeGuardedZeroFindingAlgorithm.cpp \
    $$PWD/SRC/reliability/analysis/rootFinding/SecantRootFinding.cpp \
    $$PWD/SRC/reliability/analysis/rootFinding/ZeroFindingAlgorithm.cpp \
    #$$PWD/SRC/reliability/analysis/sensitivity/FiniteDifferenceGradGEvaluator.cpp \
-   $$PWD/SRC/reliability/analysis/sensitivity/GradGEvaluator.cpp \
+   #$$PWD/SRC/reliability/analysis/sensitivity/GradGEvaluator.cpp \
    #$$PWD/SRC/reliability/analysis/sensitivity/OpenSeesGradGEvaluator.cpp \
    $$PWD/SRC/reliability/analysis/stepSize/ArmijoStepSizeRule.cpp \
    $$PWD/SRC/reliability/analysis/stepSize/FixedStepSizeRule.cpp \
    $$PWD/SRC/reliability/analysis/stepSize/StepSizeRule.cpp \
-   $$PWD/SRC/reliability/analysis/telm/Analyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/AnalyzerGradGEvaluator.cpp \
-   $$PWD/SRC/reliability/analysis/telm/CrossingRateAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/DynamciAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/FirstPassageAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/FOSeriesSimulation.cpp \
-   $$PWD/SRC/reliability/analysis/telm/GeneralRandGenerator.cpp \
-   $$PWD/SRC/reliability/analysis/telm/InitialPointBuilder.cpp \
-   $$PWD/SRC/reliability/analysis/telm/InitialStaticAnalysis.cpp \
-   $$PWD/SRC/reliability/analysis/telm/localMath.cpp \
-   $$PWD/SRC/reliability/analysis/telm/mersenne.cpp \
-   $$PWD/SRC/reliability/analysis/telm/mother.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewDiscretizedRandomProcessSeries.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewNewmarkSensitivityIntegrator.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewSearchWithStepSizeAndStepDirection.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewSensitivityAlgorithm.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewStandardLinearOscillatorAccelerationFilter.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewStaticSensitivityIntegrator.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NewWhitenoiseFilter.cpp \
-   $$PWD/SRC/reliability/analysis/telm/NonStatFirstPassageAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/OutCrossingResults.cpp \
-   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoeff.cpp \
-   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoefficientIter.cpp \
-   $$PWD/SRC/reliability/analysis/telm/rancombi.cpp \
-   $$PWD/SRC/reliability/analysis/telm/RandomProcess.cpp \
-   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulation.cpp \
-   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulatorResult.cpp \
-   $$PWD/SRC/reliability/analysis/telm/ranrotb.cpp \
-   $$PWD/SRC/reliability/analysis/telm/ranrotw.cpp \
-   $$PWD/SRC/reliability/analysis/telm/ReliabilityDirectIntegrationAnalysis.cpp \
-   $$PWD/SRC/reliability/analysis/telm/ReliabilityStaticAnalysis.cpp \
-   $$PWD/SRC/reliability/analysis/telm/SelectLoadInitialStaticAnalysis.cpp \
-   $$PWD/SRC/reliability/analysis/telm/SmoothConcrete02.cpp \
-   $$PWD/SRC/reliability/analysis/telm/StatFirstPassageAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/StaticAnalyzer.cpp \
-   $$PWD/SRC/reliability/analysis/telm/ThresholdIncInitialPointBuilder.cpp \
-   $$PWD/SRC/reliability/analysis/telm/TimePoints.cpp \
-   $$PWD/SRC/reliability/analysis/telm/UniformGenerator.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/Analyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/AnalyzerGradGEvaluator.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/CrossingRateAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/DynamciAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/FirstPassageAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/FOSeriesSimulation.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/GeneralRandGenerator.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/InitialPointBuilder.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/InitialStaticAnalysis.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/localMath.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/mersenne.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/mother.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewDiscretizedRandomProcessSeries.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewNewmarkSensitivityIntegrator.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewSearchWithStepSizeAndStepDirection.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewSensitivityAlgorithm.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewStandardLinearOscillatorAccelerationFilter.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewStaticSensitivityIntegrator.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NewWhitenoiseFilter.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/NonStatFirstPassageAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/OutCrossingResults.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoeff.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/PerformanceFunctionCoefficientIter.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/rancombi.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/RandomProcess.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulation.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/RandomVibrationSimulatorResult.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/ranrotb.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/ranrotw.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/ReliabilityDirectIntegrationAnalysis.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/ReliabilityStaticAnalysis.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/SelectLoadInitialStaticAnalysis.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/SmoothConcrete02.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/StatFirstPassageAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/StaticAnalyzer.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/ThresholdIncInitialPointBuilder.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/TimePoints.cpp \
+#   $$PWD/SRC/reliability/analysis/telm/UniformGenerator.cpp \
    $$PWD/SRC/reliability/analysis/transformation/AllIndependentTransformation.cpp \
    $$PWD/SRC/reliability/analysis/transformation/NatafProbabilityTransformation.cpp \
    $$PWD/SRC/reliability/analysis/transformation/ProbabilityTransformation.cpp \
