@@ -245,6 +245,8 @@ HEADERS += \
    $$PWD/SRC/analysis/integrator/NewmarkHSIncrLimit.h \
    $$PWD/SRC/analysis/integrator/NewmarkHSIncrReduct.h \
    $$PWD/SRC/analysis/integrator/ParkLMS3.h \
+   $$PWD/SRC/analysis/integrator/StagedNewmark.h \
+   $$PWD/SRC/analysis/integrator/StagedLoadControl.h \
    $$PWD/SRC/analysis/integrator/StaticIntegrator.h \
    $$PWD/SRC/analysis/integrator/TransientIntegrator.h \
    $$PWD/SRC/analysis/integrator/TRBDF2.h \
@@ -488,6 +490,7 @@ HEADERS += \
    $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn3d.h \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.h \
    $$PWD/SRC/element/pyMacro/PY_Macro2D.h \
+   $$PWD/SRC/element/RockingBC/RockingBC.h \
    $$PWD/SRC/element/shell/ASDShellQ4.h \
    $$PWD/SRC/element/shell/R3vectors.h \
    $$PWD/SRC/element/shell/ShellANDeS.h \
@@ -818,6 +821,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/snap/CloughHenry.h \
    $$PWD/SRC/material/uniaxial/snap/Pinching.h \
    $$PWD/SRC/material/uniaxial/snap/PinchingDamage.h \
+   $$PWD/SRC/material/uniaxial/ASD_SMA_3K.h \
    $$PWD/SRC/material/uniaxial/AxialSp.h \
    $$PWD/SRC/material/uniaxial/AxialSpHD.h \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.h \
@@ -837,6 +841,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/Concrete01.h \
    $$PWD/SRC/material/uniaxial/Concrete01A.h \
    $$PWD/SRC/material/uniaxial/Concrete01WithSITC.h \
+   $$PWD/SRC/material/uniaxial/Concrete02IS.h \
    $$PWD/SRC/material/uniaxial/Concrete02.h \
    $$PWD/SRC/material/uniaxial/Concrete02Thermal.h \
    $$PWD/SRC/material/uniaxial/Concrete04.h \
@@ -981,6 +986,7 @@ HEADERS += \
    $$PWD/SRC/recorder/PatternRecorder.h \
    $$PWD/SRC/recorder/Recorder.h \
    $$PWD/SRC/recorder/RemoveRecorder.h \
+   $$PWD/SRC/recorder/VTK_Recorder.h \
    $$PWD/SRC/renderer/Renderer.h \
    $$PWD/SRC/string/G3string.h \
    $$PWD/SRC/system_of_eqn/eigenSOE/EigenSOE.h \
@@ -1192,6 +1198,8 @@ SOURCES += \
    $$PWD/SRC/analysis/integrator/NewmarkHSIncrLimit.cpp \
    $$PWD/SRC/analysis/integrator/NewmarkHSIncrReduct.cpp \
    $$PWD/SRC/analysis/integrator/ParkLMS3.cpp \
+   $$PWD/SRC/analysis/integrator/StagedNewmark.cpp \
+   $$PWD/SRC/analysis/integrator/StagedLoadControl.cpp \
    $$PWD/SRC/analysis/integrator/StaticIntegrator.cpp \
    $$PWD/SRC/analysis/integrator/TransientIntegrator.cpp \
    $$PWD/SRC/analysis/integrator/TRBDF2.cpp \
@@ -1428,6 +1436,7 @@ SOURCES += \
    $$PWD/SRC/element/mvlem/SFI_MVLEM.cpp \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.cpp \
    $$PWD/SRC/element/pyMacro/PY_Macro2D.cpp \
+   $$PWD/SRC/element/RockingBC/RockingBC.cpp \
    $$PWD/SRC/element/shell/ASDShellQ4.cpp \
    $$PWD/SRC/element/shell/R3vectors.cpp \
    $$PWD/SRC/element/shell/ShellANDeS.cpp \
@@ -1758,6 +1767,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/snap/CloughHenry.cpp \
    $$PWD/SRC/material/uniaxial/snap/Pinching.cpp \
    $$PWD/SRC/material/uniaxial/snap/PinchingDamage.cpp \
+   $$PWD/SRC/material/uniaxial/ASD_SMA_3K.cpp \
    $$PWD/SRC/material/uniaxial/AxialSp.cpp \
    $$PWD/SRC/material/uniaxial/AxialSpHD.cpp \
    $$PWD/SRC/material/uniaxial/BackboneMaterial.cpp \
@@ -1777,6 +1787,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/Concrete01.cpp \
    $$PWD/SRC/material/uniaxial/Concrete01A.cpp \
    $$PWD/SRC/material/uniaxial/Concrete01WithSITC.cpp \
+   $$PWD/SRC/material/uniaxial/Concrete02IS.cpp \
    $$PWD/SRC/material/uniaxial/Concrete02.cpp \
    $$PWD/SRC/material/uniaxial/Concrete02Thermal.cpp \
    $$PWD/SRC/material/uniaxial/Concrete04.cpp \
@@ -1920,6 +1931,7 @@ SOURCES += \
    $$PWD/SRC/recorder/PatternRecorder.cpp \
    $$PWD/SRC/recorder/Recorder.cpp \
    $$PWD/SRC/recorder/RemoveRecorder.cpp \
+   $$PWD/SRC/recorder/VTK_Recorder.cpp \
    $$PWD/SRC/renderer/Renderer.cpp \
    $$PWD/SRC/string/G3string.cpp \
    $$PWD/SRC/system_of_eqn/eigenSOE/EigenSOE.cpp \

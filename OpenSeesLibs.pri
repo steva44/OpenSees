@@ -30,23 +30,23 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/ -lsuperlu
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/superlu/5.2.1_4/lib/ -lsuperlu
+LIBS += -L/usr/local/Cellar/superlu/5.2.2/lib/ -lsuperlu
 
 
-INCLUDEPATH += /usr/local/Cellar/superlu/5.2.1_4/include/superlu
-DEPENDPATH += /usr/local/Cellar/superlu/5.2.1_4/include/superlu
+INCLUDEPATH += /usr/local/Cellar/superlu/5.2.2/include
+DEPENDPATH += /usr/local/Cellar/superlu/5.2.2/include
 
-PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.1_4/lib/libsuperlu.a
+PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.2/lib/libsuperlu.a
 
 }
 else:unix: {
 
-LIBS += -L$$PWD/OpenSeesLibs/superlu/Unix/5.2.1/lib/ -lsuperlu
+LIBS += -L$$PWD/OpenSeesLibs/superlu/Unix/5.2.2/lib/ -lsuperlu
 
-INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/include/superlu
-DEPENDPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/include/superlu
+INCLUDEPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.2/include/superlu
+DEPENDPATH += $$PWD/OpenSeesLibs/superlu/Unix/5.2.2/include/superlu
 
-PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/Unix/5.2.1/lib/libsuperlu.a
+PRE_TARGETDEPS += $$PWD/OpenSeesLibs/superlu/Unix/5.2.2/lib/libsuperlu.a
 
 }
 
@@ -219,14 +219,14 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L/usr/local/Cellar/arpack/3.7.0_5/lib/ -larpack.2 -larpack
-INCLUDEPATH += /usr/local/Cellar/arpack/3.7.0_5/libexec/include
-DEPENDPATH += /usr/local/Cellar/arpack/3.7.0_5/libexec/include
+LIBS += -L/usr/local/Cellar/arpack/3.8.0/lib/ -larpack.2 -larpack
+INCLUDEPATH += /usr/local/Cellar/arpack/3.8.0/libexec/include
+DEPENDPATH += /usr/local/Cellar/arpack/3.8.0/libexec/include
 }
 else:unix: {
-LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/lib/ -larpack
-INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/include
-DEPENDPATH  += $$PWD/OpenSeesLibs/arpack/Unix/3.7.0_2/include
+LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.8.0/lib/ -larpack
+INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Unix/3.8.0/include
+DEPENDPATH  += $$PWD/OpenSeesLibs/arpack/Unix/3.8.0/include
 }
 
 
