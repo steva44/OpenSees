@@ -250,8 +250,10 @@
 #include "UWelements/BeamEndContact3Dp.h"
 #include "UWelements/QuadBeamEmbedContact.h"
 
+#ifdef _USINGFORTRAN
 #include "PML/PML2D.h"
 #include "PML/PML3D.h"
+#endif
 
 #include "UP-ucsd/Nine_Four_Node_QuadUP.h"
 #include "UP-ucsd/BrickUP.h"
@@ -742,11 +744,13 @@ FEM_ObjectBrokerAllClasses::getNewElement(int classTag)
     case ELE_TAG_SSPbrickUP:
       return new SSPbrickUP();
 
+#ifdef _USINGFORTRAN
 	case ELE_TAG_PML2D:
 		return new PML2D();
 
 	case ELE_TAG_PML3D:
 		return new PML3D();
+#endif
       
     case ELE_TAG_BeamContact2D:
       return new BeamContact2D();

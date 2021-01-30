@@ -49,62 +49,65 @@
 #define OPS_SECTION_TYPE 7
 
 struct modState {
-    double time;
-    double dt;
+  double time;
+  double dt;
 };
 
 typedef struct modState modelState;
 
-typedef void (*matFunct)(struct matObject*, modelState*, double* strain, double* tang, double* stress, int* isw, int* error);
+typedef void (*matFunct)(struct matObject *, modelState *,double *strain, double *tang, double *stress, int *isw, int *error);
 
 struct matObject {
-    int tag;
-    int matType;
-    int nParam;
-    int nState;
-    double* theParam;
-    double* cState;
-    double* tState;
-    matFunct matFunctPtr;
-    void* matObjectPtr;
+  int tag;
+  int matType;
+  int nParam;
+  int nState;
+  double *theParam;
+  double *cState;
+  double *tState;
+  matFunct matFunctPtr;
+  void *matObjectPtr;
 };
 
 typedef struct matObject matObj;
 
-typedef void (*limCrvFunct)(struct limCrvObject*, modelState*, double* strain, double* tang, double* stress, int* isw, int* error);
+
+typedef void (*limCrvFunct)(struct limCrvObject *, modelState *,double *strain, double *tang, double *stress, int *isw, int *error);
 
 struct limCrvObject {
-    int tag;
-    int nParam;
-    int nState;
-    double* theParam;
-    double* cState;
-    double* tState;
-    limCrvFunct limCrvFunctPtr;
-    void* limCrvObjectPtr;
+  int tag;
+  int nParam;
+  int nState;
+  double *theParam;
+  double *cState;
+  double *tState;
+  limCrvFunct limCrvFunctPtr;
+  void *limCrvObjectPtr;
 };
 
 typedef struct limCrvObject limCrvObj;
 
-typedef void (*eleFunct)(struct eleObject*, modelState*, double* tang, double* resid, int* isw, int* error);
+
+typedef void (*eleFunct)(struct eleObject *, modelState *, double *tang, double *resid, int *isw, int *error);
 
 struct eleObject {
-    int tag;
-    int nNode;
-    int nDOF;
-    int nParam;
-    int nState;
-    int nMat;
-    int* node;
-    double* param;
-    double* cState;
-    double* tState;
-    matObj** mats;
-    eleFunct eleFunctPtr;
+  int tag;
+  int nNode;
+  int nDOF;
+  int nParam;
+  int nState;
+  int nMat;
+  int *node;
+  double *param;
+  double *cState;
+  double *tState;
+  matObj **mats;
+  eleFunct eleFunctPtr;
 };
 
 typedef struct eleObject eleObj;
 
+#ifdef __cplusplus
 class AnalysisModel;
 class EquiSolnAlgo;
 class ConstraintHandler;
@@ -117,6 +120,7 @@ class VariableTimeStepDirectIntegrationAnalysis;
 class StaticIntegrator;
 class TransientIntegrator;
 class ConvergenceTest;
+#endif
 
 #define OPS_Error ops_error_
 #define OPS_GetIntInput ops_getintinput_
@@ -166,18 +170,14 @@ class ConvergenceTest;
 #define OPS_builtModel ops_builtmodel_
 #define OPS_GetDomain ops_getdomain_
 
-#include <OPS_Globals.h>
-#include <tcl.h>
-//#include "TclModelBuilder.h"
-
 #ifdef __cplusplus
 extern "C" int         OPS_GetNDM();
 extern "C" int         OPS_GetNDF();
 extern "C" int         OPS_Error(char* errorMessage, int length);
 extern "C" int         OPS_GetNumRemainingInputArgs();
 extern "C" int         OPS_ResetCurrentInputArg(int cArg);
-//extern "C" int       OPS_ResetInput(ClientData clientData, Tcl_Interp * interp, int cArg, int mArg, TCL_Char * *argv, Domain * domain, TclModelBuilder * builder);
-extern "C" int         OPS_ResetInputNoBuilder(ClientData clientData, Tcl_Interp * interp, int cArg, int mArg, TCL_Char * *argv, Domain * domain);
+// extern "C" int       OPS_ResetInput(ClientData clientData, Tcl_Interp * interp, int cArg, int mArg, TCL_Char * *argv, Domain * domain, TclModelBuilder * builder);
+// extern "C" int       OPS_ResetInputNoBuilder(ClientData clientData, Tcl_Interp * interp, int cArg, int mArg, TCL_Char * *argv, Domain * domain);
 extern "C" int         OPS_GetIntInput(int* numData, int* data);
 extern "C" int         OPS_SetIntOutput(int* numData, int* data, bool scalar);
 extern "C" int         OPS_GetDoubleInput(int* numData, double* data);
@@ -250,48 +250,48 @@ int OPS_numIter();
 int     OPS_GetNDF();
 int     OPS_GetNDM();
 
-int     OPS_Error(char*, int length);
-int     OPS_GetIntInput(int* numData, int* data);
-int     OPS_GetDoubleInput(int* numData, double* data);
-int     OPS_GetString(char* cArray, int sizeArray);
+int     OPS_Error(char *, int length);
+int     OPS_GetIntInput(int *numData, int*data);
+int     OPS_GetDoubleInput(int *numData, double *data);
+int     OPS_GetString(char *cArray, int sizeArray);
 
 
-matObj* OPS_GetMaterial(int* matTag, int* matType);
-void    OPS_GetMaterialPtr(int*, matObj*);
-eleObj* OPS_GetElement(int*);
-matObj* OPS_GetMaterialType(char* type, int sizeType);
-eleObj* OPS_GetElementType(char*, int);
-int     OPS_AllocateElement(eleObj*, int* matTags, int* maType);
-int     OPS_AllocateMaterial(matObj*);
+matObj  *OPS_GetMaterial(int *matTag, int *matType);
+void    OPS_GetMaterialPtr(int *, matObj *);
+eleObj  *OPS_GetElement(int *);
+matObj  *OPS_GetMaterialType(char *type, int sizeType);
+eleObj  *OPS_GetElementType(char *, int);
+int     OPS_AllocateElement(eleObj *, int *matTags, int *maType);
+int     OPS_AllocateMaterial(matObj *);
 
-limCrv* OPS_GetLimitCurveType(char* type, int sizeType);//**MRL
-int     OPS_AllocateLimitCurve(limCrvObj*);//**MRL
+limCrvObj	*OPS_GetLimitCurveType(char *type, int sizeType);//**MRL
+int     OPS_AllocateLimitCurve(limCrvObj *);//**MRL
 
-int    OPS_InvokeMaterial(struct eleObj*, int*, modelState*, double*, double*, double*, int*);
-int    OPS_InvokeMaterialDirectly(matObj**, modelState*, double*, double*, double*, int*);
-int    OPS_InvokeMaterialDirectly2(matObj*, modelState*, double*, double*, double*, int*);
+int    OPS_InvokeMaterial(struct eleObj *, int *,modelState *, double *, double *, double *, int *);
+int    OPS_InvokeMaterialDirectly(matObj **, modelState *, double *, double *, double *, int *);
+int    OPS_InvokeMaterialDirectly2(matObj *, modelState *, double *, double *, double *, int *);
 
-int    OPS_GetNodeCrd(int* nodeTag, int* sizeData, double* data);
-int    OPS_GetNodeDisp(int* nodeTag, int* sizeData, double* data);
-int    OPS_GetNodeVel(int* nodeTag, int* sizeData, double* data);
-int    OPS_GetNodeAcc(int* nodeTag, int* sizeData, double* data);
-int    OPS_GetNodeIncrDisp(int* nodeTag, int* sizeData, double* data);
-int    OPS_GetNodeIncrDeltaDisp(int* nodeTag, int* sizeData, double* data);
+int    OPS_GetNodeCrd(int *nodeTag, int *sizeData, double *data);
+int    OPS_GetNodeDisp(int *nodeTag, int *sizeData, double *data);
+int    OPS_GetNodeVel(int *nodeTag, int *sizeData, double *data);
+int    OPS_GetNodeAcc(int *nodeTag, int *sizeData, double *data);
+int    OPS_GetNodeIncrDisp(int *nodeTag, int *sizeData, double *data);
+int    OPS_GetNodeIncrDeltaDisp(int *nodeTag, int *sizeData, double *data);
 
-AnalysisModel** OPS_GetAnalysisModel(void);
-EquiSolnAlgo** OPS_GetAlgorithm(void);
-ConstraintHandler** OPS_GetHandler(void);
-DOF_Numberer** OPS_GetNumberer(void);
-LinearSOE** OPS_GetSOE(void);
-EigenSOE** OPS_GetEigenSOE(void);
-StaticAnalysis** OPS_GetStaticAnalysis(void);
-DirectIntegrationAnalysis** OPS_GetTransientAnalysis(void);
-VariableTimeStepDirectIntegrationAnalysis** OPS_GetVariableTimeStepTransientAnalysis(void);
-int* OPS_GetNumEigen(void);
-StaticIntegrator** OPS_GetStaticIntegrator(void);
-TransientIntegrator** OPS_GetTransientIntegrator(void);
-ConvergenceTest** OPS_GetTest(void);
-bool* OPS_builtModel(void);
+//AnalysisModel		**OPS_GetAnalysisModel(void);
+//EquiSolnAlgo		**OPS_GetAlgorithm(void);
+//ConstraintHandler **OPS_GetHandler(void);
+//DOF_Numberer		**OPS_GetNumberer(void);
+//LinearSOE				**OPS_GetSOE(void);
+//EigenSOE				**OPS_GetEigenSOE(void);
+//StaticAnalysis	**OPS_GetStaticAnalysis(void);
+//DirectIntegrationAnalysis	**OPS_GetTransientAnalysis(void);
+//VariableTimeStepDirectIntegrationAnalysis **OPS_GetVariableTimeStepTransientAnalysis(void);
+//int							*OPS_GetNumEigen(void);
+//StaticIntegrator	**OPS_GetStaticIntegrator(void);
+//TransientIntegrator	**OPS_GetTransientIntegrator(void);
+//ConvergenceTest		**OPS_GetTest(void);
+//bool						*OPS_builtModel(void);
 
 #endif
 

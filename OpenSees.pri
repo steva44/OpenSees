@@ -65,6 +65,7 @@ INCLUDEPATH += \
     $$PWD/SRC/element/mixedBeamColumn \
     $$PWD/SRC/element/nonlinearBeamColumn/matrixutil \
     $$PWD/SRC/element/pyMacro \
+    $$PWD/SRC/element/PML \
     $$PWD/SRC/element/shell \
     $$PWD/SRC/element/surfaceLoad \
     $$PWD/SRC/element/tetrahedron \
@@ -177,6 +178,7 @@ HEADERS += \
    $$PWD/SRC/analysis/analysis/DomainDecompositionAnalysis.h \
    $$PWD/SRC/analysis/analysis/DomainUser.h \
    $$PWD/SRC/analysis/analysis/EigenAnalysis.h \
+   $$PWD/SRC/analysis/analysis/ResponseSpectrumAnalysis.h \
    $$PWD/SRC/analysis/analysis/StaticAnalysis.h \
    $$PWD/SRC/analysis/analysis/StaticDomainDecompositionAnalysis.h \
    $$PWD/SRC/analysis/analysis/SubdomainAnalysis.h \
@@ -303,6 +305,7 @@ HEADERS += \
    $$PWD/SRC/domain/domain/single/SingleDomPC_Iter.h \
    $$PWD/SRC/domain/domain/single/SingleDomSP_Iter.h \
    $$PWD/SRC/domain/domain/Domain.h \
+   $$PWD/SRC/domain/domain/DomainModalProperties.h \
    $$PWD/SRC/domain/domain/ElementIter.h \
    $$PWD/SRC/domain/domain/LoadCaseIter.h \
    $$PWD/SRC/domain/domain/MP_ConstraintIter.h \
@@ -1131,6 +1134,7 @@ SOURCES += \
    $$PWD/SRC/analysis/analysis/DomainDecompositionAnalysis.cpp \
    $$PWD/SRC/analysis/analysis/DomainUser.cpp \
    $$PWD/SRC/analysis/analysis/EigenAnalysis.cpp \
+   $$PWD/SRC/analysis/analysis/ResponseSpectrumAnalysis.cpp \
    $$PWD/SRC/analysis/analysis/StaticAnalysis.cpp \
    $$PWD/SRC/analysis/analysis/StaticDomainDecompositionAnalysis.cpp \
    $$PWD/SRC/analysis/analysis/SubstructuringAnalysis.cpp \
@@ -1255,6 +1259,7 @@ SOURCES += \
    $$PWD/SRC/domain/domain/single/SingleDomPC_Iter.cpp \
    $$PWD/SRC/domain/domain/single/SingleDomSP_Iter.cpp \
    $$PWD/SRC/domain/domain/Domain.cpp \
+   $$PWD/SRC/domain/domain/DomainModalProperties.cpp \
    $$PWD/SRC/domain/groundMotion/GroundMotion.cpp \
    $$PWD/SRC/domain/groundMotion/GroundMotionRecord.cpp \
    $$PWD/SRC/domain/groundMotion/InterpolatedGroundMotion.cpp \
@@ -2155,6 +2160,8 @@ HEADERS += \
    $$PWD/SRC/element/feap/fElement.h \
    $$PWD/SRC/element/feap/fElmt02.h \
    #$$PWD/SRC/element/feap/fElmt05.h \
+   $$PWD/SRC/element/PML/PML2D.h \
+   $$PWD/SRC/element/PML/PML3D.h \
    $$PWD/SRC/material/nD/FeapMaterial.h \
    $$PWD/SRC/material/nD/feap/counts.h \
    $$PWD/SRC/material/nD/feap/FeapMaterial01.h \
@@ -2180,6 +2187,8 @@ SOURCES += \
    $$PWD/SRC/element/feap/fElmt02.cpp \
    #$$PWD/SRC/element/feap/fElmt05.cpp \
    $$PWD/SRC/element/feap/TclFeapElementCommand.cpp \
+   $$PWD/SRC/element/PML/PML2D.cpp \
+   $$PWD/SRC/element/PML/PML3D.cpp \
    $$PWD/SRC/material/nD/FeapMaterial.cpp \
    $$PWD/SRC/material/nD/feap/FeapMaterial01.cpp \
    $$PWD/SRC/material/nD/feap/FeapMaterial02.cpp \
