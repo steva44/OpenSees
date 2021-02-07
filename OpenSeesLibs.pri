@@ -30,13 +30,13 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/OpenSeesLibs/superlu/5.2.1/lib/debug/ -lsuperlu
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/superlu/5.2.2/lib/ -lsuperlu
+LIBS += -L/Users/steve/Desktop/C++Libraries/SuperLU/Install/lib/ -lsuperlu
 
 
-INCLUDEPATH += /usr/local/Cellar/superlu/5.2.2/include
-DEPENDPATH += /usr/local/Cellar/superlu/5.2.2/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuperLU/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuperLU/Install/include
 
-PRE_TARGETDEPS += /usr/local/Cellar/superlu/5.2.2/lib/libsuperlu.a
+PRE_TARGETDEPS += /Users/steve/Desktop/C++Libraries/SuperLU/Install/lib/libsuperlu.a
 
 }
 else:unix: {
@@ -62,12 +62,12 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx:{
 
-LIBS += -L/usr/local/Cellar/superlu_mt/3.0/lib/ -lsuperlu_mt_PTHREAD
+LIBS += -L/Users/steve/Desktop/C++Libraries/SuperLUMT/Install/lib/ -lsuperlu_mt_PTHREAD
 
-INCLUDEPATH += /usr/local/Cellar/superlu_mt/3.0/include
-DEPENDPATH += /usr/local/Cellar/superlu_mt/3.0/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
 
-PRE_TARGETDEPS += /usr/local/Cellar/superlu_mt/3.0/lib/libsuperlu_mt_PTHREAD.a
+PRE_TARGETDEPS += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/lib/libsuperlu_mt_PTHREAD.a
 
 }
 else:unix:{
@@ -134,10 +134,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/parmetis/4.0.3_5/lib/ -lparmetis
+LIBS += -L/Users/steve/Desktop/C++Libraries/parmetis-4.0.3/Install/lib/ -lparmetis
 
-INCLUDEPATH += /usr/local/Cellar/parmetis/4.0.3_5/include
-DEPENDPATH += /usr/local/Cellar/parmetis/4.0.3_5/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/parmetis-4.0.3/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/parmetis-4.0.3/Install/include
 
 }
 else:unix:{
@@ -167,14 +167,16 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L/usr/local/Cellar/metis/5.1.0/lib/ -lmetis
-INCLUDEPATH += /usr/local/Cellar/metis/5.1.0/include
-DEPENDPATH += /usr/local/Cellar/metis/5.1.0/include
+
+LIBS += -L/Users/steve/Desktop/C++Libraries/metis-5.1.0/build/lib/ -lmetis
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/metis-5.1.0/build/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/metis-5.1.0/build/include
+
 }
 else:unix: {
-LIBS += -L$$PWD/OpenSeesLibs/metis/Unix/5.1.0/lib/ -lmetis
-INCLUDEPATH += $$PWD/OpenSeesLibs/Unix/metis/5.1.0/include
-DEPENDPATH += $$PWD/OpenSeesLibs/Unix/metis/5.1.0/include
+LIBS += -L
+INCLUDEPATH +=
+DEPENDPATH +=
 }
 
 
@@ -219,14 +221,14 @@ SOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
-LIBS += -L/usr/local/Cellar/arpack/3.8.0/lib/ -larpack.2 -larpack
-INCLUDEPATH += /usr/local/Cellar/arpack/3.8.0/libexec/include
-DEPENDPATH += /usr/local/Cellar/arpack/3.8.0/libexec/include
+LIBS += -L/Users/steve/Desktop/C++Libraries/Arpack/Install/lib/ -larpack.2 -larpack
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/Arpack/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/Arpack/Install/include
 }
 else:unix: {
-LIBS += -L$$PWD/OpenSeesLibs/arpack/Unix/3.8.0/lib/ -larpack
-INCLUDEPATH += $$PWD/OpenSeesLibs/arpack/Unix/3.8.0/include
-DEPENDPATH  += $$PWD/OpenSeesLibs/arpack/Unix/3.8.0/include
+LIBS += -L -larpack
+INCLUDEPATH +=
+DEPENDPATH  +=
 }
 
 
@@ -334,11 +336,11 @@ LIBS += -L/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/
 INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
-#Need to include the library below so that we do not get a blacs_gridexit error in PyCharm. It looks like this function is not included in the accelerate framework
-LIBS += -L/usr/local/Cellar/scalapack/2.1.0_2/lib/ -lscalapack
+#Need to include the library below so that we do not get a blacs_gridexit error in Python. It looks like this function is not included in the accelerate framework
+LIBS += -L/Users/steve/Desktop/C++Libraries/scalapack-master/Install/lib/ -lscalapack
 
-INCLUDEPATH += /usr/local/Cellar/scalapack/2.1.0_2/
-DEPENDPATH += /usr/local/Cellar/scalapack/2.1.0_2/
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/scalapack-master/
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/scalapack-master/
 
 }
 else:unix: {
@@ -445,16 +447,16 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/libs/Cellar/petsc/Mac/3.11.3_2/lib/ -lpetsc.3.9.3
-INCLUDEPATH += /usr/libs/Cellar/petsc/Mac/3.11.3_2/include
-DEPENDPATH += /usr/libs/Cellar/petsc/Mac/3.11.3_2/include
+LIBS +=
+INCLUDEPATH +=
+DEPENDPATH +=
 
 }
 else:unix: {
 
-LIBS += -L$$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/lib/ -lpetsc.3.9.3
-INCLUDEPATH += $$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/include
-DEPENDPATH += $$PWD/OpenSeesLibs/petsc/Unix/3.10.3_2/include
+LIBS +=
+INCLUDEPATH +=
+DEPENDPATH +=
 
 }
 
@@ -539,11 +541,10 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/open-mpi/4.0.5/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
-INCLUDEPATH += /usr/local/Cellar/open-mpi/4.0.5/include
-DEPENDPATH += /usr/local/Cellar/open-mpi/4.0.5/include
+LIBS += -L/Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/include
 
-#PRE_TARGETDEPS += /usr/local/Cellar/open-mpi/4.0.3/lib/libmpi_usempi_ignore_tkr.a
 }
 else:unix: {
 
@@ -602,19 +603,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/usr/local/Cellar/suite-sparse/5.8.1/lib/ -lumfpack -lcxsparse
-INCLUDEPATH += /usr/local/Cellar/suite-sparse/5.8.1/include
-DEPENDPATH += /usr/local/Cellar/suite-sparse/5.8.1/include
-
-#Add umfpack dependency openblas
-#LIBS += -L/usr/local/Cellar/openblas/0.3.7/lib/ -lopenblas
-#INCLUDEPATH += /usr/local/Cellar/openblas/0.3.7/include
-#DEPENDPATH += /usr/local/Cellar/openblas/0.3.7/include
-
-#Add umfpack dependency gfortran
-#LIBS += -L/usr/local/Cellar/gcc/9.2.0_1/lib/gcc/9/ -lgfortran
-#DEPENDPATH += /usr/local/Cellar/gcc/9.2.0_1/lib/gcc/9/
-
+LIBS += -L/Users/steve/Desktop/C++Libraries/SuiteSparse/Install/lib/ -lumfpack -lcxsparse
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuiteSparse/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuiteSparse/Install/include
 
 }
 else:unix: {
@@ -628,19 +619,19 @@ DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
 }
 
 
-win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/release/ -lomp
-else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/debug/ -lomp
-else:unix: LIBS += -L/usr/local/Cellar/libomp/11.0.0/lib/ -lomp
+win32:CONFIG(release, debug|release): LIBS += -L -lomp
+else:win32:CONFIG(debug, debug|release): LIBS += -L -lomp
+else:unix: LIBS += -L/Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/lib/ -lomp
 
-INCLUDEPATH += /usr/local/Cellar/libomp/11.0.0/include
-DEPENDPATH += /usr/local/Cellar/libomp/11.0.0/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/include
 
-win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/release/ -lgfortran.5
-else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/debug/ -lgfortran.5
-else:unix: LIBS += -L/usr/local/Cellar/gcc/10.2.0/lib/gcc/10/ -lgfortran.5
+win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/release/ -lgfortran.5
+else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/debug/ -lgfortran.5
+else:unix: LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/ -lgfortran.5
 
-INCLUDEPATH += /usr/local/Cellar/gcc/10.2.0/lib/gcc/10
-DEPENDPATH += /usr/local/Cellar/gcc/10.2.0/lib/gcc/10
+INCLUDEPATH += /usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10
+DEPENDPATH += /usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10
 
 
 #contains (DEFINES, _USINGFORTRAN){

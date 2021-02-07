@@ -18,17 +18,6 @@ CONFIG += plugin
 CONFIG -= app_bundle
 CONFIG -= qt
 
-#GCC not tested yet
-#QMAKE_CC = gcc
-#QMAKE_CXX = g++
-
-QMAKE_CFLAGS += -fPIC
-QMAKE_CXXFLAGS += -fPIC
-
-QMAKE_CFLAGS_SHLIB += -fPIC
-QMAKE_CXXFLAGS_SHLIB += -fPIC
-
-
 include(./OpenSees.pri)
 
 include(./OpenSeesLibs.pri)
@@ -48,13 +37,23 @@ include(./OpenSeesPy.pri)
 #message( $$PYTHON_CFLAGS)
 
 #Change these variables to match the location of your Python installation
-macx: {
+#macx: {
 
-LIBS += -L/Library/Frameworks/Python.framework/Versions/3.8/lib/ -lpython3.8
+#LIBS += -L/Library/Frameworks/Python.framework/Versions/3.8/lib/ -lpython3.8
 
 INCLUDEPATH += /Library/Frameworks/Python.framework/Versions/3.8/include/python3.8  \
                /Library/Frameworks/Python.framework/Versions/3.8/include/python3.8/internal
 
-}
+#}
 
+#GCC not tested yet
+#QMAKE_CC = gcc
+#QMAKE_CXX = g++
 
+QMAKE_CFLAGS -= -O2
+QMAKE_CXXFLAGS -= -O2
+
+QMAKE_CFLAGS += -fPIC -O3 -undefined dynamic_lookup
+QMAKE_CXXFLAGS += -fPIC -O3 -undefined dynamic_lookup
+
+QMAKE_LFLAGS += -Wl,-undefined,dynamic_lookup
