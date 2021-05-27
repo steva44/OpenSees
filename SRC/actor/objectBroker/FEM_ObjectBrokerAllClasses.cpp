@@ -96,6 +96,7 @@
 #include "Bond_SP01.h"
 #include "SimpleFractureMaterial.h"
 #include "ConfinedConcrete01.h"
+#include <HystereticPoly.h>					// Salvatore Sessa 14-Jan-2021
 
 //PY springs: RWBoulanger and BJeremic
 #include "PY/PySimple1.h"
@@ -195,6 +196,7 @@
 #include "UWmaterials/PM4Sand.h"
 #include "UWmaterials/PM4Silt.h"
 #include "UWmaterials/InitialStateAnalysisWrapper.h"
+#include "stressDensityModel/stressDensity.h"
 #include "InitStressNDMaterial.h"
 
 // Fibers
@@ -276,6 +278,11 @@
 #include "twoNodeLink/LinearElasticSpring.h"
 #include "twoNodeLink/Inerter.h"
 
+#include "mvlem/MVLEM.h"		// Kristijan Kolozvari
+#include "mvlem/SFI_MVLEM.h"	// Kristijan Kolozvari
+#include "mvlem/MVLEM_3D.h"		// Kristijan Kolozvari
+#include "mvlem/SFI_MVLEM_3D.h"		// Kristijan Kolozvari
+
 #include "elastomericBearing/ElastomericBearingBoucWen2d.h"
 #include "elastomericBearing/ElastomericBearingBoucWen3d.h"
 #include "elastomericBearing/ElastomericBearingPlasticity2d.h"
@@ -343,7 +350,7 @@
 #include "EnvelopeNodeRecorder.h"
 #include "EnvelopeElementRecorder.h"
 #include "DriftRecorder.h"
-#include "MPCORecorder.h"
+//#include "MPCORecorder.h"
 #include "VTK_Recorder.h"
 #include "GmshRecorder.h"
 
@@ -799,6 +806,18 @@ FEM_ObjectBrokerAllClasses::getNewElement(int classTag)
 
     case ELE_TAG_Inerter:
         return new Inerter();
+
+	case ELE_TAG_MVLEM:				// Kristijan Kolozvari
+		return new MVLEM();	// Kristijan Kolozvari
+
+	case ELE_TAG_SFI_MVLEM:			// Kristijan Kolozvari
+		return new SFI_MVLEM();	// Kristijan Kolozvari
+
+	case ELE_TAG_MVLEM_3D:		// Kristijan Kolozvari
+		return new MVLEM_3D();	// Kristijan Kolozvari
+
+	case ELE_TAG_SFI_MVLEM_3D:		// Kristijan Kolozvari
+		return new SFI_MVLEM_3D();	// Kristijan Kolozvari
 
     case ELE_TAG_BBarFourNodeQuadUP:
       return new BBarFourNodeQuadUP();			
@@ -1290,6 +1309,9 @@ FEM_ObjectBrokerAllClasses::getNewUniaxialMaterial(int classTag)
 
         case MAT_TAG_ConfinedConcrete01:
             return new ConfinedConcrete01();
+		    
+	case MAT_TAG_HystereticPoly:			// Salvatore Sessa
+	    return new HystereticPoly();
 
 
 	default:
@@ -1496,6 +1518,9 @@ FEM_ObjectBrokerAllClasses::getNewNDMaterial(int classTag)
 
   case ND_TAG_InitialStateAnalysisWrapper:
       return new InitialStateAnalysisWrapper(); 
+
+  case ND_TAG_stressDensity:
+      return new stressDensity();
 
   case ND_TAG_CycLiqCP3D:
       return new CycLiqCP3D(); 

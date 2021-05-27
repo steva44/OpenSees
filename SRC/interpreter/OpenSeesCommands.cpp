@@ -2028,22 +2028,22 @@ int OPS_printB()
     }
     }
     if (theSOE != 0) {
-    if (theStaticIntegrator != 0) {
-        theStaticIntegrator->formTangent();
-    } else if (theTransientIntegrator != 0) {
-        theTransientIntegrator->formTangent(0);
-    }
+	if (theStaticIntegrator != 0) {
+	    theStaticIntegrator->formUnbalance();
+	} else if (theTransientIntegrator != 0) {
+	    theTransientIntegrator->formUnbalance();
+	}
 
-    Vector &b = const_cast<Vector&>(theSOE->getB());
-    if (ret) {
-        int size = b.Size();
-        if (size > 0) {
-        double &ptr = b(0);
-        if (OPS_SetDoubleOutput(&size, &ptr, false) < 0) {
-            opserr << "WARNING: printb - failed to set output\n";
-            return -1;
-        }
-        } else {
+	Vector &b = const_cast<Vector&>(theSOE->getB());
+	if (ret) {
+	    int size = b.Size();
+	    if (size > 0) {
+		double &ptr = b(0);
+		if (OPS_SetDoubleOutput(&size, &ptr, false) < 0) {
+		    opserr << "WARNING: printb - failed to set output\n";
+		    return -1;
+		}
+	    } else {
             size = 0;
             double *ptr2 = 0;
             if (OPS_SetDoubleOutput(&size, ptr2, false) < 0) {
