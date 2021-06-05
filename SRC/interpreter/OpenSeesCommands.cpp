@@ -964,12 +964,14 @@ OpenSeesCommands::wipe()
     // wipe CyclicModel
     OPS_clearAllCyclicModel();
 
+#ifdef _RELIABILITY
     if (reliability != 0) {
       ReliabilityDomain* theReliabilityDomain = reliability->getDomain();
       if (theReliabilityDomain != 0) {
 	//theReliabilityDomain->clearAll();
       }
     }
+#endif
 }
 
 void
@@ -1957,12 +1959,14 @@ int OPS_printA()
         theTransientIntegrator->formTangent(0);
     }
 
+#ifdef _PFEM
     PFEMLinSOE* pfemsoe = dynamic_cast<PFEMLinSOE*>(theSOE);
     if (pfemsoe != 0) {
         pfemsoe->saveK(*output);
         outputFile.close();
         return 0;
     }
+#endif
 
     Matrix *A = const_cast<Matrix*>(theSOE->getA());
     if (A != 0) {

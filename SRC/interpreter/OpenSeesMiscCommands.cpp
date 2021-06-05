@@ -58,7 +58,7 @@
 
 #ifdef _PARALLEL_INTERPRETERS
 #include <mpi.h>
-#include <metis.h>
+#include <include/metis.h> // SG - conflict with local metis.h
 #endif
 
 #ifdef _OPENMP

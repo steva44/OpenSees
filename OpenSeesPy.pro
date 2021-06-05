@@ -46,14 +46,32 @@ INCLUDEPATH += /Library/Frameworks/Python.framework/Versions/3.8/include/python3
 
 #}
 
-#GCC not tested yet
-#QMAKE_CC = gcc
-#QMAKE_CXX = g++
+# MPI Settings
+contains (DEFINES, _WITHMPI){
 
-QMAKE_CFLAGS -= -O2
-QMAKE_CXXFLAGS -= -O2
+QMAKE_CXX = mpicxx
+QMAKE_CXX_RELEASE = $$QMAKE_CXX
+QMAKE_CXX_DEBUG = $$QMAKE_CXX
+QMAKE_LINK = $$QMAKE_CXX
+QMAKE_CC = mpicc
 
-QMAKE_CFLAGS += -fPIC -O3 -undefined dynamic_lookup
-QMAKE_CXXFLAGS += -fPIC -O3 -undefined dynamic_lookup
+QMAKE_CFLAGS += $$system(mpicc --showme:compile)
+QMAKE_LFLAGS += $$system(mpicxx --showme:link)
+QMAKE_CXXFLAGS += $$system(mpicxx --showme:compile) -DMPICH_IGNORE_CXX_SEEK
+QMAKE_CXXFLAGS_RELEASE += $$system(mpicxx --showme:compile) -DMPICH_IGNORE_CXX_SEEK
+
+}
+
+
+QMAKE_LFLAGS_RELEASE -= -O1
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += -O3
+
+CONFIG(release, debug|release) {
+ CONFIG += optimize_full
+}
+
+QMAKE_CFLAGS += -fPIC
+QMAKE_CXXFLAGS += -fPIC #-Xpreprocessor -fopenmp -undefined dynamic_lookup
 
 QMAKE_LFLAGS += -Wl,-undefined,dynamic_lookup

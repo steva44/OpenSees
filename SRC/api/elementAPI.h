@@ -170,9 +170,9 @@ class ConvergenceTest;
 #define OPS_builtModel ops_builtmodel_
 #define OPS_GetDomain ops_getdomain_
 
-#include <OPS_Globals.h>
+// #include <OPS_Globals.h>
 // #include <tcl.h>
-//#include "TclModelBuilder.h"
+// #include "TclModelBuilder.h"
 
 #ifdef __cplusplus
 extern "C" int         OPS_GetNDM();

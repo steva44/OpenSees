@@ -196,7 +196,6 @@
 #include "UWmaterials/PM4Sand.h"
 #include "UWmaterials/PM4Silt.h"
 #include "UWmaterials/InitialStateAnalysisWrapper.h"
-#include "stressDensityModel/stressDensity.h"
 #include "InitStressNDMaterial.h"
 
 // Fibers
@@ -1518,9 +1517,6 @@ FEM_ObjectBrokerAllClasses::getNewNDMaterial(int classTag)
 
   case ND_TAG_InitialStateAnalysisWrapper:
       return new InitialStateAnalysisWrapper(); 
-
-  case ND_TAG_stressDensity:
-      return new stressDensity();
 
   case ND_TAG_CycLiqCP3D:
       return new CycLiqCP3D(); 

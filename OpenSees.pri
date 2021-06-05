@@ -66,6 +66,7 @@ INCLUDEPATH += \
     $$PWD/SRC/element/nonlinearBeamColumn/matrixutil \
     $$PWD/SRC/element/pyMacro \
     $$PWD/SRC/element/PML \
+    $$PWD/SRC/element/RockingBC \
     $$PWD/SRC/element/shell \
     $$PWD/SRC/element/surfaceLoad \
     $$PWD/SRC/element/tetrahedron \
@@ -276,6 +277,7 @@ HEADERS += \
    $$PWD/SRC/coordTransformation/CorotCrdTransf2d.h \
    $$PWD/SRC/coordTransformation/CorotCrdTransf3d.h \
    $$PWD/SRC/coordTransformation/CorotCrdTransfWarping2d.h \
+   $$PWD/SRC/coordTransformation/CorotCrdTransfWarping3d.h \
    $$PWD/SRC/coordTransformation/CrdTransf.h \
    $$PWD/SRC/coordTransformation/LinearCrdTransf2d.h \
    $$PWD/SRC/coordTransformation/LinearCrdTransf3d.h \
@@ -398,11 +400,13 @@ HEADERS += \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumn3dThermal.h \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumn3dWithSensitivity.h \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumnNL2d.h \
+   $$PWD/SRC/element/dispBeamColumn/DispBeamColumnWarping3d.h \
    $$PWD/SRC/element/dispBeamColumnInt/DispBeamColumn2dInt.h \
    $$PWD/SRC/element/dispBeamColumnInt/FiberSection2dInt.h \
    $$PWD/SRC/element/dispBeamColumnInt/LinearCrdTransf2dInt.h \
    $$PWD/SRC/element/elasticBeamColumn/ElasticBeam2d.h \
    $$PWD/SRC/element/elasticBeamColumn/ElasticBeam3d.h \
+   $$PWD/SRC/element/elasticBeamColumn/ElasticBeamWarping3d.h \
    $$PWD/SRC/element/elasticBeamColumn/ElasticTimoshenkoBeam2d.h \
    $$PWD/SRC/element/elasticBeamColumn/ElasticTimoshenkoBeam3d.h \
    $$PWD/SRC/element/elasticBeamColumn/ModElasticBeam2d.h \
@@ -488,7 +492,9 @@ HEADERS += \
    $$PWD/SRC/element/joint/MP_Joint2D.h \
    $$PWD/SRC/element/joint/MP_Joint3D.h \
    $$PWD/SRC/element/mvlem/MVLEM.h \
+   $$PWD/SRC/element/mvlem/MVLEM_3D.h \
    $$PWD/SRC/element/mvlem/SFI_MVLEM.h \
+   $$PWD/SRC/element/mvlem/SFI_MVLEM_3D.h \
    $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn2d.h \
    $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn3d.h \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.h \
@@ -748,6 +754,7 @@ HEADERS += \
    $$PWD/SRC/material/section/FiberSection3dThermal.h \
    $$PWD/SRC/material/section/FiberSectionGJ.h \
    $$PWD/SRC/material/section/FiberSectionGJThermal.h \
+   $$PWD/SRC/material/section/FiberSectionWarping3d.h \
    $$PWD/SRC/material/section/GenericSection1d.h \
    $$PWD/SRC/material/section/Isolator2spring.h \
    $$PWD/SRC/material/section/LayeredShellFiberSection.h \
@@ -879,6 +886,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/HookGap.h \
    $$PWD/SRC/material/uniaxial/HyperbolicGapMaterial.h \
    $$PWD/SRC/material/uniaxial/HystereticMaterial.h \
+   $$PWD/SRC/material/uniaxial/HystereticPoly.h \
    $$PWD/SRC/material/uniaxial/IMKBilin.h \
    $$PWD/SRC/material/uniaxial/IMKPinching.h \
    $$PWD/SRC/material/uniaxial/IMKPeakOriented.h \
@@ -921,6 +929,7 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/Steel01.h \
    $$PWD/SRC/material/uniaxial/Steel01Thermal.h \
    $$PWD/SRC/material/uniaxial/Steel02.h \
+   $$PWD/SRC/material/uniaxial/Steel02Fatigue.h \
    $$PWD/SRC/material/uniaxial/Steel02Thermal.h \
    $$PWD/SRC/material/uniaxial/Steel03.h \
    $$PWD/SRC/material/uniaxial/Steel2.h \
@@ -1063,6 +1072,8 @@ HEADERS += \
    $$PWD/SRC/domain/component/MatParameter.h \
    $$PWD/SRC/domain/component/NodeResponseParameter.h \
    $$PWD/SRC/domain/component/Parameter.h \
+
+
    #$$PWD/SRC/optimization/SNOPT/SNOPTAnalysis.h \  #include file not found: snopt.h
    #$$PWD/SRC/optimization/SNOPT/SNOPTCLASS.h \     #include file not found: snopt.h
    #$$PWD/SRC/optimization/SNOPT/toyOptfunction.h \ #include file not found: snopt.h
@@ -1230,6 +1241,7 @@ SOURCES += \
    $$PWD/SRC/coordTransformation/CorotCrdTransf2d.cpp \
    $$PWD/SRC/coordTransformation/CorotCrdTransf3d.cpp \
    $$PWD/SRC/coordTransformation/CorotCrdTransfWarping2d.cpp \
+   $$PWD/SRC/coordTransformation/CorotCrdTransfWarping3d.cpp \
    $$PWD/SRC/coordTransformation/CrdTransf.cpp \
    $$PWD/SRC/coordTransformation/LinearCrdTransf2d.cpp \
    $$PWD/SRC/coordTransformation/LinearCrdTransf3d.cpp \
@@ -1344,11 +1356,13 @@ SOURCES += \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumn3dThermal.cpp \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumn3dWithSensitivity.cpp \
    $$PWD/SRC/element/dispBeamColumn/DispBeamColumnNL2d.cpp \
+   $$PWD/SRC/element/dispBeamColumn/DispBeamColumnWarping3d.cpp \
    $$PWD/SRC/element/dispBeamColumnInt/DispBeamColumn2dInt.cpp \
    $$PWD/SRC/element/dispBeamColumnInt/FiberSection2dInt.cpp \
    $$PWD/SRC/element/dispBeamColumnInt/LinearCrdTransf2dInt.cpp \
    $$PWD/SRC/element/elasticBeamColumn/ElasticBeam2d.cpp \
    $$PWD/SRC/element/elasticBeamColumn/ElasticBeam3d.cpp \
+   $$PWD/SRC/element/elasticBeamColumn/ElasticBeamWarping3d.cpp \
    $$PWD/SRC/element/elasticBeamColumn/ElasticTimoshenkoBeam2d.cpp \
    $$PWD/SRC/element/elasticBeamColumn/ElasticTimoshenkoBeam3d.cpp \
    $$PWD/SRC/element/elasticBeamColumn/ModElasticBeam2d.cpp \
@@ -1436,9 +1450,11 @@ SOURCES += \
    $$PWD/SRC/element/joint/MP_Joint2D.cpp \
    $$PWD/SRC/element/joint/MP_Joint3D.cpp \
    $$PWD/SRC/element/mvlem/MVLEM.cpp \
+   $$PWD/SRC/element/mvlem/MVLEM_3D.cpp \
+   $$PWD/SRC/element/mvlem/SFI_MVLEM.cpp \
+   $$PWD/SRC/element/mvlem/SFI_MVLEM_3D.cpp \
    $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn2d.cpp \
    $$PWD/SRC/element/mixedBeamColumn/MixedBeamColumn3d.cpp \
-   $$PWD/SRC/element/mvlem/SFI_MVLEM.cpp \
    $$PWD/SRC/element/nonlinearBeamColumn/matrixutil/MatrixUtil.cpp \
    $$PWD/SRC/element/pyMacro/PY_Macro2D.cpp \
    $$PWD/SRC/element/RockingBC/RockingBC.cpp \
@@ -1695,6 +1711,7 @@ SOURCES += \
    $$PWD/SRC/material/section/FiberSection3dThermal.cpp \
    $$PWD/SRC/material/section/FiberSectionGJ.cpp \
    $$PWD/SRC/material/section/FiberSectionGJThermal.cpp \
+   $$PWD/SRC/material/section/FiberSectionWarping3d.cpp \
    $$PWD/SRC/material/section/GenericSection1d.cpp \
    $$PWD/SRC/material/section/Isolator2spring.cpp \
    $$PWD/SRC/material/section/LayeredShellFiberSection.cpp \
@@ -1827,6 +1844,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/HookGap.cpp \
    $$PWD/SRC/material/uniaxial/HyperbolicGapMaterial.cpp \
    $$PWD/SRC/material/uniaxial/HystereticMaterial.cpp \
+   $$PWD/SRC/material/uniaxial/HystereticPoly.cpp \
    $$PWD/SRC/material/uniaxial/IMKBilin.cpp \
    $$PWD/SRC/material/uniaxial/IMKPinching.cpp \
    $$PWD/SRC/material/uniaxial/IMKPeakOriented.cpp \
@@ -1869,6 +1887,7 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/Steel01.cpp \
    $$PWD/SRC/material/uniaxial/Steel01Thermal.cpp \
    $$PWD/SRC/material/uniaxial/Steel02.cpp \
+   $$PWD/SRC/material/uniaxial/Steel02Fatigue.cpp \
    $$PWD/SRC/material/uniaxial/Steel02Thermal.cpp \
    $$PWD/SRC/material/uniaxial/Steel03.cpp \
    $$PWD/SRC/material/uniaxial/Steel2.cpp \
@@ -2013,6 +2032,7 @@ SOURCES += \
    $$PWD/SRC/domain/component/MatParameter.cpp \
    $$PWD/SRC/domain/component/NodeResponseParameter.cpp \
    $$PWD/SRC/domain/component/Parameter.cpp \
+
    #$$PWD/SRC/optimization/SNOPT/SNOPTAnalysis.cpp \   #include file not found: snopt.h
    #$$PWD/SRC/optimization/SNOPT/SNOPTCLASS.cpp \      #include file not found: snopt.h
    #$$PWD/SRC/optimization/SNOPT/toyOptfunction.cpp \  #include file not found: snopt.h
@@ -2179,7 +2199,9 @@ HEADERS += \
    $$PWD/SRC/material/uniaxial/drain/DrainHardeningMaterial.h \
    $$PWD/SRC/material/uniaxial/drain/DrainPinch1Material.h \
    $$PWD/SRC/material/uniaxial/drain/infel00.h \
-   $$PWD/SRC/material/nD/stressDensityModel/stressDensity.h \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel.h \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel2D.h \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel3D.h \
    $$PWD/SRC/matrix/f2c.h \
 
 SOURCES += \
@@ -2204,7 +2226,9 @@ SOURCES += \
    $$PWD/SRC/material/uniaxial/drain/DrainPinch1Material.cpp \
    $$PWD/SRC/material/uniaxial/drain/TclDrainMaterialCommand.cpp \
    $$PWD/SRC/material/uniaxial/DrainMaterial.cpp \
-   $$PWD/SRC/material/nD/stressDensityModel/stressDensity.cpp \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel.cpp \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel2D.cpp \
+   $$PWD/SRC/material/nD/stressDensityModel/stressDensityModel3D.cpp \
 }
 
 
@@ -2225,7 +2249,24 @@ else {
 
 if(!contains (DEFINES, _PYTHON)){
 
-SOURCES += $$PWD/SRC/api/elementAPI_Dummy.cpp \
+HEADERS += \
+    $$PWD/SRC/interpreter/OpenSeesCommands.h \
+    $$PWD/SRC/interpreter/OpenSeesOutputCommands.h \
+
+SOURCES += \
+    $$PWD/SRC/interpreter/OpenSeesCommands.cpp \
+    $$PWD/SRC/interpreter/OpenSeesOutputCommands.cpp \
+
+contains (DEFINES, _RELIABILITY){
+
+HEADERS += \
+   ./SRC/interpreter/OpenSeesReliabilityCommands.h \
+
+
+SOURCES += \
+   ./SRC/interpreter/OpenSeesReliabilityCommands.cpp \
+   ./SRC/interpreter/OpenSeesParameterCommands.cpp \
+}
 
 }
 }

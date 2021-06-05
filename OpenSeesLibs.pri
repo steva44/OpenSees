@@ -64,8 +64,8 @@ else:macx:{
 
 LIBS += -L/Users/steve/Desktop/C++Libraries/SuperLUMT/Install/lib/ -lsuperlu_mt_PTHREAD
 
-INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
-DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
+#INCLUDEPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
+#DEPENDPATH += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/SRC
 
 PRE_TARGETDEPS += /Users/steve/Desktop/C++Libraries/SuperLUMT/Install/lib/libsuperlu_mt_PTHREAD.a
 
@@ -151,15 +151,15 @@ else:unix:{
 #Unstructured Graph Partitioning And Sparse Matrix Ordering System', developed by G. Karypis and V. Kumar at the University of Minnesota.
 contains (DEFINES, _METIS){
 
-INCLUDEPATH += \
-    $$PWD/OTHER/METIS \
+PATH_TO_METIS=/Users/steve/Desktop/C++Libraries/metis-5.1.0/build
 
 HEADERS += \
+   $$PATH_TO_METIS/include/Metis.h \
    $$PWD/SRC/graph/partitioner/Metis.h \
    #$$PWD/SRC/graph/numberer/MetisNumberer.h \
 
 
-SOURCES += \
+#SOURCES += \
    $$PWD/SRC/graph/partitioner/Metis.cpp \
    #$$PWD/SRC/graph/numberer/MetisNumberer.cpp \
 
@@ -168,9 +168,12 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/Users/steve/Desktop/C++Libraries/metis-5.1.0/build/lib/ -lmetis
-INCLUDEPATH += /Users/steve/Desktop/C++Libraries/metis-5.1.0/build/include
-DEPENDPATH += /Users/steve/Desktop/C++Libraries/metis-5.1.0/build/include
+LIBS += -L$$PATH_TO_METIS/lib/ -lmetis
+
+INCLUDEPATH +=  $$PATH_TO_METIS \
+                $$PATH_TO_METIS/include
+
+DEPENDPATH += $$PATH_TO_METIS/include
 
 }
 else:unix: {
@@ -337,10 +340,10 @@ INCLUDEPATH += /System/Library/Frameworks/Accelerate.framework/Versions/A/Framew
 DEPENDPATH  += /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A
 
 #Need to include the library below so that we do not get a blacs_gridexit error in Python. It looks like this function is not included in the accelerate framework
-LIBS += -L/Users/steve/Desktop/C++Libraries/scalapack-master/Install/lib/ -lscalapack
+LIBS += -L/Users/steve/Desktop/C++Libraries/Scalapack/Install/lib/ -lscalapack
 
-INCLUDEPATH += /Users/steve/Desktop/C++Libraries/scalapack-master/
-DEPENDPATH += /Users/steve/Desktop/C++Libraries/scalapack-master/
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/Scalapack/
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/Scalapack/
 
 }
 else:unix: {
@@ -541,9 +544,9 @@ win32:CONFIG(release, debug|release): LIBS += -L
 else:win32:CONFIG(debug, debug|release): LIBS += -L
 else:macx: {
 
-LIBS += -L/Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
-INCLUDEPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/include
-DEPENDPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.0.5/Install/include
+LIBS += -L/Users/steve/Desktop/C++Libraries/openmpi-4.1.1/Install/lib/ -lmpi.40 -lmca_common_sm.40 -lmca_common_monitoring.50 -lmca_common_ompio.41 -lmpi_mpifh.40 -lopen-pal.40 -lompitrace.40 -lopen-rte.40 -lmpi_usempi_ignore_tkr
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.1.1/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/openmpi-4.1.1/Install/include
 
 }
 else:unix: {
@@ -621,17 +624,17 @@ DEPENDPATH += $$PWD/OpenSeesLibs/suite-sparse/Unix/5.3.0_1/include
 
 win32:CONFIG(release, debug|release): LIBS += -L -lomp
 else:win32:CONFIG(debug, debug|release): LIBS += -L -lomp
-else:unix: LIBS += -L/Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/lib/ -lomp
+else:unix: LIBS += -L/Users/steve/Desktop/C++Libraries/OpenMP/Install/lib/ -lomp
 
-INCLUDEPATH += /Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/include
-DEPENDPATH += /Users/steve/Desktop/C++Libraries/openmp-11.0.1.src/Install/include
+INCLUDEPATH += /Users/steve/Desktop/C++Libraries/OpenMP/Install/include
+DEPENDPATH += /Users/steve/Desktop/C++Libraries/OpenMP/Install/include
 
-win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/release/ -lgfortran.5
-else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/debug/ -lgfortran.5
-else:unix: LIBS += -L/usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10/ -lgfortran.5
+win32:CONFIG(release, debug|release): LIBS += -L/usr/local/Cellar/gcc/11.1.0_1/lib/gcc/11/release/ -lgfortran.5
+else:win32:CONFIG(debug, debug|release): LIBS += -L/usr/local/Cellar/gcc/11.1.0_1/lib/gcc/11/debug/ -lgfortran.5
+else:unix: LIBS += -L/usr/local/Cellar/gcc/11.1.0_1/lib/gcc/11/ -lgfortran.5
 
-INCLUDEPATH += /usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10
-DEPENDPATH += /usr/local/Cellar/gcc/10.2.0_3/lib/gcc/10
+INCLUDEPATH += /usr/local/Cellar/gcc/11.1.0_1/lib/gcc/11
+DEPENDPATH += /usr/local/Cellar/gcc/11.1.0_1/lib/gcc/11
 
 
 #contains (DEFINES, _USINGFORTRAN){

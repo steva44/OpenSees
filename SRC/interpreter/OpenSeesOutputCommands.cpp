@@ -58,8 +58,12 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <ParameterIter.h>
 #include <DummyStream.h>
 #include <Response.h>
+
+#ifdef _PFEM
 #include <Mesh.h>
 #include <BackgroundMesh.h>
+#endif
+
 #include <Parameter.h>
 #include <ParameterIter.h>
 
@@ -67,11 +71,18 @@ void* OPS_NodeRecorder();
 void* OPS_EnvelopeNodeRecorder();
 void* OPS_ElementRecorder();
 void* OPS_EnvelopeElementRecorder();
+
+#ifdef _PFEM
 void* OPS_PVDRecorder();
+#endif
+
 void* OPS_AlgorithmRecorder();
 void* OPS_RemoveRecorder();
 void* OPS_MPCORecorder();
+
+#ifdef _PFEM
 BackgroundMesh& OPS_getBgMesh();
+#endif
 
 //void* OPS_DriftRecorder();
 //void* OPS_PatternRecorder();
@@ -94,13 +105,17 @@ namespace {
         recordersMap.insert(std::make_pair("EnvelopeNode", &OPS_EnvelopeNodeRecorder));
         recordersMap.insert(std::make_pair("Element", &OPS_ElementRecorder));
         recordersMap.insert(std::make_pair("EnvelopeElement", &OPS_EnvelopeElementRecorder));
+#ifdef _PFEM
 	recordersMap.insert(std::make_pair("PVD", &OPS_PVDRecorder));
 	recordersMap.insert(std::make_pair("BgPVD", &OPS_PVDRecorder));
+#endif
 	recordersMap.insert(std::make_pair("Remove", &OPS_RemoveRecorder));
 	recordersMap.insert(std::make_pair("ElementRemoval", &OPS_RemoveRecorder));
 	recordersMap.insert(std::make_pair("NodeRemoval", &OPS_RemoveRecorder));
 	recordersMap.insert(std::make_pair("Collapse", &OPS_RemoveRecorder));
+#ifdef _TCL85
     recordersMap.insert(std::make_pair("mpco", &OPS_MPCORecorder));
+#endif
         //recordersMap.insert(std::make_pair("Drift", &OPS_DriftRecorder));
         //recordersMap.insert(std::make_pair("Pattern", &OPS_PatternRecorder));
 
@@ -134,6 +149,7 @@ int OPS_Recorder()
         return -1;
     }
 
+#ifdef _PFEM
     if (strcmp(type,"BgPVD") == 0) {
 	BackgroundMesh& bg = OPS_getBgMesh();
 	bg.addRecorder(theRecorder);
@@ -149,6 +165,7 @@ int OPS_Recorder()
 	    return -1;
 	}
     }
+#endif
 
     // set recorder tag as result
     int size = 1;
@@ -1839,6 +1856,8 @@ int OPS_getEleTags()
 	}
     } else if (OPS_GetNumRemainingInputArgs() == 2) {
 
+
+#ifdef _PFEM
 	// return nodes in mesh
 	const char* type = OPS_GetString();
 	if (strcmp(type,"-mesh") == 0) {
@@ -1857,7 +1876,8 @@ int OPS_getEleTags()
 	    for (int i=0; i<tags.Size(); ++i) {
 		eletags.push_back(tags(i));
 	    }
-	}
+	} 
+#endif
     }
 
     int size = 0;
@@ -1889,6 +1909,8 @@ int OPS_getNodeTags() {
             nodetags.push_back(theNode->getTag());
         }
     } else if (OPS_GetNumRemainingInputArgs() > 1) {
+
+#ifdef _PFEM
         // return nodes in mesh
         const char *type = OPS_GetString();
         if (strcmp(type, "-mesh") == 0) {
@@ -1918,6 +1940,7 @@ int OPS_getNodeTags() {
             }
             nodetags.assign(nodeset.begin(), nodeset.end());
         }
+#endif
     }
 
     int size = 0;
